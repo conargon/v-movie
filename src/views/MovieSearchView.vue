@@ -1,19 +1,6 @@
 <template>
 <div>
     <MovieGrid v-bind:movies="movies" @pageChange="onPageChange($event)"/>    
-    <v-snackbar v-model="snackbar">
-      {{ textSnackbar }}
-      <template v-slot:action="{ attrs }">
-        <v-btn
-          color="pink"
-          text
-          v-bind="attrs"
-          @click="snackbar = false"
-        >
-          X
-        </v-btn>
-      </template>
-    </v-snackbar>
 </div>    
 </template>
 
@@ -30,9 +17,7 @@ export default {
 
   data: function() {
     return {
-      movies: null,
-      snackbar: false,
-      textSnackbar: 'Hello, I\'m a snackbar',      
+      movies: null
     }
   }, 
 
@@ -48,10 +33,6 @@ export default {
                 response => {
                     window.scrollTo(0,0);
                     this.movies = response.data;
-                    if(page == 1) {
-                      this.textSnackbar = this.movies.total_results > 0 ? 'Total resultados: ' + this.movies.total_results : 'No se han encontado resultados'; 
-                      this.snackbar = true;
-                    }
                 }
             )
             .catch(
