@@ -17,7 +17,8 @@ export default {
 
   data: function() {
     return {
-      movies: null
+      movies: null,
+      currentPage: 1
     }
   }, 
 
@@ -33,6 +34,9 @@ export default {
                 response => {
                     window.scrollTo(0,0);
                     this.movies = response.data;
+                    if(this.movies != null) {
+                      this.movies.results = this.movies.results.sort((a,b) => b.vote_count-a.vote_count)
+                    }
                 }
             )
             .catch(
@@ -40,12 +44,13 @@ export default {
             )
       },
       onPageChange: function(newPage) {
+        this.currentPage = newPage
         this.searchMovies(this.$route.params.searchText, newPage);
       } 
   },  
 
   created () {
-    this.searchMovies(this.$route.params.searchText, 1);
+    this.searchMovies(this.$route.params.searchText, this.currentPage);
   }
 }
 </script>

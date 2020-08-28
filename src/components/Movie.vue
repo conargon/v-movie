@@ -1,14 +1,16 @@
 <template>
-  <v-card height="390" :to="{ name: 'MovieDetail', params: { idMovie: movie.id }}" hover light>
-    <v-card-title class="pa-0 ma-0">
-      <v-container fluid>
+  <v-card height="390" :to="{ name: 'MovieDetail', params: { idMovie: movie.id }}" hover>
+    <v-card-title class="pa-0 ma-0 blue darken-3">
+      <v-container fluid class="pa-2 ma-0">
         <p
           class="text-subtitle-2 font-weight-bold text-center pa-0 ma-0"
-          style="word-break: normal;"
+          style="color:white; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"
         >{{movie.title}}</p>
       </v-container>
     </v-card-title>
-    <v-img :src="srcPoster" :contain="true" max-height="300"></v-img>
+    <v-container class="ma-0 pa-0 mt-2">
+        <v-img :src="srcPoster" :contain="true" max-height="300"></v-img>
+    </v-container>
     <v-card-subtitle class="pa-0 ma-0">
       <v-container fluid text-center>
         <v-icon small color="amber">mdi-star</v-icon>

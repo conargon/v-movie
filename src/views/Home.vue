@@ -3,8 +3,11 @@
     <v-container fluid v-if="movies != null">
       <v-container text-center>
         <img src="../assets/tmdb_long.svg" width="640" />
-        <h1>Peliculas de estreno recientes</h1>
+        
       </v-container>
+      <v-container text-center>
+        <h1>Peliculas de estreno recientes</h1>
+        </v-container>
       <carousel :perPageCustom="[[768, 2], [1024, 3], [1200, 4]]" scrollPerPage navigationEnabled>
         <slide v-for="(m,i) in movies.results" :key="i">
           <v-container fluid grid-list-lg>
@@ -41,7 +44,6 @@ export default {
   },
 
   methods: {
-    //https://api.themoviedb.org/3/discover/movie?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=2020-07-20&primary_release_date.lte=2020-08-20
     searchLastMovies: function (page) {
       axios
         .get(
@@ -49,7 +51,7 @@ export default {
             "&page=" +
             page +
             "&primary_release_date.gte=2020-07-20&primary_release_date.lte=2020-08-20" +
-            "&sort_by=popularity.desc&include_adult=false&include_video=false"
+            "&sort_by=popularity.desc&include_adult=false&include_video=true"
         )
         .then((response) => {
           this.movies = response.data;
