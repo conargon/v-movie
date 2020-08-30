@@ -41,12 +41,14 @@
                                 <p class="text-justify">{{person.biography}}</p>
                             </v-card-subtitle> 
 
+                        </v-col>
+
+                        <v-col cols="12">
                             <v-card-actions>
-                                <v-container class="pa-1">
+                                <v-container class="pa-4 ma-0 text-center" fluid>
                                     <v-btn color="primary" @click="$router.go(-1)">Volver</v-btn>
                                 </v-container>
-                            </v-card-actions> 
-
+                            </v-card-actions>                                     
                         </v-col>
 
                     </v-row>

@@ -1,12 +1,12 @@
 <template>
   <div class="home ma-4 pa-0 fluid">    
     <v-container fluid v-if="movies != null">
-      <v-container text-center>
-        <v-img src="../assets/tmdb_long.svg" max-width="400" />        
+      <v-container fluid text-center>
+        <v-img src="../assets/tmdb_long.svg" max-height="48" contain="true" />        
       </v-container>
       <v-container text-center>
         <h2>Peliculas recientes</h2>
-      </v-container>
+      </v-container> 
       <carousel :perPageCustom="[[400, 1], [768, 2], [1024, 3], [1200, 4]]" scrollPerPage navigationEnabled>
         <slide v-for="(m,i) in movies.results" :key="i">
           <v-container fluid grid-list-lg>
@@ -52,6 +52,10 @@ export default {
             "&primary_release_date.gte=2020-07-20&primary_release_date.lte=2020-08-20" +
             "&sort_by=popularity.desc&include_adult=false&include_video=true"
         )
+        // peliculas más populares
+        // .get(
+        //   "https://api.themoviedb.org/3/movie/popular?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES&page="+page
+        // )        
         .then((response) => {
           this.movies = response.data;
         })

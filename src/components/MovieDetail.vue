@@ -41,22 +41,22 @@
                                 <v-card-title class="pa-1 pl-4"> 
                                     <v-container class="pa-0 ma-0">                       
                                         <p class="text-subtitle-2" style="word-break: normal;">
-                                            Título original: <span class="sb_val">{{movie.original_title}} {{movie.production_countries.length > 0? '(' + movie.production_countries[0].name +')' : ''}}</span>
+                                            Título original: {{movie.original_title}} {{movie.production_countries.length > 0? '(' + movie.production_countries[0].name +')' : ''}}
                                         </p>
                                     </v-container>
                                     <v-container class="pa-0 ma-0">
-                                        <p class="text-subtitle-2" style="word-break: normal;">Duración: <span class="sb_val">{{movie.runtime}} minutos</span></p>
+                                        <p class="text-subtitle-2" style="word-break: normal;">Duración: {{movie.runtime}} minutos</p>
                                     </v-container>
                                     <v-container class="pa-0 ma-0">                       
-                                        <p class="text-subtitle-2" style="word-break: normal;">Año de producción: <span class="sb_val">{{movie.release_date != null ? movie.release_date.substr(0,4) : ''}}</span></p>
+                                        <p class="text-subtitle-2" style="word-break: normal;">Año de producción: {{movie.release_date != null ? movie.release_date.substr(0,4) : ''}}</p>
                                     </v-container>
                                     <v-container class="pa-0 ma-0" v-if='firstCompany != null'> 
                                         <p class="text-subtitle-2" style="word-break: normal;">
-                                            Producción: <span class="sb_val">{{firstCompany.name}}</span>                                            
+                                            Producción: {{firstCompany.name}}
                                         </p>                                        
                                     </v-container>                                           
                                     <v-container class="pa-0 ma-0"> 
-                                        <p class="text-subtitle-2" style="word-break: normal;">Valoración: <v-icon small color="amber">mdi-star</v-icon>&nbsp;<span class="sb_val">{{movie.vote_average}}</span></p>   
+                                        <p class="text-subtitle-2" style="word-break: normal;">Valoración: <v-icon small color="amber">mdi-star</v-icon>&nbsp;{{movie.vote_average}}</p>   
                                     </v-container>                             
                                 </v-card-title>                               
 
@@ -78,34 +78,36 @@
                                     <a :href="movie.homepage" target="_blank">{{movie.homepage}}</a>
                                 </v-card-subtitle>    
 
+                            </v-col>
+
+                            <!-- ACTORES -->
+                            <v-col cols="12" sm="2">
+                                <v-card-title class="ma-0 pa-0 pl-4" v-if="movie.homepage != null && movie.homepage != ''">                        
+                                    <p class="text-subtitle-1" style="word-break: normal;">Reparto</p>
+                                </v-card-title>                                
+                                <v-list>
+                                    <v-list-item
+                                        v-for="p in people"                                         
+                                        :key="p.cast_id"
+                                        dense
+                                        @click="goPeopleDetail(p.credit_id)">
+                                            <v-list-item-avatar>
+                                                <v-img :src="'http://image.tmdb.org/t/p/original' + p.profile_path"></v-img>
+                                            </v-list-item-avatar>
+                                            <v-list-item-content>
+                                                <v-list-item-subtitle v-text="p.name"></v-list-item-subtitle>
+                                            </v-list-item-content>                                              
+                                    </v-list-item>                                  
+                                </v-list> 
+                            </v-col>
+
+                            <v-col cols="12">
                                 <v-card-actions>
                                     <v-container class="pa-4 ma-0 text-center" fluid>
                                         <v-btn color="primary" @click="$router.go(-1)">Volver</v-btn>
                                     </v-container>
-                                </v-card-actions>                                
-
+                                </v-card-actions>                                     
                             </v-col>
-
-                            <v-col cols="12" sm="2">
-                                <v-card-subtitle 
-                                    class="pa-1 pl-4"
-                                    v-for="p in people" 
-                                    :key="p.cast_id"
-                                    style="cursor:pointer;">                                                     
-                                    <v-avatar 
-                                        @click="goPeopleDetail(p.credit_id)"
-                                        v-if="p.profile_path != null">
-                                        <img
-                                            :src="'http://image.tmdb.org/t/p/original' + p.profile_path"
-                                        >
-                                    </v-avatar>
-                                    <span 
-                                        @click="goPeopleDetail(p.credit_id)"
-                                        class="text-xs-caption">
-                                        &nbsp;{{p.name}}
-                                    </span>
-                                </v-card-subtitle>
-                            </v-col>    
 
                         </v-row>
                     </v-container>                            
@@ -161,9 +163,3 @@ export default {
 
 }
 </script>
-
-<style>
-    .sb_val {
-        color: rgba(0, 0, 0, 0.6) !important;
-    }
-</style>
