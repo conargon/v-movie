@@ -17,7 +17,7 @@
           <img 
             :src="srcPoster"
             height="300" 
-            class="mt-4 ml-10 mr-10"
+            class="mt-4"
             />
     </v-container>
     <v-card-subtitle class="pa-0 ma-0">
