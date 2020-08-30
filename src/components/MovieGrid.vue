@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid grid-list-lg v-if="movies != null">     
+    <v-container fluid grid-list-lg v-if="movies != null">        
         <v-pagination 
             :length="movies.total_pages" 
             total-visible="10"
@@ -14,7 +14,7 @@
                    <Movie v-bind:movie="m" />
             </v-flex>             
         </v-layout>
-    </v-container>
+    </v-container>    
 </template>
 
 <script>

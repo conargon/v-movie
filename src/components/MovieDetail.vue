@@ -6,7 +6,7 @@
                     <v-container fluid>
                         <v-row dense>
 
-                            <v-col cols="5">          
+                            <v-col cols="12" sm="5">          
                                 <v-carousel hide-delimiters height="auto">
                                     <v-carousel-item
                                         :src="srcPoster" 
@@ -21,7 +21,7 @@
                                 </v-carousel>                                  
                             </v-col>                               
 
-                            <v-col cols="5">
+                            <v-col cols="12" sm="5">
                   
                                 <v-card-title class="pa-1 pl-4">  
                                     <v-container class="pa-0 ma-0">
@@ -86,15 +86,24 @@
 
                             </v-col>
 
-                            <v-col cols="2">
-                                <v-card-subtitle class="pa-1 pl-4" v-for="p in people" :key="p.cast_id">                                                     
+                            <v-col cols="12" sm="2">
+                                <v-card-subtitle 
+                                    class="pa-1 pl-4"
+                                    v-for="p in people" 
+                                    :key="p.cast_id"
+                                    style="cursor:pointer;">                                                     
                                     <v-avatar 
+                                        @click="goPeopleDetail(p.credit_id)"
                                         v-if="p.profile_path != null">
                                         <img
                                             :src="'http://image.tmdb.org/t/p/original' + p.profile_path"
                                         >
                                     </v-avatar>
-                                    <span class="text-xs-caption">&nbsp;{{p.name}}</span>
+                                    <span 
+                                        @click="goPeopleDetail(p.credit_id)"
+                                        class="text-xs-caption">
+                                        &nbsp;{{p.name}}
+                                    </span>
                                 </v-card-subtitle>
                             </v-col>    
 
@@ -142,12 +151,18 @@ export default {
                 return null;
             }            
         }
+    },
+    methods: {
+        goPeopleDetail: function(id) {
+            this.$router.push({ name: 'PeopleDetail', params: { idPeople : id } }).catch(()=>{});
+        },
     }
+
 
 }
 </script>
 
-<style scoped>
+<style>
     .sb_val {
         color: rgba(0, 0, 0, 0.6) !important;
     }

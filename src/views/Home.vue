@@ -1,14 +1,13 @@
 <template>
-  <div class="home ma-4 pa-0 fluid">
+  <div class="home ma-4 pa-0 fluid">    
     <v-container fluid v-if="movies != null">
       <v-container text-center>
-        <img src="../assets/tmdb_long.svg" width="640" />
-        
+        <v-img src="../assets/tmdb_long.svg" max-width="400" />        
       </v-container>
       <v-container text-center>
-        <h1>Peliculas de estreno recientes</h1>
-        </v-container>
-      <carousel :perPageCustom="[[768, 2], [1024, 3], [1200, 4]]" scrollPerPage navigationEnabled>
+        <h2>Peliculas recientes</h2>
+      </v-container>
+      <carousel :perPageCustom="[[400, 1], [768, 2], [1024, 3], [1200, 4]]" scrollPerPage navigationEnabled>
         <slide v-for="(m,i) in movies.results" :key="i">
           <v-container fluid grid-list-lg>
             <v-layout row wrap>

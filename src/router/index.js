@@ -20,6 +20,12 @@ const routes = [{
         name: 'MovieDetail',
         component: () =>
             import ( /* webpackChunkName: "movieDetail" */ '../views/MovieDetailView.vue')
+    },
+    {
+        path: '/people/:idPeople',
+        name: 'PeopleDetail',
+        component: () =>
+            import ( /* webpackChunkName: "peopleDetail" */ '../views/PeopleDetailView.vue')
     }
 ]
 

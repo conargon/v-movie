@@ -1,5 +1,7 @@
 <template>
-  <v-card height="390" :to="{ name: 'MovieDetail', params: { idMovie: movie.id }}" hover>
+  <v-card 
+    height="410" 
+    :to="{ name: 'MovieDetail', params: { idMovie: movie.id }}">
     <v-card-title class="pa-0 ma-0 blue darken-3">
       <v-container fluid class="pa-2 ma-0">
         <p
@@ -8,8 +10,15 @@
         >{{movie.title}}</p>
       </v-container>
     </v-card-title>
-    <v-container class="ma-0 pa-0 mt-2">
-        <v-img :src="srcPoster" :contain="true" max-height="300"></v-img>
+    <v-container text-center class="ma-0 pa-0">
+        <!-- <v-img 
+          :src="srcPoster" 
+          :contain="true" height="300"></v-img> -->
+          <img 
+            :src="srcPoster"
+            height="300" 
+            class="mt-4 ml-10 mr-10"
+            />
     </v-container>
     <v-card-subtitle class="pa-0 ma-0">
       <v-container fluid text-center>
