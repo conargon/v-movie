@@ -1,6 +1,7 @@
 <template>
 <div>
-    <MovieGrid v-bind:movies="movies" @pageChange="onPageChange($event)"/>    
+    <MovieGrid v-bind:movies="movies" @pageChange="onPageChange($event)" v-if="movies != null && movies.results.length > 0"/>    
+    <v-subheader v-else>No se han encontrado resultados</v-subheader>
 </div>    
 </template>
 
