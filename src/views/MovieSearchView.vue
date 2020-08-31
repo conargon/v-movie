@@ -1,5 +1,10 @@
 <template>
 <div>
+    <v-progress-linear
+      v-if="loading"  
+      indeterminate
+      color="cyan"
+    ></v-progress-linear>
     <MovieGrid v-bind:movies="movies" @pageChange="onPageChange($event)" v-if="movies != null && movies.results.length > 0"/>    
     <v-subheader v-else>No se han encontrado resultados</v-subheader>
 </div>    
@@ -19,13 +24,15 @@ export default {
   data: function() {
     return {
       movies: null,
-      currentPage: 1
+      currentPage: 1,
+      loading: true,
     }
   }, 
 
   methods: {
       // TODO usar api para recuperar la config.
       searchMovies: function(query, page) {
+          this.loading = true;
           axios
             .get('https://api.themoviedb.org/3/search/movie?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES&' 
                     + 'query=' + query 
@@ -42,6 +49,9 @@ export default {
             )
             .catch(
                 e => console.log(e)
+            )
+            .finally(
+                this.loading = false
             )
       },
       onPageChange: function(newPage) {

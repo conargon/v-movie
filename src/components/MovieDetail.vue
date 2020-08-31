@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid  v-if="movie != null">
+    <v-container fluid  >
         <v-layout>
             <v-flex>
                 <v-card>    
@@ -11,12 +11,15 @@
                                     <v-carousel-item
                                         :src="srcPoster" 
                                         contain
+                                        height="600"
                                         max-height="600">
                                     </v-carousel-item>                                            
                                     <v-carousel-item
                                         v-for="(item,i) in images"
                                         :key="i"
-                                        :src="'http://image.tmdb.org/t/p/original' + item.file_path">
+                                        :src="'http://image.tmdb.org/t/p/original' + item.file_path"                                        
+                                        height="600"
+                                        max-height="600">
                                     </v-carousel-item>
                                 </v-carousel>                                  
                             </v-col>                               
@@ -27,7 +30,7 @@
                                     <v-container class="pa-0 ma-0">
                                         <p class="text-title font-weight-bold pa-0 ma-0" style="word-break: normal;">{{movie.title}}</p>
                                     </v-container>          
-                                    <v-container class="pa-0 ma-0" v-if="firstCompany != null && firstCompany != ''">       
+                                    <v-container class="pa-0 ma-0" v-if="firstCompany != null && firstCompany.logo_path != null">       
                                         <v-img :src="'http://image.tmdb.org/t/p/original' + firstCompany.logo_path" max-height="32" max-width="100" contain position="left"/>   
                                     </v-container>
                                 </v-card-title>   
@@ -54,7 +57,12 @@
                                         <p class="text-subtitle-2" style="word-break: normal;">
                                             Producción: {{firstCompany.name}}
                                         </p>                                        
-                                    </v-container>                                           
+                                    </v-container>     
+                                    <v-container class="pa-0 ma-0" v-if='director.length > 0'> 
+                                        <p class="text-subtitle-2" style="word-break: normal;">
+                                            Dirección: {{director[0].name}}
+                                        </p>                                        
+                                    </v-container>                                                                          
                                     <v-container class="pa-0 ma-0"> 
                                         <p class="text-subtitle-2" style="word-break: normal;">Valoración: <v-icon small color="amber">mdi-star</v-icon>&nbsp;{{movie.vote_average}}</p>   
                                     </v-container>                             
@@ -91,7 +99,7 @@
                                         :key="p.cast_id"
                                         dense
                                         @click="goPeopleDetail(p.credit_id)">
-                                            <v-list-item-avatar>
+                                            <v-list-item-avatar v-if="p.profile_path != null">
                                                 <v-img :src="'http://image.tmdb.org/t/p/original' + p.profile_path"></v-img>
                                             </v-list-item-avatar>
                                             <v-list-item-content>
@@ -123,7 +131,8 @@ export default {
     props: {
         movie: Object,
         images: Array,
-        people: Array
+        people: Array,
+        director: Array
     },
     data() {
         return {
@@ -142,7 +151,7 @@ export default {
                             : './no-poster.jpg'
         },
         firstCompany: function() {
-            if(this.movie.production_companies.length > 0) {
+            if(this.movie.production_companies != null && this.movie.production_companies.length > 0) {
                 for(var i=0; i < this.movie.production_companies.length; i++) {
                     if(this.movie.production_companies[i].logo_path != null && this.movie.production_companies[i].logo_path != '') {
                         return this.movie.production_companies[i];

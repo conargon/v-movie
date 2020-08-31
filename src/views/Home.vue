@@ -2,7 +2,7 @@
   <div class="home ma-4 pa-0 fluid">    
     <v-container fluid v-if="movies != null">
       <v-container fluid text-center>
-        <v-img src="../assets/tmdb_long.svg" max-height="48" contain="true" />        
+        <v-img src="../assets/tmdb_long.svg" max-height="48" :contain="true" />        
       </v-container>
       <v-container text-center>
         <h2>Peliculas recientes</h2>

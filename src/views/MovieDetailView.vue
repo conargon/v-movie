@@ -1,5 +1,15 @@
 <template>
-    <MovieDetail v-bind:movie="movie" v-bind:images="images" v-bind:people="people"/>    
+    <v-progress-linear
+      v-if="loading"  
+      indeterminate
+      color="cyan"
+    ></v-progress-linear>
+    <MovieDetail 
+        v-else
+        v-bind:movie="movie" 
+        v-bind:images="images" 
+        v-bind:people="people" 
+        v-bind:director="director"/>    
 </template>
 
 <script>
@@ -15,15 +25,18 @@ export default {
 
   data: function() {
       return { 
-        movie: null,
+        movie: Object,
         images: [],
-        people: []
+        people: [],
+        director: [],
+        loading: true,
       }
   },
 
   methods: {
       // TODO usar api para recuperar la config.
       findMovie: function(idMovie) {
+          this.loading = true;
           axios
             .get('https://api.themoviedb.org/3/movie/' + idMovie + '?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES')
             .then(
@@ -56,10 +69,14 @@ export default {
             .then(
                 response => {
                     this.people = response.data.cast.slice(0, 9);
+                    this.director = response.data.crew.filter(e => e.job == 'Director');                    
                 }
             )
             .catch(
                 e => console.log(e)
+            )
+            .finally(
+                this.loading = false
             )
       }
   },  
