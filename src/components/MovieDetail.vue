@@ -17,7 +17,8 @@
                                     <v-carousel-item
                                         v-for="(item,i) in images"
                                         :key="i"
-                                        :src="'http://image.tmdb.org/t/p/original' + item.file_path"                                        
+                                        :src="'http://image.tmdb.org/t/p/original' + item.file_path"     
+                                        contain                                   
                                         height="600"
                                         max-height="600">
                                     </v-carousel-item>
