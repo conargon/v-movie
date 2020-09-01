@@ -6,7 +6,7 @@
                     <v-container fluid>
                         <v-row dense>
 
-                            <v-col cols="12" sm="5">          
+                            <v-col cols="12" sm="3">          
                                 <v-carousel hide-delimiters height="auto">
                                     <v-carousel-item
                                         :src="srcPoster" 
@@ -25,7 +25,7 @@
                                 </v-carousel>                                  
                             </v-col>                               
 
-                            <v-col cols="12" sm="5">
+                            <v-col cols="12" sm="9">
                   
                                 <v-card-title class="pa-1 pl-4">  
                                     <v-container class="pa-0 ma-0">
@@ -89,7 +89,7 @@
 
                             </v-col>
 
-                            <!-- ACTORES -->
+                            <!-- ACTORES 
                             <v-col cols="12" sm="2">
                                 <v-card-title class="ma-0 pa-0 pl-4" v-if="movie.homepage != null && movie.homepage != ''">                        
                                     <p class="text-subtitle-1" style="word-break: normal;">Reparto</p>
@@ -100,14 +100,32 @@
                                         :key="p.cast_id"
                                         dense
                                         @click="goPeopleDetail(p.credit_id)">
-                                            <v-list-item-avatar v-if="p.profile_path != null">
+                                            <v-list-item-avatar tile v-if="p.profile_path != null">
                                                 <v-img :src="'http://image.tmdb.org/t/p/original' + p.profile_path"></v-img>
                                             </v-list-item-avatar>
                                             <v-list-item-content>
-                                                <v-list-item-subtitle v-text="p.name"></v-list-item-subtitle>
+                                                <v-list-item-title v-text="p.name"></v-list-item-title>
+                                                <v-list-item-subtitle v-text="p.character"></v-list-item-subtitle>
                                             </v-list-item-content>                                              
                                     </v-list-item>                                  
                                 </v-list> 
+                            </v-col>-->
+
+                            <v-col cols="12" sm="3">          
+                            </v-col>
+
+                            <v-col cols="12" sm="9">
+                               <carousel perPage="20" scrollPerPage navigationEnabled>
+                                    <slide v-for="(p,i) in people" :key="i">
+                                        <v-container fluid grid-list-md>
+                                            <v-layout row wrap>
+                                            <v-flex>
+                                                <Credit v-bind:credit="p" />
+                                            </v-flex>
+                                            </v-layout>
+                                        </v-container>
+                                    </slide>
+                                </carousel>                             
                             </v-col>
 
                             <v-col cols="12">
@@ -127,8 +145,17 @@
 </template>
 
 <script>
+import Credit from '@/components/Credit';
+import { Carousel, Slide } from "vue-carousel";
+
 export default {
+
     name: 'MovieDetail',
+    components: {
+        Credit,
+        Carousel,
+        Slide,        
+    },
     props: {
         movie: Object,
         images: Array,

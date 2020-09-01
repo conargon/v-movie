@@ -68,7 +68,8 @@ export default {
             .get('https://api.themoviedb.org/3/movie/' + idMovie + '/credits?api_key=91e88eab577c30d2e4546d14c947362a')
             .then(
                 response => {
-                    this.people = response.data.cast.slice(0, 9);
+                    //this.people = response.data.cast.slice(0, 9);
+                    this.people = response.data.cast;
                     this.director = response.data.crew.filter(e => e.job == 'Director');                    
                 }
             )
