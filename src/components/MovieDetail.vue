@@ -84,49 +84,42 @@
                                 </v-card-title>
 
                                 <v-card-subtitle class="pa-1 pl-4">
-                                    <a :href="movie.homepage" target="_blank">{{movie.homepage}}</a>
+                                    <a :href="movie.homepage" target="_blank" class="text-decoration-none">{{movie.homepage}}</a>
                                 </v-card-subtitle>    
+
+                                <!-- ACTORES -->
+                                <v-card-title class="pa-1 pl-4" v-if="people != null && people.length > 0">                        
+                                    <p class="text-subtitle-1" style="word-break: normal;">Reparto</p>
+                                </v-card-title>
+
+                               <carousel :perPageCustom="[[400, 1], [768, 2], [1024, 6], [1200, 10]]" scrollPerPage navigationEnabled class="ma-0 pa-0 ml-10 mr-10" v-if="people != null">
+                                    <slide v-for="(p,i) in people" :key="i">
+                                        <v-container fluid grid-list-xs>
+                                            <v-layout>
+                                                <v-flex>
+                                                    <Credit v-bind:credit="p" />
+                                                </v-flex>
+                                            </v-layout>
+                                        </v-container>
+                                    </slide>
+                                </carousel>                                   
 
                             </v-col>
 
                             <!-- ACTORES 
-                            <v-col cols="12" sm="2">
-                                <v-card-title class="ma-0 pa-0 pl-4" v-if="movie.homepage != null && movie.homepage != ''">                        
-                                    <p class="text-subtitle-1" style="word-break: normal;">Reparto</p>
-                                </v-card-title>                                
-                                <v-list>
-                                    <v-list-item
-                                        v-for="p in people"                                         
-                                        :key="p.cast_id"
-                                        dense
-                                        @click="goPeopleDetail(p.credit_id)">
-                                            <v-list-item-avatar tile v-if="p.profile_path != null">
-                                                <v-img :src="'http://image.tmdb.org/t/p/original' + p.profile_path"></v-img>
-                                            </v-list-item-avatar>
-                                            <v-list-item-content>
-                                                <v-list-item-title v-text="p.name"></v-list-item-title>
-                                                <v-list-item-subtitle v-text="p.character"></v-list-item-subtitle>
-                                            </v-list-item-content>                                              
-                                    </v-list-item>                                  
-                                </v-list> 
-                            </v-col>-->
-
-                            <v-col cols="12" sm="3">          
-                            </v-col>
-
-                            <v-col cols="12" sm="9">
-                               <carousel perPage="20" scrollPerPage navigationEnabled>
+                            <v-col cols="12">
+                               <carousel perPage="20" scrollPerPage navigationEnabled class="ml-10 mr-10">
                                     <slide v-for="(p,i) in people" :key="i">
-                                        <v-container fluid grid-list-md>
-                                            <v-layout row wrap>
-                                            <v-flex>
-                                                <Credit v-bind:credit="p" />
-                                            </v-flex>
+                                        <v-container fluid grid-list-sm>
+                                            <v-layout>
+                                                <v-flex>
+                                                    <Credit v-bind:credit="p" />
+                                                </v-flex>
                                             </v-layout>
                                         </v-container>
                                     </slide>
                                 </carousel>                             
-                            </v-col>
+                            </v-col>-->
 
                             <v-col cols="12">
                                 <v-card-actions>
@@ -190,13 +183,7 @@ export default {
                 return null;
             }            
         }
-    },
-    methods: {
-        goPeopleDetail: function(id) {
-            this.$router.push({ name: 'PeopleDetail', params: { idPeople : id } }).catch(()=>{});
-        },
     }
-
 
 }
 </script>
