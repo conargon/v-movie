@@ -1,15 +1,13 @@
 <template>
   <v-app id="inspire">
 
-    <v-app-bar
-      :clipped-left="$vuetify.breakpoint.lgAndUp"
+    <v-app-bar      
       app
       color="blue darken-3"
-      dark
       dense
     >
-    
-    <img src="imdb.svg" width="80" class="mr-4"/>
+
+      <img src="imdb.svg" width="80" class="mr-4"/>
 
       <v-text-field
         flat
@@ -25,34 +23,61 @@
       >
       </v-text-field>
 
-      <v-spacer></v-spacer>
-      <v-btn icon @click="goHome">
-        <v-icon>mdi-home</v-icon>
-      </v-btn>      
+      <v-menu
+        bottom
+        left
+        offset-y
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            icon
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item
+          @click="goHome"
+          >
+            <v-icon>mdi-home</v-icon>            
+            <v-list-item-title>&nbsp;Inicio</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
 
     </v-app-bar>
 
+    <v-parallax
+      dark
+      src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+      jumbotron
+      style="height: 100%;"
+    >
+      <v-main>
+          <router-view :key="$route.fullPath"/>        
+      </v-main>  
+    </v-parallax>
 
-    <v-main>
-        <router-view :key="$route.fullPath"/> 
-    </v-main>  
-        
     <v-footer
       dark
       padless
       absolute
       app
-      class="indigo lighten-1 center"
+      color="blue darken-3"
     >
       <v-card
         flat
         tile
         fluid
-        class="indigo lighten-1 white--text text-center"
+        class="text-center"
+        color="blue darken-3"
         style="width:100%"
       >
         <v-card-text class="white--text">
-          {{ new Date().getFullYear() }} — <strong>© Constantino Argüello González</strong>
+          {{ new Date().getFullYear() }} — <strong>&copy; Constantino Argüello González</strong>
         </v-card-text>
       </v-card>
     </v-footer>
