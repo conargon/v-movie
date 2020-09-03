@@ -5,7 +5,8 @@
         <v-card>            
           <v-container fluid>
             <v-row dense>
-              <!-- TITULO DE LA PELICULA -->
+
+              <!-- TITULO DE LA PELICULA Y LOGO DE LA PRODUCTORA -->
               <v-col cols="12">
 
                 <div class="pa-0 ma-0" style="float:left;">
@@ -35,12 +36,10 @@
                 <v-tab>Información<v-icon>mdi-information</v-icon></v-tab>
                 <v-tab>Reparto<v-icon>mdi-account</v-icon></v-tab>
                 <v-tab>Imágenes<v-icon>mdi-image</v-icon></v-tab>
-                <v-tab>Videos<v-icon>mdi-video</v-icon></v-tab>
-
-                
+                <v-tab>Videos<v-icon>mdi-video</v-icon></v-tab>               
 
                 <v-tab-item>
-                  <v-container fluid>
+                  <v-container fluid  class="pa-0 ma-0">
 
                     <v-row dense>
 
@@ -137,7 +136,7 @@
                     :perPageCustom="[[400, 1], [768, 2], [1024, 6], [1200, 10]]"
                     scrollPerPage
                     navigationEnabled
-                    :paginationEnabled="false"
+                    :paginationEnabled="$vuetify.breakpoint.smAndUp"
                     class="ma-0 pa-0 ml-10 mr-10"
                     v-if="people != null"
                   >
@@ -155,7 +154,10 @@
 
                 <!-- IMAGENES -->
                 <v-tab-item>
-                  <v-carousel hide-delimiters height="auto">
+                  <v-carousel 
+                    hide-delimiters 
+                    height="auto"
+                  >
                     <v-carousel-item
                       v-for="(item,i) in images"
                       :key="i"

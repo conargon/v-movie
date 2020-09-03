@@ -1,13 +1,19 @@
 <template>
-  <div class="home ma-4 pa-0 fluid">    
+  <div class="home fluid">    
     <v-container fluid v-if="movies != null">
       <v-container fluid text-center>
-        <v-img src="../assets/tmdb_long.svg" max-height="48" :contain="true" />        
-      </v-container>
+        <img src="../assets/tmdb_long.svg" style="max-height: 48px;">        
+      </v-container> 
       <v-container text-center>
         <h2>Peliculas recientes</h2>
       </v-container> 
-      <carousel :perPageCustom="[[400, 1], [768, 2], [1024, 3], [1200, 4]]" scrollPerPage navigationEnabled>
+      <div class="home ma-0 pa-4 fluid">
+      <carousel 
+        :perPageCustom="[[400, 1], [768, 2], [1024, 3], [1200, 4]]" 
+        scrollPerPage 
+        navigationEnabled 
+        :paginationEnabled="$vuetify.breakpoint.smAndUp"
+      >
         <slide v-for="(m,i) in movies.results" :key="i">
           <v-container fluid grid-list-lg>
             <v-layout row wrap>
@@ -18,6 +24,7 @@
           </v-container>
         </slide>
       </carousel>
+      </div>
     </v-container>
   </div>
 </template>
@@ -65,7 +72,6 @@ export default {
       this.searchMovies(newPage);
     },
   },
-
   created() {
     this.searchLastMovies(this.$route.params.searchText, 1);
   },

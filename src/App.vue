@@ -23,6 +23,7 @@
       >
       </v-text-field>
 
+      <!-- MENU DE OPCIONES -->
       <v-menu
         bottom
         left
@@ -60,16 +61,11 @@
 
     </v-app-bar>
 
-    <v-parallax
-      dark
-      src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
-      jumbotron
-      style="height: 100%;"
-    >
+
       <v-main>
-          <router-view :key="$route.fullPath"/>        
+          <router-view :key="$route.fullPath"/>      
       </v-main>  
-    </v-parallax>
+     
 
     <v-footer
       dark
@@ -92,37 +88,33 @@
       </v-card>
     </v-footer>
 
-<!-- DIALOGO DE OPCIONES -->
-  <v-dialog
-      v-model="dialog"
-      max-width="290"
+    <!-- DIALOGO DE OPCIONES -->
+    <v-dialog
+        v-model="dialog"
+        max-width="290"
     >
-      <v-card>
-        <v-card-title class="headline">Opciones</v-card-title>
-
-        <v-card-text>
-          <v-switch
-            v-model="$vuetify.theme.dark"
-            hide-details
-            inset
-            label="Nocturno"
-          ></v-switch>        
-        </v-card-text>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-
-          <v-btn
-            color="green darken-1"
-            text
-            @click="dialog = false"
-          >
-            Cerrar
-          </v-btn>
-        </v-card-actions>
-      </v-card>
+        <v-card>
+          <v-card-title class="headline">Opciones</v-card-title>
+          <v-card-text>
+            <v-switch
+              v-model="$vuetify.theme.dark"
+              hide-details
+              inset
+              label="Nocturno"
+            ></v-switch>        
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="green darken-1"
+              text
+              @click="dialog = false"
+            >
+              Cerrar
+            </v-btn>
+          </v-card-actions>
+        </v-card>
     </v-dialog>
-
 
   </v-app>
 </template>
@@ -139,12 +131,6 @@ export default {
   data: () => ({
     dialog: false,
     searchText: "",
-    icons: [
-      'mdi-facebook',
-      'mdi-twitter',
-      'mdi-linkedin',
-      'mdi-instagram',
-    ],       
   }),
   methods: {
     onEnterSearch:function() {  
