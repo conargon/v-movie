@@ -40,11 +40,21 @@
 
         <v-list>
           <v-list-item
-          @click="goHome"
+            @click="goHome"
           >
-            <v-icon>mdi-home</v-icon>            
-            <v-list-item-title>&nbsp;Inicio</v-list-item-title>
+            <v-list-item-icon>
+               <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>                      
+            <v-list-item-title>Inicio</v-list-item-title>
           </v-list-item>
+          
+          <v-list-item @click.stop="dialog = true">
+            <v-list-item-icon>
+              <v-icon>mdi-cog</v-icon> 
+            </v-list-item-icon>                        
+            <v-list-item-title>Opciones</v-list-item-title>
+          </v-list-item> 
+
         </v-list>
       </v-menu>
 
@@ -82,6 +92,37 @@
       </v-card>
     </v-footer>
 
+<!-- DIALOGO DE OPCIONES -->
+  <v-dialog
+      v-model="dialog"
+      max-width="290"
+    >
+      <v-card>
+        <v-card-title class="headline">Opciones</v-card-title>
+
+        <v-card-text>
+          <v-switch
+            v-model="$vuetify.theme.dark"
+            hide-details
+            inset
+            label="Nocturno"
+          ></v-switch>        
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            color="green darken-1"
+            text
+            @click="dialog = false"
+          >
+            Cerrar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
 
   </v-app>
 </template>
@@ -97,7 +138,6 @@ export default {
 
   data: () => ({
     dialog: false,
-    drawer: null,
     searchText: "",
     icons: [
       'mdi-facebook',
