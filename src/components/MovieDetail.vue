@@ -30,12 +30,14 @@
             
 
             <v-row dense>
-              <v-tabs :fixed-tabs="true">
+              <v-tabs icons-and-text show-arrows>
 
-                <v-tab>Info</v-tab>
-                <v-tab>Reparto</v-tab>
-                <v-tab>Imágenes</v-tab>
-                <v-tab>Videos</v-tab>
+                <v-tab>Información<v-icon>mdi-information</v-icon></v-tab>
+                <v-tab>Reparto<v-icon>mdi-account</v-icon></v-tab>
+                <v-tab>Imágenes<v-icon>mdi-image</v-icon></v-tab>
+                <v-tab>Videos<v-icon>mdi-video</v-icon></v-tab>
+
+                
 
                 <v-tab-item>
                   <v-container fluid>
@@ -44,7 +46,7 @@
 
                     <!-- POSTER -->  
                     <v-col cols="12" lg="3">
-                      <v-img :src="srcPoster" contain height="600" max-height="600" position="top"></v-img>
+                      <v-img :src="srcPoster" contain max-height="600" position="top"></v-img>
                     </v-col>
 
                     <v-col cols="12" lg="9">
@@ -129,11 +131,13 @@
                   </v-container>
                 </v-tab-item>
 
+                <!-- REPARTO -->
                 <v-tab-item>
                   <carousel
                     :perPageCustom="[[400, 1], [768, 2], [1024, 6], [1200, 10]]"
                     scrollPerPage
                     navigationEnabled
+                    :paginationEnabled="false"
                     class="ma-0 pa-0 ml-10 mr-10"
                     v-if="people != null"
                   >
@@ -149,6 +153,7 @@
                   </carousel>
                 </v-tab-item>
 
+                <!-- IMAGENES -->
                 <v-tab-item>
                   <v-carousel hide-delimiters height="auto">
                     <v-carousel-item
@@ -161,7 +166,18 @@
                     ></v-carousel-item>
                   </v-carousel>
                 </v-tab-item>
-              </v-tabs>
+
+                <!-- VIDEOS -->         
+                <v-tab-item>
+                  <v-carousel hide-delimiters height="auto">
+                    <v-carousel-item                     
+                      v-for="v in videos"
+                      :key="v.id"
+                      v-html="srcVideo(v)"                  
+                    ></v-carousel-item>
+                  </v-carousel>
+                </v-tab-item>
+              </v-tabs>              
 
               <v-col cols="12">
                 <v-card-actions>
@@ -192,6 +208,7 @@ export default {
   props: {
     movie: Object,
     images: Array,
+    videos: Array,
     people: Array,
     director: Array,
   },
@@ -238,5 +255,39 @@ export default {
       }
     },
   },
+  methods: {
+    srcVideo: function(item) {
+      return "<div class='videoFrameWrapper'><div class='videoWrapper'><iframe src='https://www.youtube.com/embed/" + item.key + "' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe></div></div>";
+    },
+  }
 };
 </script>
+
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+  overflow: hidden;
+}
+
+.videoWrapper iframe, 
+.videoWrapper object, 
+.videoWrapper embed
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+  display: block !important;
+  margin: 0 auto !important;  
+}
+
+.videoFrameWrapper {
+    max-width: 800px;
+    display: block !important;
+    margin: 0 auto !important;
+}
+</style>

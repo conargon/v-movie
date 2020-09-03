@@ -8,6 +8,7 @@
         v-else
         v-bind:movie="movie" 
         v-bind:images="images" 
+        v-bind:videos="videos" 
         v-bind:people="people" 
         v-bind:director="director"/>    
 </template>
@@ -27,6 +28,7 @@ export default {
       return { 
         movie: Object,
         images: [],
+        videos: [],
         people: [],
         director: [],
         loading: true,
@@ -56,13 +58,27 @@ export default {
             .then(
                 response => {
                     this.images = response.data.backdrops;
-                    this.getCredits(idMovie);
+                    this.getVideos(idMovie);
                 }
             )
             .catch(
                 e => console.log(e)
             )
       },
+      getVideos: function(idMovie) {
+          axios
+            .get('https://api.themoviedb.org/3/movie/' + idMovie + '/videos?api_key=91e88eab577c30d2e4546d14c947362a')
+            .then(
+                response => {
+                    this.videos = response.data.results;
+                    //this.videos = this.videos.filter(e => e.site == 'YouTube')
+                    this.getCredits(idMovie);
+                }
+            )
+            .catch(
+                e => console.log(e)
+            )
+      },      
       getCredits: function(idMovie) {
           axios
             .get('https://api.themoviedb.org/3/movie/' + idMovie + '/credits?api_key=91e88eab577c30d2e4546d14c947362a')
