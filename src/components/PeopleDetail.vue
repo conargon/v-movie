@@ -41,6 +41,21 @@
                                 <p class="text-justify">{{person.biography}}</p>
                             </v-card-subtitle> 
 
+<!--
+                            <v-card v-for="k in credit.person.known_for" :key="k.id">
+                                <v-card-title >                                    
+                                        <p class="text-title" style="word-break: normal;">{{k.title}}</p>
+                                </v-card-title>
+                                <v-card-subtitle >                                    
+                                        <v-img :src="'http://image.tmdb.org/t/p/original' + k.poster_path" height="96" :contain="true"></v-img>
+                                        <p class="text-subtitle" style="word-break: normal;">{{k.overview}}</p>
+                                </v-card-subtitle>                                
+                            </v-card>
+
+                            <MovieGrid v-bind:movies="credit.person.known_for" @pageChange="onPageChange($event)" 
+                                v-if="credit.person.known_for != null && credit.person.known_for.results.length > 0"/>
+                            -->
+                            
                         </v-col>
 
                         <v-col cols="12">
@@ -75,8 +90,13 @@
 </template>
 
 <script>
+//import MovieGrid from '@/components/MovieGrid';
+
 export default {
     name: 'PeopleDetail',
+    /*components: {
+        MovieGrid
+    },*/
     props: {
             credit: Object,
             person: Object
