@@ -62,9 +62,10 @@
     </v-app-bar>
 
 
-      <v-main>
-          <router-view :key="$route.fullPath"/>      
-      </v-main>  
+    <v-main>
+        <router-view :key="$route.fullPath" @viewImage="viewImage"/>  
+        <ImagePreview ref="imagePreview"/>    
+    </v-main>  
      
 
     <v-footer
@@ -120,9 +121,14 @@
 </template>
 
 <script>
+import ImagePreview from "@/components/ImagePreview";
 
 export default {
   name: 'App',
+
+  components: {
+    ImagePreview
+  },
 
   props: {
     source: String,
@@ -141,6 +147,10 @@ export default {
       this.$router.push({ name : 'Home' }).catch(()=>{});
 
     },
+    viewImage: function(src) {
+      console.log("viewImage");
+      this.$refs["imagePreview"].open(src)
+    }
   }
 };
 </script>

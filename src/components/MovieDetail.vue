@@ -21,7 +21,8 @@
                       :src="'http://image.tmdb.org/t/p/original' + firstCompany.logo_path"
                       height="48"
                       max-height="48"
-                      class = "ml-4"
+                      class="ml-4"
+                      style="background-color: white;"
                     />       
                 </div>
 
@@ -152,7 +153,29 @@
                   </carousel>
                 </v-tab-item>
 
-                <!-- IMAGENES -->
+                <v-tab-item>
+                  <carousel
+                    :perPageCustom="[[400, 1], [768, 2], [1024, 6], [1200, 10]]"
+                    scrollPerPage
+                    navigationEnabled
+                    :paginationEnabled="$vuetify.breakpoint.smAndUp"
+                    class="ma-0 pa-0 ml-10 mr-10"
+                    v-if="images != null"
+                  >
+                    <slide v-for="(item,i) in images" :key="i">
+                      <v-container fluid grid-list-xs>
+                        <v-layout>
+                          <v-flex>                      
+                            
+                            <ImageMovie v-bind:image="item" />
+                          </v-flex>
+                        </v-layout>
+                      </v-container>                            
+                    </slide>
+                  </carousel>
+                </v-tab-item>                
+
+                <!-- IMAGENES 
                 <v-tab-item>
                   <v-carousel 
                     hide-delimiters 
@@ -167,7 +190,7 @@
                       max-height="600"
                     ></v-carousel-item>
                   </v-carousel>
-                </v-tab-item>
+                </v-tab-item>-->
 
                 <!-- VIDEOS -->         
                 <v-tab-item>
@@ -198,12 +221,14 @@
 
 <script>
 import Credit from "@/components/Credit";
+import ImageMovie from "@/components/ImageMovie"
 import { Carousel, Slide } from "vue-carousel";
 
 export default {
   name: "MovieDetail",
   components: {
     Credit,
+    ImageMovie,
     Carousel,
     Slide,
   },
@@ -300,4 +325,5 @@ export default {
     display: block !important;
     margin: 0 auto !important;
 }
+
 </style>

@@ -18,6 +18,7 @@
             :src="srcPoster"
             height="300" 
             class="mt-4"
+            style="border-radius: 8px;"
             />
     </v-container>
     <v-card-subtitle class="pa-0 ma-0">
