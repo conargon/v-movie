@@ -63,8 +63,7 @@
 
 
     <v-main>
-        <router-view :key="$route.fullPath" @viewImage="viewImage"/>  
-        <ImagePreview ref="imagePreview"/>    
+        <router-view :key="$route.fullPath"/>           
     </v-main>  
      
 
@@ -117,6 +116,8 @@
         </v-card>
     </v-dialog>
 
+    <ImagePreview />   
+
   </v-app>
 </template>
 
@@ -145,12 +146,7 @@ export default {
     goHome: function() {
       this.searchText = '';
       this.$router.push({ name : 'Home' }).catch(()=>{});
-
     },
-    viewImage: function(src) {
-      console.log("viewImage");
-      this.$refs["imagePreview"].open(src)
-    }
   }
 };
 </script>

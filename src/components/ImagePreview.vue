@@ -1,28 +1,16 @@
 <template>
-    <div id="myModal" class="modal">
+    <div id="myModal" class="modal" :style="this.$store.state.srcImagePreview != '' ? 'display: block;' : 'display: none;'">
       <span class="close" @click="close">&times;</span>
-      <img class="modal-content" id="img01" :src="imageSrc">
-      <div id="caption"></div>
+      <img class="modal-content" id="img01" :src="this.$store.state.srcImagePreview">
     </div>       
 </template>
 
 <script>
 export default {
   name: "ImagePreview",
-  data: function() {
-      return {
-        imageSrc: null
-      }
-  },    
   methods: {
-    open: function(src) {
-        this.imageSrc = src;
-        var modal = document.getElementById('myModal');
-        modal.style.display = "block";
-    },
     close: function() {
-      var modal = document.getElementById('myModal');
-      modal.style.display = "none";
+      this.$store.commit('setSrcImagePreview', '')
     }
   }    
 }
@@ -41,7 +29,7 @@ export default {
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 999; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
@@ -54,26 +42,16 @@ export default {
 
 /* Modal Content (image) */
 .modal-content {
-  margin: auto;
+  /*margin: auto;*/
   display: block;
-  width: 80%;
-  max-width: 700px;
-}
-
-/* Caption of Modal Image */
-#caption {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-  text-align: center;
-  color: #ccc;
-  padding: 10px 0;
-  height: 150px;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;  
+  /*max-width: 700px;*/
 }
 
 /* Add Animation */
-.modal-content, #caption {  
+.modal-content {  
   animation-name: zoom;
   animation-duration: 0.6s;
 }

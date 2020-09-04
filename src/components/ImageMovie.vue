@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     viewImage: function() {
-      this.$emit("viewImage", this.srcImage)
+      this.$store.commit('setSrcImagePreview', this.srcImage)
     },
   }
 };
