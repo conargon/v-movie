@@ -39,6 +39,7 @@
                 <v-tab>Imágenes<v-icon>mdi-image</v-icon></v-tab>
                 <v-tab>Videos<v-icon>mdi-video</v-icon></v-tab>               
 
+                <!-- FICHA DE LA PELICULA (INFO) -->
                 <v-tab-item>
                   <v-container fluid  class="pa-0 ma-0">
 
@@ -133,64 +134,25 @@
 
                 <!-- REPARTO -->
                 <v-tab-item>
-                  <carousel
-                    :perPageCustom="[[400, 1], [768, 2], [1024, 6], [1200, 10]]"
-                    scrollPerPage
-                    navigationEnabled
-                    :paginationEnabled="$vuetify.breakpoint.smAndUp"
-                    class="ma-0 pa-0 ml-10 mr-10"
-                    v-if="people != null"
-                  >
-                    <slide v-for="(p,i) in people" :key="i">
-                      <v-container fluid grid-list-xs>
-                        <v-layout>
-                          <v-flex>
-                            <Credit v-bind:credit="p" />
-                          </v-flex>
-                        </v-layout>
-                      </v-container>
-                    </slide>
-                  </carousel>
-                </v-tab-item>
-
-                <v-tab-item>
-                  <carousel
-                    :perPageCustom="[[400, 1], [768, 2], [1024, 6], [1200, 10]]"
-                    scrollPerPage
-                    navigationEnabled
-                    :paginationEnabled="$vuetify.breakpoint.smAndUp"
-                    class="ma-0 pa-0 ml-10 mr-10"
-                    v-if="images != null"
-                  >
-                    <slide v-for="(item,i) in images" :key="i">
-                      <v-container fluid grid-list-xs>
-                        <v-layout>
-                          <v-flex>                      
-                            
-                            <ImageMovie v-bind:image="item" />
-                          </v-flex>
-                        </v-layout>
-                      </v-container>                            
-                    </slide>
-                  </carousel>
+                  <v-container fluid grid-list-md>
+                    <v-layout row wrap>           
+                        <v-flex xs12 sm3 md2 xl1 v-for="(p,i) in people" :key="i">
+                              <Credit v-bind:credit="p" />
+                        </v-flex>             
+                    </v-layout>                
+                  </v-container>
                 </v-tab-item>                
 
-                <!-- IMAGENES 
+                <!-- IMAGENES -->
                 <v-tab-item>
-                  <v-carousel 
-                    hide-delimiters 
-                    height="auto"
-                  >
-                    <v-carousel-item
-                      v-for="(item,i) in images"
-                      :key="i"
-                      :src="'http://image.tmdb.org/t/p/original' + item.file_path"
-                      contain
-                      height="600"
-                      max-height="600"
-                    ></v-carousel-item>
-                  </v-carousel>
-                </v-tab-item>-->
+                  <v-container fluid grid-list-md>
+                    <v-layout row wrap>           
+                        <v-flex xs12 sm6 md4 lg2 v-for="(item,i) in images" :key="i">
+                              <ImageMovie v-bind:image="item" />
+                        </v-flex>             
+                    </v-layout>                
+                  </v-container>
+                </v-tab-item>
 
                 <!-- VIDEOS -->         
                 <v-tab-item>
@@ -204,6 +166,7 @@
                 </v-tab-item>
               </v-tabs>              
 
+              <!-- BOTON VOLVER -->
               <v-col cols="12">
                 <v-card-actions>
                   <v-container class="pa-4 ma-0 text-center" fluid>
@@ -222,15 +185,12 @@
 <script>
 import Credit from "@/components/Credit";
 import ImageMovie from "@/components/ImageMovie"
-import { Carousel, Slide } from "vue-carousel";
 
 export default {
   name: "MovieDetail",
   components: {
     Credit,
     ImageMovie,
-    Carousel,
-    Slide,
   },
   props: {
     movie: null

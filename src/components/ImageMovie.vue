@@ -1,8 +1,6 @@
 <template>
   <v-container fluid class="pa-0 ma-0">
     <v-card 
-      width="340"
-      max-width="340" 
       class="pa-0 ma-0"
       hover>
       <v-img 

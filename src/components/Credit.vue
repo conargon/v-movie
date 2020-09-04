@@ -1,16 +1,13 @@
 <template>
   <v-card 
-    width="150"
-    max-width="150" 
-    height="200"
-    max-height="200"
+    hover
     class="pa-0 ma-0"
     :to="{ name: 'PeopleDetail', params: { idPeople: credit.credit_id }}">
     <v-img 
-        class="pa-0 ma-0 mt-4"
+        class="pa-0 ma-0"
         :src="srcProfile" 
         :contain="true" 
-        height="120">
+        max-height="300">
     </v-img>
     <v-card-subtitle class="pa-0 ma-0 pt-4">
       <p class="text-sm-body-2 font-weight-black text-center pa-0 ma-0" style="word-break: normal;">{{credit.name}}</p>
