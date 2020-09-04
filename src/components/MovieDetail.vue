@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid v-if="movie != null">
     <v-layout>
       <v-flex>
         <v-card>            
@@ -54,7 +54,7 @@
                           <p
                             class="text-subtitle-2"
                             style="word-break: normal;"
-                          >Título original: {{movie.original_title}} {{movie.production_countries.length > 0? '(' + movie.production_countries[0].name +')' : ''}}</p>
+                          >Título original: {{movie.original_title}} {{movie.production_countries != null && movie.production_countries.length > 0 ? '(' + movie.production_countries[0].name +')' : ''}}</p>
                         </v-container>
                         <v-container class="pa-0 ma-0">
                           <p
@@ -74,7 +74,7 @@
                             style="word-break: normal;"
                           >Producción: {{firstCompany.name}}</p>
                         </v-container>
-                        <v-container class="pa-0 ma-0" v-if="director.length > 0">
+                        <v-container class="pa-0 ma-0" v-if="director != null && director.length > 0">
                           <p
                             class="text-subtitle-2"
                             style="word-break: normal;"
@@ -208,11 +208,7 @@ export default {
     Slide,
   },
   props: {
-    movie: Object,
-    images: Array,
-    videos: Array,
-    people: Array,
-    director: Array,
+    movie: null
   },
   data() {
     return {
@@ -255,6 +251,18 @@ export default {
       } else {
         return null;
       }
+    },
+    images: function() {
+        return this.movie.images != null ? this.movie.images.backdrops : null;
+    },
+    videos: function() {
+        return this.movie.videos != null ? this.movie.videos.results : null;
+    },
+    people: function() {
+        return this.movie.credits != null ? this.movie.credits.cast : null;
+    },
+    director: function() {
+        return this.movie.credits != null ? this.movie.credits.crew.filter(e => e.job == 'Director') : null;
     },
   },
   methods: {

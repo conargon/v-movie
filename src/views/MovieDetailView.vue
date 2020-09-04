@@ -6,11 +6,7 @@
     ></v-progress-linear>
     <MovieDetail 
         v-else
-        v-bind:movie="movie" 
-        v-bind:images="images" 
-        v-bind:videos="videos" 
-        v-bind:people="people" 
-        v-bind:director="director"/>    
+        v-bind:movie="movie" />            
 </template>
 
 <script>
@@ -26,11 +22,7 @@ export default {
 
   data: function() {
       return { 
-        movie: Object,
-        images: [],
-        videos: [],
-        people: [],
-        director: [],
+        movie: null,
         loading: true,
       }
   },
@@ -40,62 +32,22 @@ export default {
       findMovie: function(idMovie) {
           this.loading = true;
           axios
-            .get('https://api.themoviedb.org/3/movie/' + idMovie + '?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES')
+            .get('https://api.themoviedb.org/3/movie/' + idMovie + '?api_key=91e88eab577c30d2e4546d14c947362a'
+                + '&language=es-ES' 
+                + '&append_to_response=credits,videos,images'
+                + '&include_image_language=es,null')
             .then(
                 response => {
-                    window.scrollTo(0,0);
                     this.movie = response.data;
-                    this.getImages(idMovie);
                 }
             )
             .catch(
-                e => console.log(e)
-            )
-      },
-      getImages: function(idMovie) {
-          axios
-            .get('https://api.themoviedb.org/3/movie/' + idMovie + '/images?api_key=91e88eab577c30d2e4546d14c947362a')
-            .then(
-                response => {
-                    this.images = response.data.backdrops;
-                    this.getVideos(idMovie);
-                }
-            )
-            .catch(
-                e => console.log(e)
-            )
-      },
-      getVideos: function(idMovie) {
-          axios
-            .get('https://api.themoviedb.org/3/movie/' + idMovie + '/videos?api_key=91e88eab577c30d2e4546d14c947362a')
-            .then(
-                response => {
-                    this.videos = response.data.results;
-                    //this.videos = this.videos.filter(e => e.site == 'YouTube')
-                    this.getCredits(idMovie);
-                }
-            )
-            .catch(
-                e => console.log(e)
-            )
-      },      
-      getCredits: function(idMovie) {
-          axios
-            .get('https://api.themoviedb.org/3/movie/' + idMovie + '/credits?api_key=91e88eab577c30d2e4546d14c947362a')
-            .then(
-                response => {
-                    //this.people = response.data.cast.slice(0, 9);
-                    this.people = response.data.cast;
-                    this.director = response.data.crew.filter(e => e.job == 'Director');                    
-                }
-            )
-            .catch(
-                e => console.log(e)
+                e => console.log("==================> findMovie" + e)
             )
             .finally(
                 this.loading = false
-            )
-      }
+            )            
+      },     
   },  
 
   created () {
