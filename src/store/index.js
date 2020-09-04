@@ -10,7 +10,6 @@ export default new Vuex.Store({
   mutations: {
     setSrcImagePreview(state, src) {
       state.srcImagePreview = src;
-      console.log("setSrcImagePreview:"+state.srcImagePreview);
     },
     clearSrcImagePreview(state) {
       state.srcImagePreview = "";

@@ -1,5 +1,5 @@
 <template>
-    <div id="myModal" class="modal" :style="this.$store.state.srcImagePreview != '' ? 'display: block;' : 'display: none;'">
+    <div id="myModal" class="modal" :style="this.$store.state.srcImagePreview != null && this.$store.state.srcImagePreview != '' ? 'display: block;' : 'display: none;'">
       <span class="close" @click="close">&times;</span>
       <img class="modal-content" id="img01" :src="this.$store.state.srcImagePreview">
     </div>       

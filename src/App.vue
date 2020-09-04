@@ -147,6 +147,9 @@ export default {
       this.searchText = '';
       this.$router.push({ name : 'Home' }).catch(()=>{});
     },
+  },
+  created() {
+    this.$store.commit('clearSrcImagePreview')
   }
 };
 </script>

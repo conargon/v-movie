@@ -39,36 +39,32 @@
 
                             <v-card-subtitle v-if="person != null && person.biography != null && person.biography != ''">
                                 <p class="text-justify">{{person.biography}}</p>
-                            </v-card-subtitle> 
-
-
-                            <v-card-title class="mt-0 pt-0 mb-0 pb-0" v-if="person != null && person.biography != null && person.biography != ''">                        
-                                <p class="text-subtitle-1" style="word-break: normal;">Otras películas</p>
-                            </v-card-title>                             
+                            </v-card-subtitle>                            
                             
                         </v-col>
 
                         <v-col cols="12">
+
+                            <v-card-title class="mt-0 pt-0 mb-0 pb-0" v-if="person != null && person.biography != null && person.biography != ''">                        
+                                <p class="text-subtitle-1" style="word-break: normal;">Otras películas</p>
+                            </v-card-title>  
+
                             <!-- OTRAS PELICULAS -->     
                             <v-container fluid grid-list-md>
                                 <v-layout row wrap>           
-                                    <v-flex xs12 sm6 lg4 v-for="k in credit.person.known_for" :key="k.id">
+                                    <v-flex xs12 sm6 lg12 v-for="k in credit.person.known_for" :key="k.id">
                                         <v-card :to="{ name: 'MovieDetail', params: { idMovie: k.id }}">
                                             <v-container fluid>
                                                 <v-row dense>
-                                                    <v-col cols="12">
-                                                        <v-card-title class="ma-0 pa-0 ">                                    
-                                                                <p class="text-title fluid text-centered" style="word-break: normal;">{{k.title}}</p>
-                                                        </v-card-title>
-                                                    </v-col>
-                                                </v-row>
-                                                <v-row dense>
-                                                    <v-col cols="12" sm="6" class="ma-0 pa-0">
+                                                    <v-col cols="auto" class="ma-0 pa-0">
                                                         <v-img :src="'http://image.tmdb.org/t/p/original' + k.poster_path" max-height="250" :contain="true"></v-img>                                                                
                                                     </v-col>
-                                                    <v-col cols="12" sm="6">                                                       
-                                                        <v-card-subtitle class="ma-0 pa-0">                                                                                                                                                                
-                                                                <p class="text-subtitle" style="word-break: normal;">{{k.overview}}</p>
+                                                    <v-col cols="12" sm="9">  
+                                                        <v-card-title class="ma-0 pa-0 pl-4 ">                                    
+                                                                <p class="text-title fluid text-centered" style="word-break: normal;">{{k.title}}</p>
+                                                        </v-card-title>                                                                                                             
+                                                        <v-card-subtitle class="ma-0 pa-0 pl-4">                                                                                                                                                                
+                                                                <p class="text-subtitle text-justify" style="word-break: normal;">{{k.overview}}</p>
                                                         </v-card-subtitle>      
                                                     </v-col>                                                    
                                                 </v-row>
