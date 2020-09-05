@@ -1,7 +1,7 @@
 <template>
   <v-card 
-    height="410" 
-    :to="{ name: 'MovieDetail', params: { idMovie: movie.id }}">
+    :to="{ name: 'MovieDetail', params: { idMovie: movie.id }}"  
+  >
     <v-card-title class="pa-0 ma-0 blue darken-3">
       <v-container fluid class="pa-2 ma-0">
         <p
@@ -10,17 +10,20 @@
         >{{movie.title}}</p>
       </v-container>
     </v-card-title>
-    <v-container text-center class="ma-0 pa-0">
-        <!-- <v-img 
-          :src="srcPoster" 
-          :contain="true" height="300"></v-img> -->
-          <img 
-            :src="srcPoster"
-            height="300" 
-            class="mt-4"
-            style="border-radius: 8px;"
-            />
-    </v-container>
+    <v-img 
+      :src="srcPoster" 
+      :contain="true" 
+    >
+        <template v-slot:placeholder>
+          <v-row
+            class="fill-height ma-0"
+            align="center"
+            justify="center"
+          >
+            <v-progress-circular indeterminate color="$vuetify.theme.dark ? 'grey lighten-5' : 'blue darken-3'"></v-progress-circular>
+          </v-row>
+        </template>           
+    </v-img>  
     <v-card-subtitle class="pa-0 ma-0">
       <v-container fluid text-center>
         <v-icon small color="amber">mdi-star</v-icon>

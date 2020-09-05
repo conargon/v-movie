@@ -8,6 +8,15 @@
         :src="srcProfile" 
         :contain="true" 
         max-height="300">
+        <template v-slot:placeholder>
+          <v-row
+            class="fill-height ma-0"
+            align="center"
+            justify="center"
+          >
+            <v-progress-circular indeterminate color="$vuetify.theme.dark ? 'grey lighten-5' : 'blue darken-3'"></v-progress-circular>
+          </v-row>
+        </template>         
     </v-img>
     <v-card-subtitle class="pa-0 ma-0 pt-4">
       <p class="text-sm-body-2 font-weight-black text-center pa-0 ma-0" style="word-break: normal;">{{credit.name}}</p>
@@ -26,7 +35,7 @@ export default {
   computed: {
     srcProfile: function () {
       return this.credit.profile_path != null
-        ? "http://image.tmdb.org/t/p/original" + this.credit.profile_path
+        ? "http://image.tmdb.org/t/p/w342" + this.credit.profile_path
         : "./no-poster.jpg";
     },
   },

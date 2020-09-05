@@ -42,12 +42,12 @@ export default {
 
 /* Modal Content (image) */
 .modal-content {
-  /*margin: auto;*/
+  margin: auto;
   display: block;
-  width: 75%;
-  margin-left: auto;
-  margin-right: auto;  
+  /*width: 75%;*/
+  height: auto;
   /*max-width: 700px;*/
+  max-height: 85vh;
 }
 
 /* Add Animation */

@@ -1,14 +1,17 @@
 <template>
   <v-app id="inspire">
 
+    <!-- CABECERA -->
     <v-app-bar      
       app
       color="blue darken-3"
       dense
     >
 
+      <!-- LOGO TMDB -->  
       <img src="imdb.svg" width="80" class="mr-4"/>
 
+      <!-- CAMPO DE BUSQUEDA -->
       <v-text-field
         flat
         solo-inverted
@@ -61,12 +64,12 @@
 
     </v-app-bar>
 
-
+    <!-- VISTA PRINCIPAL -->
     <v-main>
         <router-view :key="$route.fullPath"/>           
     </v-main>  
      
-
+    <!-- PIE CON CREDITOS -->
     <v-footer
       dark
       padless
@@ -116,6 +119,7 @@
         </v-card>
     </v-dialog>
 
+    <!-- VISUALIZACIÓN IMAGENES PANTALLA COMPLETA -->
     <ImagePreview />   
 
   </v-app>

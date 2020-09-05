@@ -7,7 +7,9 @@
     <PeopleDetail 
         v-else
         v-bind:credit="credit" 
-        v-bind:person="person" />  
+        v-bind:person="person" 
+        v-bind:images="images" 
+        />  
 </template>
 
 <script>
@@ -24,6 +26,7 @@ export default {
         return { 
             credit: null,
             person: null,
+            images: [],
             loading: true
         }
     },
@@ -54,6 +57,19 @@ export default {
                     if(language == 'es-ES' && (this.person.biography == null || this.person.biography == '')) {
                         this.findPerson(idPerson, 'en-US');
                     }
+                    this.findImages(idPerson)
+                }
+            )
+            .catch(
+                e => console.log(e)
+            )         
+      },      
+      findImages: function(idPerson) {
+          axios
+            .get('https://api.themoviedb.org/3/person/' + idPerson + '/images?api_key=91e88eab577c30d2e4546d14c947362a')
+            .then(
+                response => {
+                    this.images = response.data.profiles;
                 }
             )
             .catch(
@@ -62,7 +78,7 @@ export default {
             .finally(
                 this.loading = false
             )            
-      },      
+      },            
     },  
 
   created () {
