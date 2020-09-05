@@ -81,7 +81,7 @@
                     <v-tab-item>
                         <v-container fluid grid-list-md>
                             <v-layout row wrap>           
-                                <v-flex xs12 v-for="k in credit.person.known_for" :key="k.id">
+                                <v-flex xs12 v-for="k in movies.results" :key="k.id">
                                     <v-card :to="{ name: 'MovieDetail', params: { idMovie: k.id }}">
                                         <v-container fluid>
                                             <v-row dense>
@@ -132,6 +132,7 @@ export default {
             credit: Object,
             person: Object,
             images: Array,
+            movies: Object
     },
     computed: {
         srcPoster: function () {

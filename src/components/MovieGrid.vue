@@ -10,7 +10,7 @@
         >
         </v-pagination>
         <v-layout row wrap>           
-            <v-flex xs12 sm6 md4 lg2 v-for="m in movies.results" :key="m.id">
+            <v-flex xs12 sm6 md4 lg3 v-for="m in movies.results" :key="m.id">
                    <Movie v-bind:movie="m" />
             </v-flex>             
         </v-layout>

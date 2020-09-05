@@ -1,18 +1,20 @@
 <template>
   <v-card 
     :to="{ name: 'MovieDetail', params: { idMovie: movie.id }}"  
+    height="500"
   >
     <v-card-title class="pa-0 ma-0 blue darken-3">
       <v-container fluid class="pa-2 ma-0">
         <p
           class="text-subtitle-2 font-weight-bold text-center pa-0 ma-0"
           style="color:white; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"
-        >{{movie.title}}</p>
+        >{{movie.title + anyoLanzamiento}}</p>
       </v-container>
     </v-card-title>
     <v-img 
       :src="srcPoster" 
       :contain="true" 
+      height="85%"
     >
         <template v-slot:placeholder>
           <v-row
@@ -45,6 +47,9 @@ export default {
         ? "http://image.tmdb.org/t/p/w342" + this.movie.poster_path
         : "./no-poster.jpg";
     },
+    anyoLanzamiento: function() {
+      return this.movie.release_date != null ? ' (' + this.movie.release_date.substr(0,4) + ')' : 'xxx';
+    }    
   },
 };
 </script>

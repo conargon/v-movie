@@ -13,7 +13,7 @@
                     <p
                       class="text-h5 font-weight-bold pa-0 ma-0 pt-1"
                       style="word-break: normal;"
-                    >{{movie.title}}</p>
+                    >{{movie.title}} {{anyoLanzamiento}}</p>
                 </div>
 
                 <div class="pa-0 ma-0" style="float:left;" v-if="firstCompany != null && firstCompany.logo_path != null">
@@ -27,9 +27,7 @@
                 </div>
 
               </v-col>
-            </v-row>
-
-            
+            </v-row>            
 
             <v-row dense>
               <v-tabs icons-and-text show-arrows>
@@ -68,7 +66,7 @@
                           <p
                             class="text-subtitle-2"
                             style="word-break: normal;"
-                          >Año de producción: {{movie.release_date != null ? movie.release_date.substr(0,4) : ''}}</p>
+                          >Lanzamiento: {{fechaLanzamiento}}</p>
                         </v-container>
                         <v-container class="pa-0 ma-0" v-if="firstCompany != null">
                           <p
@@ -184,7 +182,7 @@
 
 <script>
 import Credit from "@/components/Credit";
-import ImageMovie from "@/components/ImageMovie"
+import ImageMovie from "@/components/ImageMovie";
 
 export default {
   name: "MovieDetail",
@@ -249,6 +247,12 @@ export default {
     director: function() {
         return this.movie.credits != null ? this.movie.credits.crew.filter(e => e.job == 'Director') : null;
     },
+    fechaLanzamiento: function() {
+      return this.movie.release_date != null ?  new Date(this.movie.release_date).toLocaleDateString('es-ES') : '';
+    },
+    anyoLanzamiento: function() {
+      return this.movie.release_date != null ? ' (' + this.movie.release_date.substr(0,4) + ')' : 'xxx';
+    }
   },
   methods: {
     srcVideo: function(item) {

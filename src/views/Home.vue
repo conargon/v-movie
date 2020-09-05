@@ -7,7 +7,7 @@
       </v-container> 
 
       <v-container text-center v-if="movies != null">
-        <h2>Peliculas recientes</h2>
+        <h2>Peliculas recientes más populares</h2>
       </v-container> 
 
       <!-- CARUSEL VISTA PC -->
@@ -15,10 +15,10 @@
         :perPageCustom="[[400, 1], [768, 3], [1024, 4], [1200, 6]]" 
         scrollPerPage 
         navigationEnabled 
-        paginationEnabled="true"
+        :paginationEnabled="true"
         v-if="$vuetify.breakpoint.smAndUp"
       >
-        <slide :id="'VueCarousel-slide-' + i" v-for="(m,i) in movies.results" :key="i">
+        <slide :id="'VueCarousel-slide-' + i" v-for="(m,i) in movies" :key="i">
           <v-container fluid grid-list-lg>
             <v-layout row wrap>
               <v-flex>
@@ -36,7 +36,7 @@
           v-else
       >
         <v-carousel-item                     
-          v-for="(m,i) in movies.results"
+          v-for="(m,i) in movies"
           :key="i" 
         >
           <Movie v-bind:movie="m" />
@@ -51,7 +51,6 @@
 import axios from "axios";
 import { Carousel, Slide } from "vue-carousel";
 import Movie from "@/components/Movie";
-import Date from 'datejs';
 
 export default {
   name: "Home",
@@ -64,21 +63,28 @@ export default {
 
   data: function () {
     return {
-      movies: null,
+      movies: [],
     };
   },
 
   methods: {
-    searchLastMovies: function (page) {
-      // let hoy = new Date().toString("yyyy-M-d")
-      // let mesAnt = new Date().addMonths(-1).toString("yyyy-M-d");         
+    addMonths: function(date, months) {
+        var d = date.getDate();
+        date.setMonth(date.getMonth() + +months);
+        if (date.getDate() != d) {
+          date.setDate(0);
+        }
+        return date;
+    },
+    searchLastMovies: function () {
+      let hoy = new Date().toISOString().substr(0,10);
+      let mesAnt = this.addMonths(new Date(), -1).toISOString().substr(0,10);
       axios
         .get(
-          "https://api.themoviedb.org/3/discover/movie?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES&" +
-            "&page=" +
-            page +
-            // "&primary_release_date.gte=" +  mesAnt +
-            // "&primary_release_date.lte=" + hoy +
+          "https://api.themoviedb.org/3/discover/movie?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES" +
+            "&page=1" + 
+            "&primary_release_date.gte=" +  mesAnt +
+            "&primary_release_date.lte=" + hoy +
             "&sort_by=popularity.desc&include_adult=false&include_video=true"
         )
         // peliculas más populares
@@ -86,7 +92,8 @@ export default {
         //   "https://api.themoviedb.org/3/movie/popular?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES&page="+page
         // )        
         .then((response) => {
-          this.movies = response.data;
+          this.movies = response.data.results; //
+          this.movies = this.movies.sort( (a,b) => b.vote_average - a.vote_average);
         })
         .catch((e) => console.log(e));
     },
@@ -95,7 +102,7 @@ export default {
     },
   },
   created() {
-    this.searchLastMovies(this.$route.params.searchText, 1);
+    this.searchLastMovies(this.$route.params.searchText);
   },
 };
 </script>

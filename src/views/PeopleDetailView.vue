@@ -9,6 +9,7 @@
         v-bind:credit="credit" 
         v-bind:person="person" 
         v-bind:images="images" 
+        v-bind:movies="movies" 
         />  
 </template>
 
@@ -27,6 +28,7 @@ export default {
             credit: null,
             person: null,
             images: [],
+            movies: null,
             loading: true
         }
     },
@@ -57,13 +59,28 @@ export default {
                     if(language == 'es-ES' && (this.person.biography == null || this.person.biography == '')) {
                         this.findPerson(idPerson, 'en-US');
                     }
-                    this.findImages(idPerson)
+                    this.findMovies(idPerson)
                 }
             )
             .catch(
                 e => console.log(e)
             )         
       },      
+      findMovies: function(idPerson, language) {
+          axios
+            .get('https://api.themoviedb.org/3/discover/movie?api_key=91e88eab577c30d2e4546d14c947362a&sort_by=primary_release_date.desc&include_adult=false&include_video=false&page=1' 
+                    + '&with_cast=' + idPerson
+                    + '&language=' + language)
+            .then(
+                response => {
+                    this.movies = response.data;
+                    this.findImages(idPerson)
+                }
+            )
+            .catch(
+                e => console.log(e)
+            )         
+      },           
       findImages: function(idPerson) {
           axios
             .get('https://api.themoviedb.org/3/person/' + idPerson + '/images?api_key=91e88eab577c30d2e4546d14c947362a')
