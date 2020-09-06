@@ -7,6 +7,7 @@
         class="pa-0 ma-0"
         :src="srcProfile" 
         :contain="true" 
+        style="border-radius: 10px;"
         max-height="300">
         <template v-slot:placeholder>
           <v-row

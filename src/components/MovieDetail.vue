@@ -41,14 +41,15 @@
                 <v-tab-item>
                   <v-container fluid  class="pa-0 ma-0">
 
-                    <v-row dense>
+                    <v-row dense>                      
 
                     <!-- POSTER -->  
                     <v-col cols="12" lg="3">
-                      <v-img :src="srcPoster" contain max-height="600" position="top"></v-img>
+                      <v-img :src="srcPoster" contain max-height="600" position="top" style="border-radius: 10px;"></v-img>
                     </v-col>
 
-                    <v-col cols="12" lg="9">
+                    <v-col cols="12" lg="9"                    
+                        >
                       <v-card-title class="pa-1 pl-4">
                         <v-container class="pa-0 ma-0">
                           <p
@@ -106,7 +107,7 @@
                       </v-card-title>
 
                       <v-card-subtitle class="pa-1 pl-4">
-                        <p>{{movie.overview}}</p>
+                        <p class="text-justify">{{movie.overview}}</p>
                       </v-card-subtitle>
 
                       <v-card-title
@@ -134,7 +135,7 @@
                 <v-tab-item>
                   <v-container fluid grid-list-md>
                     <v-layout row wrap>           
-                        <v-flex xs12 sm3 md2 xl1 v-for="(p,i) in people" :key="i">
+                        <v-flex xs6 sm3 lg1 v-for="(p,i) in people" :key="i">
                               <Credit v-bind:credit="p" />
                         </v-flex>             
                     </v-layout>                
@@ -242,7 +243,7 @@ export default {
         return this.movie.videos != null ? this.movie.videos.results : null;
     },
     people: function() {
-        return this.movie.credits != null ? this.movie.credits.cast : null;
+        return this.movie.credits != null ? this.movie.credits.cast.filter( e => e.profile_path != null) : null;
     },
     director: function() {
         return this.movie.credits != null ? this.movie.credits.crew.filter(e => e.job == 'Director') : null;
@@ -252,7 +253,7 @@ export default {
     },
     anyoLanzamiento: function() {
       return this.movie.release_date != null ? ' (' + this.movie.release_date.substr(0,4) + ')' : 'xxx';
-    }
+    },
   },
   methods: {
     srcVideo: function(item) {
@@ -290,4 +291,10 @@ export default {
     margin: 0 auto !important;
 }
 
+.alpha60 {
+	/* Fallback for web browsers that doesn't support RGBa */
+	background-color: rgb(0, 0, 0);
+	/* RGBa with 0.6 opacity */
+	background-color: rgba(0, 0, 0, 0.6);
+}
 </style>

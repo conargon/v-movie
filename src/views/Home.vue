@@ -12,7 +12,7 @@
 
       <!-- CARUSEL VISTA PC -->
       <carousel 
-        :perPageCustom="[[400, 1], [768, 3], [1024, 4], [1200, 6]]" 
+        :perPageCustom="[[400, 1], [768, 3], [1024, 6]]" 
         scrollPerPage 
         navigationEnabled 
         :paginationEnabled="true"

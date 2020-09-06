@@ -19,7 +19,7 @@
                             <v-row dense>
 
                                 <v-col cols="12" sm="2" v-if="credit.person.profile_path != null">  
-                                    <v-img :src="srcPoster" contain max-height="400">
+                                    <v-img :src="srcPoster" contain max-height="400" style="border-radius: 10px;">
                                         <template v-slot:placeholder>
                                         <v-row
                                             class="fill-height ma-0"
@@ -52,7 +52,7 @@
                                     </v-card-title>  
 
                                     <v-card-title class="mt-0 pt-0 mb-0 pb-0" v-if="person != null && person.biography != null && person.biography != ''">                        
-                                        <p class="text-subtitle-1" style="word-break: normal;">Biografia</p>
+                                        <p class="text-subtitle-1" style="word-break: normal;">Biografía</p>
                                     </v-card-title>                            
 
                                     <v-card-subtitle v-if="person != null && person.biography != null && person.biography != ''">
@@ -81,9 +81,14 @@
                     <v-tab-item>
                         <v-container fluid grid-list-md>
                             <v-layout row wrap>           
-                                <v-flex xs12 v-for="k in movies.results" :key="k.id">
+                                <v-flex xs12 sm6 md4 lg1 v-for="k in movies.results" :key="k.id">
                                     <v-card :to="{ name: 'MovieDetail', params: { idMovie: k.id }}">
-                                        <v-container fluid>
+                                        <v-img :src="'http://image.tmdb.org/t/p/original' + k.poster_path" max-height="300" :contain="true" style="border-radius: 5px;">
+                                        </v-img>
+                                        <v-card-subtitle class="ma-0 pa-0 pl-2">                                                                                                                                                                
+                                                <p class="text-subtitle text-center" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">{{k.title}}</p>
+                                        </v-card-subtitle>                                          
+                                        <!-- <v-container fluid>
                                             <v-row dense>
                                                 <v-col cols="12" sm="1" class="ma-0 pa-0">
                                                     <v-img :src="'http://image.tmdb.org/t/p/original' + k.poster_path" max-height="300" :contain="true"></v-img>                                                                
@@ -97,7 +102,7 @@
                                                     </v-card-subtitle>      
                                                 </v-col>                                                    
                                             </v-row>
-                                        </v-container>
+                                        </v-container> -->
                                     </v-card>
                                 </v-flex>             
                             </v-layout>                

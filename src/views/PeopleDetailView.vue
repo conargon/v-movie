@@ -40,6 +40,7 @@ export default {
             .get('https://api.themoviedb.org/3/credit/' + idCredit + '?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES')
             .then(
                 response => {
+                    window.scrollTo(0,0);
                     this.credit = response.data;
                     if(this.credit != null && this.credit.person != null) {
                         this.findPerson(this.credit.person.id, 'es-ES')
@@ -74,6 +75,9 @@ export default {
             .then(
                 response => {
                     this.movies = response.data;
+                    if(this.movies != null) {
+                            this.movies.results = this.movies.results.filter( e => e.poster_path != null);
+                    }
                     this.findImages(idPerson)
                 }
             )

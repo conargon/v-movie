@@ -31,6 +31,7 @@ export default {
       // TODO usar api para recuperar la config.
       findMovie: function(idMovie) {
           this.loading = true;
+          window.scrollTo(0,0);
           axios
             .get('https://api.themoviedb.org/3/movie/' + idMovie + '?api_key=91e88eab577c30d2e4546d14c947362a'
                 + '&language=es-ES' 
