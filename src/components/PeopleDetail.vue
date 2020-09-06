@@ -10,8 +10,8 @@
 
                 <v-tabs icons-and-text show-arrows>
                     <v-tab>Información<v-icon>mdi-information</v-icon></v-tab>
-                    <v-tab>Imágenes<v-icon>mdi-image</v-icon></v-tab>
-                    <v-tab>Películas<v-icon>mdi-video</v-icon></v-tab>                        
+                    <v-tab v-if="images != null && images.length > 0">Imágenes<v-icon>mdi-image</v-icon></v-tab>
+                    <v-tab v-if="movies != null && movies.results.length > 0">Películas<v-icon>mdi-video</v-icon></v-tab>                        
                     
                     <!-- FICHA DEL ACTOR (INFO) -->
                     <v-tab-item>
@@ -67,43 +67,32 @@
                     </v-tab-item>
 
                     <!-- IMAGENES -->     
-                    <v-tab-item>
+                    <v-tab-item  v-if="images != null && images.length > 0">
                         <v-container fluid grid-list-md>
                             <v-layout row wrap>           
-                                <v-flex xs12 sm6 md3 lg1 v-for="(item,i) in images" :key="i">
-                                    <ImageMovie v-bind:image="item" />
+                                <v-flex xs12 sm6 md3 lg1 v-for="(item,i) in images" :key="i">                                   
+                                    <ImageMovie v-bind:image="item" :elevation="hover ? 8 : 1" />
                                 </v-flex>             
                             </v-layout>                
                         </v-container>
                     </v-tab-item>
 
                     <!-- PELICULAS -->     
-                    <v-tab-item>
+                    <v-tab-item  v-if="movies != null && movies.results.length > 0">
                         <v-container fluid grid-list-md>
                             <v-layout row wrap>           
                                 <v-flex xs12 sm6 md4 lg1 v-for="k in movies.results" :key="k.id">
-                                    <v-card :to="{ name: 'MovieDetail', params: { idMovie: k.id }}">
-                                        <v-img :src="'http://image.tmdb.org/t/p/original' + k.poster_path" max-height="300" :contain="true" style="border-radius: 5px;">
-                                        </v-img>
-                                        <v-card-subtitle class="ma-0 pa-0 pl-2">                                                                                                                                                                
-                                                <p class="text-subtitle text-center" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">{{k.title}}</p>
-                                        </v-card-subtitle>                                          
-                                        <!-- <v-container fluid>
-                                            <v-row dense>
-                                                <v-col cols="12" sm="1" class="ma-0 pa-0">
-                                                    <v-img :src="'http://image.tmdb.org/t/p/original' + k.poster_path" max-height="300" :contain="true"></v-img>                                                                
-                                                </v-col>
-                                                <v-col cols="12" sm="11">  
-                                                    <v-card-title class="ma-0 pa-0 pl-4 ">                                    
-                                                            <p class="text-title fluid text-centered" style="word-break: normal;">{{k.title}}</p>
-                                                    </v-card-title>                                                                                                             
-                                                    <v-card-subtitle class="ma-0 pa-0 pl-4">                                                                                                                                                                
-                                                            <p class="text-subtitle text-justify" style="word-break: normal;">{{k.overview}}</p>
-                                                    </v-card-subtitle>      
-                                                </v-col>                                                    
-                                            </v-row>
-                                        </v-container> -->
-                                    </v-card>
+                                    <v-hover>
+                                        <template v-slot="{ hover }">
+                                            <v-card :to="{ name: 'MovieDetail', params: { idMovie: k.id }}"  :elevation="hover ? 8 : 1">
+                                                <v-img :src="'http://image.tmdb.org/t/p/original' + k.poster_path" max-height="300" :contain="true" style="border-radius: 5px;">
+                                                </v-img>
+                                                <v-card-subtitle class="ma-0 pa-0 pl-2">                                                                                                                                                                
+                                                        <p class="text-subtitle text-center" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">{{k.title}}</p>
+                                                </v-card-subtitle>   
+                                            </v-card>
+                                        </template>
+                                    </v-hover>
                                 </v-flex>             
                             </v-layout>                
                         </v-container>    

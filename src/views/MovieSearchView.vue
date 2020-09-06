@@ -24,7 +24,6 @@ export default {
   data: function() {
     return {
       movies: null,
-      currentPage: 1,
       loading: true,
     }
   }, 
@@ -40,7 +39,6 @@ export default {
                     + '&include_adult=false')
             .then(
                 response => {
-                    window.scrollTo(0,0);
                     this.movies = response.data;
                     if(this.movies != null) {
                       this.movies.results = this.movies.results.sort((a,b) => b.vote_count-a.vote_count)
@@ -55,13 +53,21 @@ export default {
             )
       },
       onPageChange: function(newPage) {
-        this.currentPage = newPage
+        this.$store.commit('setCurrentPage', newPage);
         this.searchMovies(this.$route.params.searchText, newPage);
       } 
   },  
 
-  created () {
-    this.searchMovies(this.$route.params.searchText, this.currentPage);
+  created () {    
+    let currentPage = this.$store.state.currentPage;    
+    if(currentPage == null) {
+      currentPage = 1;
+      this.$store.commit('setCurrentPage', currentPage)
+    }
+    this.searchMovies(this.$route.params.searchText, currentPage);
+  },
+  mounted() {
+        window.scrollTo(0,0);
   }
 }
 </script>

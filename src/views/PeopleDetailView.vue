@@ -39,8 +39,7 @@ export default {
           axios
             .get('https://api.themoviedb.org/3/credit/' + idCredit + '?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES')
             .then(
-                response => {
-                    window.scrollTo(0,0);
+                response => {                    
                     this.credit = response.data;
                     if(this.credit != null && this.credit.person != null) {
                         this.findPerson(this.credit.person.id, 'es-ES')
@@ -104,6 +103,9 @@ export default {
 
   created () {
     this.findCredit(this.$route.params.idPeople);
+  },
+  mounted() {
+        window.scrollTo(0,0);
   }    
 }
 </script>

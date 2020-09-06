@@ -33,9 +33,9 @@
               <v-tabs icons-and-text show-arrows>
 
                 <v-tab>Información<v-icon>mdi-information</v-icon></v-tab>
-                <v-tab>Reparto<v-icon>mdi-account</v-icon></v-tab>
-                <v-tab>Imágenes<v-icon>mdi-image</v-icon></v-tab>
-                <v-tab>Videos<v-icon>mdi-video</v-icon></v-tab>               
+                <v-tab v-if="people != null && people.length > 0">Reparto<v-icon>mdi-account</v-icon></v-tab>
+                <v-tab v-if="images != null && images.length > 0">Imágenes<v-icon>mdi-image</v-icon></v-tab>
+                <v-tab v-if="videos != null && videos.length > 0">Videos<v-icon>mdi-video</v-icon></v-tab>               
 
                 <!-- FICHA DE LA PELICULA (INFO) -->
                 <v-tab-item>
@@ -132,7 +132,7 @@
                 </v-tab-item>
 
                 <!-- REPARTO -->
-                <v-tab-item>
+                <v-tab-item v-if="people != null && people.length > 0">
                   <v-container fluid grid-list-md>
                     <v-layout row wrap>           
                         <v-flex xs6 sm3 lg1 v-for="(p,i) in people" :key="i">
@@ -143,7 +143,7 @@
                 </v-tab-item>                
 
                 <!-- IMAGENES -->
-                <v-tab-item>
+                <v-tab-item  v-if="images != null && images.length > 0">
                   <v-container fluid grid-list-md>
                     <v-layout row wrap>           
                         <v-flex xs12 sm6 md4 lg2 v-for="(item,i) in images" :key="i">
@@ -154,7 +154,7 @@
                 </v-tab-item>
 
                 <!-- VIDEOS -->         
-                <v-tab-item>
+                <v-tab-item  v-if="videos != null && videos.length > 0">
                   <v-carousel hide-delimiters height="auto">
                     <v-carousel-item                     
                       v-for="v in videos"

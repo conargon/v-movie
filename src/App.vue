@@ -145,6 +145,7 @@ export default {
   }),
   methods: {
     onEnterSearch:function() {  
+      this.$store.commit('setCurrentPage', 1);
       this.$router.push({ name: 'MovieSearch', params: { searchText : this.searchText } }).catch(()=>{});
     },
     goHome: function() {
