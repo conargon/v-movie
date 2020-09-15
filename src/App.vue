@@ -18,11 +18,12 @@
         hide-details
         dense
         clearable
-        prepend-inner-icon="mdi-magnify"
+        append-icon="mdi-magnify"      
         label="Búsqueda de peliculas"        
         ref="inputSearch"
         v-model="searchText"
         @keydown.enter="onEnterSearch"
+        @click:append="onEnterSearch"
       >
       </v-text-field>
 
