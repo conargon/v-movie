@@ -1,161 +1,104 @@
 <template>
-  <v-app id="inspire">
+<div>
 
     <!-- CABECERA -->
-    <v-app-bar      
-      app
-      color="blue darken-3"
-      dense
-    >
-
-      <!-- LOGO TMDB -->  
-      <img src="imdb.svg" width="80" class="mr-4"/>
-
-      <!-- CAMPO DE BUSQUEDA -->
-      <v-text-field
-        flat
-        solo-inverted
-        hide-details
-        dense
-        clearable
-        append-icon="mdi-magnify"      
-        label="Búsqueda de peliculas"        
-        ref="inputSearch"
-        v-model="searchText"
-        @keydown.enter="onEnterSearch"
-        @click:append="onEnterSearch"
-      >
-      </v-text-field>
-
-      <!-- MENU DE OPCIONES -->
-      <v-menu
-        bottom
-        left
-        offset-y
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            icon
-            v-bind="attrs"
-            v-on="on"
-          >
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item
-            @click="goHome"
-          >
-            <v-list-item-icon>
-               <v-icon>mdi-home</v-icon>
-            </v-list-item-icon>                      
-            <v-list-item-title>Inicio</v-list-item-title>
-          </v-list-item>
-          
-          <v-list-item @click.stop="dialog = true">
-            <v-list-item-icon>
-              <v-icon>mdi-cog</v-icon> 
-            </v-list-item-icon>                        
-            <v-list-item-title>Opciones</v-list-item-title>
-          </v-list-item> 
-
-        </v-list>
-      </v-menu>
-
-    </v-app-bar>
+    <nav>
+      <div class="nav-wrapper">
+        <!-- <img src="imdb.svg" width="80" class="logo" /> -->
+        <img src="./assets/tmdb_long.svg" class="logo" />
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+            <a href="#" @click="goHome"><i class="large material-icons left">home</i></a>
+          </li>          
+        <li>
+          <div class="input-field">
+            <input id="search" type="search" v-model="searchText" @keydown.enter="onEnterSearch" required>
+            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+            <i class="material-icons" @click="searchText=''">close</i>
+          </div>
+        </li>          
+        </ul>
+      </div>
+    </nav>
 
     <!-- VISTA PRINCIPAL -->
-    <v-main>
-        <router-view :key="$route.fullPath"/>           
-    </v-main>  
-     
-    <!-- PIE CON CREDITOS -->
-    <v-footer
-      dark
-      padless
-      absolute
-      app
-      color="blue darken-3"
-    >
-      <v-card
-        flat
-        tile
-        fluid
-        class="text-center"
-        color="blue darken-3"
-        style="width:100%"
-      >
-        <v-card-text class="white--text">
-          {{ new Date().getFullYear() }} — <strong>&copy; Constantino Argüello González</strong>
-        </v-card-text>
-      </v-card>
-    </v-footer>
+    <router-view :key="$route.fullPath" />
 
-    <!-- DIALOGO DE OPCIONES -->
-    <v-dialog
-        v-model="dialog"
-        max-width="290"
-    >
-        <v-card>
-          <v-card-title class="headline">Opciones</v-card-title>
-          <v-card-text>
-            <v-switch
-              v-model="$vuetify.theme.dark"
-              hide-details
-              inset
-              label="Nocturno"
-            ></v-switch>        
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-              color="green darken-1"
-              text
-              @click="dialog = false"
-            >
-              Cerrar
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-    </v-dialog>
+    <!-- PIE -->
+    <footer class="page-footer">
+      <div class="footer-copyrigh">
+        <div class="container center-align">
+          <strong
+            >&copy; Constantino Argüello González&nbsp;{{
+              new Date().getFullYear()
+            }}</strong
+          >
+        </div>
+      </div>
+    </footer>
 
-    <!-- VISUALIZACIÓN IMAGENES PANTALLA COMPLETA -->
-    <ImagePreview />   
-
-  </v-app>
+  </div>
 </template>
 
 <script>
-import ImagePreview from "@/components/ImagePreview";
+import M from "materialize-css";
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    ImagePreview
+    // ImagePreview,
   },
 
   props: {
-    source: String,
+    // source: String,
   },
 
   data: () => ({
-    dialog: false,
     searchText: "",
   }),
+
   methods: {
-    onEnterSearch:function() {  
-      this.$store.commit('setCurrentPage', 1);
-      this.$router.push({ name: 'MovieSearch', params: { searchText : this.searchText } }).catch(()=>{});
+    onEnterSearch: function () {
+      this.$store.commit("setCurrentPage", 1);
+      this.$router
+        .push({ name: "MovieSearch", params: { searchText: this.searchText } })
+        .catch(() => {});
     },
-    goHome: function() {
-      this.searchText = '';
-      this.$router.push({ name : 'Home' }).catch(()=>{});
+    goHome: function () {
+      this.searchText = "";
+      this.$router.push({ name: "Home" }).catch(() => {});
     },
   },
+
   created() {
-    this.$store.commit('clearSrcImagePreview')
-  }
+    this.$store.commit("clearSrcImagePreview");
+  },
+
+  mounted() {
+    M.AutoInit();
+  },
+
 };
 </script>
+
+<style scoped>
+
+.logo {
+  margin-left: 16px;
+  width: 180px;
+}
+
+#search {
+  height: auto;
+}
+
+.page-footer {
+  padding-top: 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;  
+  width: 100%;
+}
+
+</style>
