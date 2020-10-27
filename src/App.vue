@@ -26,7 +26,7 @@
 
     <!-- PIE -->
     <footer class="page-footer">
-      <div class="footer-copyrigh">
+      <div class="footer-copyright">
         <div class="container center-align">
           <strong
             >&copy; Constantino Argüello González&nbsp;{{
@@ -41,18 +41,10 @@
 </template>
 
 <script>
-import M from "materialize-css";
+//import M from "materialize-css";
 
 export default {
   name: "App",
-
-  components: {
-    // ImagePreview,
-  },
-
-  props: {
-    // source: String,
-  },
 
   data: () => ({
     searchText: "",
@@ -75,9 +67,10 @@ export default {
     this.$store.commit("clearSrcImagePreview");
   },
 
+/*
   mounted() {
     M.AutoInit();
-  },
+  },*/
 
 };
 </script>

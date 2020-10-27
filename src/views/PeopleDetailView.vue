@@ -1,15 +1,10 @@
 <template>
-    <v-progress-linear
-      v-if="loading"  
-      indeterminate
-      color="cyan"
-    ></v-progress-linear>
     <PeopleDetail 
-        v-else
-        v-bind:credit="credit" 
-        v-bind:person="person" 
-        v-bind:images="images" 
-        v-bind:movies="movies" 
+        v-if="!loading"
+        :credit="credit" 
+        :person="person" 
+        :profiles="profiles" 
+        :movies="movies" 
         />  
 </template>
 
@@ -27,7 +22,7 @@ export default {
         return { 
             credit: null,
             person: null,
-            images: [],
+            profiles: null,
             movies: null,
             loading: true
         }
@@ -89,7 +84,7 @@ export default {
             .get('https://api.themoviedb.org/3/person/' + idPerson + '/images?api_key=91e88eab577c30d2e4546d14c947362a')
             .then(
                 response => {
-                    this.images = response.data.profiles;
+                    this.profiles = response.data;
                 }
             )
             .catch(

@@ -1,12 +1,5 @@
 <template>
-    <v-progress-linear
-      v-if="loading"  
-      indeterminate
-      color="cyan"
-    ></v-progress-linear>
-    <MovieDetail 
-        v-else
-        v-bind:movie="movie" />            
+    <MovieDetail v-if="!loading" :movie="movie" />            
 </template>
 
 <script>
@@ -53,8 +46,10 @@ export default {
   created () {
     this.findMovie(this.$route.params.idMovie);
   },
+
   mounted() {
-        window.scrollTo(0,0);
+    window.scrollTo(0,0);
   }
+  
 }
 </script>

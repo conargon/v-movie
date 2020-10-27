@@ -1,34 +1,27 @@
 <template>
-  <v-container fluid v-if="movies != null && movies.length > 0">
+  <div v-if="movies != null && movies.length > 0">
     <div class="carousel center-align" ref="carousel">
       <div class="carousel-item hoverable" v-for="(m, i) in movies" :key="i">
           <img :src="srcPoster(m)" @click.stop="goTo(m)" alt="" />
       </div>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
 import M from "materialize-css";
+import mixins from "./mixins.js";
 
 export default {
   name: "CarouselMovie",
+
+  mixins: [mixins],
 
   props: {
     movies: Array,
   },
 
   methods: {
-    srcPoster: function (movie) {
-      return movie != null && movie.poster_path != null
-        ? "http://image.tmdb.org/t/p/w342" + movie.poster_path
-        : "./no-poster.jpg";
-    },
-    anyoLanzamiento: function (movie) {
-      return movie != null && movie.release_date != null
-        ? " (" + movie.release_date.substr(0, 4) + ")"
-        : "xxx";
-    },
     goTo: function (m) {
       this.$router
         .push({ name: "MovieDetail", params: { idMovie: m.id } })
