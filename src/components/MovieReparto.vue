@@ -5,9 +5,9 @@
         <div>Reparto</div>
         <div class="divider"></div>
       </div>
-      <div class="col s6 m3 l2 xl1" v-for="(p,i) in people(movie)" :key="i">
+      <div class="col s6 m3 l2" v-for="(p,i) in people(movie)" :key="i">
         <div class="card small hoverable">
-          <div class="card-image material-placeholder">
+          <div class="card-image">
             <img class="materialboxed" :src="srcProfile(p)" :data-caption="p.name" />
           </div>
           <div class="card-content center-align">
@@ -70,12 +70,15 @@ export default {
 }
 
 .card-content {
-  padding-left: 4px;
-  padding-right: 4px;
+  padding: 4px;
 }
 
 .card-action {
   padding: 8px 24px;
   font-size: 0.8em;
+}
+
+.card.small .card-image {
+  max-height: 75%;
 }
 </style>

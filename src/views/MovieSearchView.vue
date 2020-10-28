@@ -1,5 +1,8 @@
 <template>
-<div>
+<div class="container">
+    <div class="progress" v-if="loading">
+      <div class="indeterminate"></div>
+    </div>  
     <MovieGrid v-bind:movies="movies" @pageChange="onPageChange($event)" v-if="movies != null && movies.results.length > 0"/>
 </div>    
 </template>
@@ -65,3 +68,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+.container {
+  width: 95%;
+  max-width: initial;
+  margin-bottom: 100px;
+}
+
+</style>

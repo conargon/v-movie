@@ -1,13 +1,29 @@
 <template>
   <div class="container">
-    <div class="card" v-if="movie != null">
+
+    <!-- INFO DE LA PELI --> 
+    <div class="card" v-if="movie != null">     
       <div class="card-content">
         <MovieInfo :movie="movie" id="infoMovie" />
         <MovieReparto :movie="movie" id="repartoMovie" />
         <MovieImagenes :movie="movie" id="imagenesMovie" />
         <MovieVideos :movie="movie" id="videosMovie" />
       </div>
+
     </div>
+
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large red">
+        <i class="large material-icons">menu</i>
+      </a>
+      <ul>
+        <li><a class="btn-floating red" href="#infoMovie"><i class="material-icons">movie</i></a></li>
+        <li><a class="btn-floating yellow darken-1" href="#repartoMovie"><i class="material-icons">person</i></a></li>
+        <li><a class="btn-floating green" href="#imagenesMovie"><i class="material-icons">image</i></a></li>
+        <li><a class="btn-floating blue" href="#videosMovie"><i class="material-icons">videocam</i></a></li>
+      </ul>
+    </div>
+
   </div>
 </template>
 
@@ -47,6 +63,8 @@ export default {
       inDuration: 500,
       outDuration: 500
     });
+    var elems = document.querySelectorAll('.fixed-action-btn');
+    M.FloatingActionButton.init(elems, {});    
   }
 };
 </script>
@@ -66,7 +84,7 @@ export default {
 }
 
 .titulo-seccion {
-  font-size: 1.7em;
+  font-size: 1.5em;
   font-weight: bold;
   color: rgb(238, 110, 115); 
   margin-bottom: 40px; 

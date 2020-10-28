@@ -2,7 +2,7 @@
 <div>
 
     <!-- CABECERA -->
-    <nav>
+    <nav class="nav-extended">
       <div class="nav-wrapper">
         <!-- <img src="imdb.svg" width="80" class="logo" /> -->
         <img src="./assets/tmdb_long.svg" class="logo" />
@@ -17,9 +17,17 @@
             <i class="material-icons" @click="searchText=''">close</i>
           </div>
         </li>          
-        </ul>
-      </div>
+        </ul>      
+      </div>    
+      <!-- <div class="nav-content red lighten-3">
+        <div class="col s12">
+          <a href="#!" class="breadcrumb">First</a>
+          <a href="#!" class="breadcrumb">Second</a>
+          <a href="#!" class="breadcrumb">Third</a>
+        </div>        
+      </div> -->
     </nav>
+ 
 
     <!-- VISTA PRINCIPAL -->
     <router-view :key="$route.fullPath" />
@@ -41,7 +49,7 @@
 </template>
 
 <script>
-//import M from "materialize-css";
+// import M from "materialize-css";
 
 export default {
   name: "App",
@@ -67,10 +75,10 @@ export default {
     this.$store.commit("clearSrcImagePreview");
   },
 
-/*
+
   mounted() {
-    M.AutoInit();
-  },*/
+    //M.AutoInit();  
+  },
 
 };
 </script>
@@ -80,6 +88,10 @@ export default {
 .logo {
   margin-left: 16px;
   width: 180px;
+}
+
+.nav-content {
+    padding-left: 16px;
 }
 
 #search {

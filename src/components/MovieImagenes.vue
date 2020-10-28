@@ -1,14 +1,16 @@
 <template>
     <!-- IMAGENES -->
-    <div class="row seccion">
+    <div class="row seccion" v-if="images(movie) != null && images(movie).length > 0">
       <div class="titulo-seccion">
         <div>Imágenes</div>
         <div class="divider"></div>
       </div>      
-      <div class="col s12 m4 l2" v-for="(p,i) in images(movie)" :key="i">
-        <div class="material-placeholder">
-          <img class="responsive-img materialboxed" :src="srcImage(p)" />
-        </div>
+      <div class="col s6 l4" v-for="(p,i) in images(movie)" :key="i">
+          <div class="card hoverable">
+            <div class="card-image">
+              <img class="responsive-img materialboxed" :src="srcImage(p)" />
+            </div>
+          </div>
       </div>
     </div>
 </template>

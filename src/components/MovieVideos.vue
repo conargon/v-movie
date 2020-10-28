@@ -1,11 +1,11 @@
 <template>
   <!-- VIDEOS -->
-  <div class="row seccion" v-if="videos(movie) != null">
+  <div class="row seccion" v-if="videos(movie) != null && videos(movie).length > 0">
     <div class="titulo-seccion">
       <div>Videos</div>
       <div class="divider"></div>
     </div>
-    <div class="col s12 m4 l3" v-for="(p,i) in videos(movie)" :key="i">
+    <div class="col s12 l6" v-for="(p,i) in videos(movie)" :key="i">
       <div class="video-container">
         <iframe
           width="853"
