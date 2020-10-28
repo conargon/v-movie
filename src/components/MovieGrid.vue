@@ -1,40 +1,45 @@
 <template>
-  <div v-if="movies != null">
+  <div v-if="movies != null && movies.total_pages > 0">
+
+    <!-- PAGINACION --> 
     <ul class="pagination">
-      <li class="disabled">
-        <a href="#!"><i class="material-icons">chevron_left</i></a>
+      <li :class="movies.page == 1 ? 'disabled' : 'waves-effect'">
+        <a href="#" @click="onPageChange(movies.page-1)"><i class="material-icons">chevron_left</i></a>
       </li>
-      <li class="active"><a href="#!">1</a></li>
-      <li class="waves-effect"><a href="#!">2</a></li>
-      <li class="waves-effect"><a href="#!">3</a></li>
-      <li class="waves-effect"><a href="#!">4</a></li>
-      <li class="waves-effect"><a href="#!">5</a></li>
-      <li class="waves-effect">
-        <a href="#!"><i class="material-icons">chevron_right</i></a>
+      <li :class="movies.page == i ? 'active' : 'waves-effect'" v-for="i in movies.total_pages" :key="i">
+        <a href="#" @click="onPageChange(i)">{{i}}</a>
+      </li>
+      <li :class="movies.page == movies.total_pages ? 'disabled' : 'waves-effect'">
+        <a href="#" @click="onPageChange(movies.page+1)"><i class="material-icons">chevron_right</i></a>
       </li>
     </ul>
 
+    <!-- GRID DE PELICULAS --> 
     <div class="row">
-      <div class="col s12 m3 l2" v-for="m in movies.results" :key="m.id">
-        <div class="card small hoverable">
+      <div class="col s12 m6 l3 xl2" v-for="m in movies.results" :key="m.id">
+        <div class="card medium hoverable">
           <div class="card-image">
             <img
-              class="tooltipped"
+              class="responsive-img"
               :src="srcPoster(m)"
               alt=""
               :data-caption="m.title"
               @click.stop="goTo(m)"
-              :data-tooltip="m.title"
+              :title="m.title"
             />
           </div>
         </div>
+        <div class="center-align">
+          <p class="pelicula">{{m.title}}</p>
+        </div>         
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
-import M from "materialize-css";
+import mixins from "./mixins.js";
 
 export default {
   name: "MovieGrid",
@@ -43,14 +48,11 @@ export default {
     movies: null,
   },
 
+  mixins: [mixins],  
+
   methods: {
     onPageChange: function (newPage) {
       this.$emit("pageChange", newPage);
-    },
-    srcPoster: function (movie) {
-      return movie != null && movie.poster_path != null
-        ? "http://image.tmdb.org/t/p/w342" + movie.poster_path
-        : "./no-poster.jpg";
     },
     goTo: function (m) {
       this.$router
@@ -59,21 +61,20 @@ export default {
     },
   },
 
-  mounted() {
-    var elems = document.querySelectorAll(".tooltipped");
-    M.Tooltip.init(elems, {
-      position: "bottom",
-      margin: 0,
-      enterDelay: 500
-      });
-  },
 };
 </script>
 
 <style scoped>
-.card.small .card-image {
+.card.medium .card-image {
   max-height: 100%;
   cursor: pointer;
   border-radius: 4px;
+}
+
+.pelicula {
+  font-size: 0.9em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

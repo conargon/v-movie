@@ -1,11 +1,16 @@
 <template>
+  <div>
+    <div class="progress" v-if="loading">
+      <div class="indeterminate"></div>
+    </div>
     <PeopleDetail 
-        v-if="!loading"
+        v-else
         :credit="credit" 
         :person="person" 
-        :profiles="profiles" 
+        :imagenes="imagenes" 
         :movies="movies" 
         />  
+  </div>
 </template>
 
 <script>
@@ -15,18 +20,21 @@ import PeopleDetail from '@/components/PeopleDetail'
 export default {
     
     name: 'PeopleView',
+
     components: {
         PeopleDetail,
     },    
+
     data: () => {
         return { 
             credit: null,
             person: null,
-            profiles: null,
+            imagenes: null,
             movies: null,
             loading: true
         }
     },
+
     methods: {
       // TODO usar api para recuperar la config.
       findCredit: function(idCredit) {
@@ -84,7 +92,7 @@ export default {
             .get('https://api.themoviedb.org/3/person/' + idPerson + '/images?api_key=91e88eab577c30d2e4546d14c947362a')
             .then(
                 response => {
-                    this.profiles = response.data;
+                    this.imagenes = response.data;
                 }
             )
             .catch(
@@ -93,14 +101,16 @@ export default {
             .finally(
                 this.loading = false
             )            
-      },            
+      },        
     },  
 
   created () {
     this.findCredit(this.$route.params.idPeople);
   },
+
   mounted() {
         window.scrollTo(0,0);
   }    
+  
 }
 </script>

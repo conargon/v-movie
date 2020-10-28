@@ -3,7 +3,7 @@
     <div class="progress" v-if="loading">
       <div class="indeterminate"></div>
     </div>
-    <MovieDetail v-if="!loading" :movie="movie" />
+    <MovieDetail v-else :movie="movie" />
   </div>
 </template>
 

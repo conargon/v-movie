@@ -1,17 +1,22 @@
 <template>
-<div class="row" id="imagenesPeople" v-if="images != []">
+<div class="row seccion" v-if="imagenes != null && imagenes.profiles.length > 0">
     <!-- IMAGENES -->
-    <div class="col s12 m6"> 
-        <div class="row">
-            <div class="col s12 m4 l3" v-for="(p,i) in getImages" :key="i">
-                <img :src="srcImage(p)" style="height:300px;">  
-            </div>     
-        </div> 
-    </div>
+    <div class="titulo-seccion secundario-texto">
+      <div>Imágenes de {{nombre}}</div>
+      <div class="divider"></div>
+    </div>        
+    <div class="col s12 l3 xl2" v-for="(p,i) in imagenes.profiles" :key="i">
+        <div class="card hoverable">
+          <div class="card-image">
+            <img class="responsive-img materialboxed" :src="srcImage(p)" :data-caption="nombre"/>
+          </div>
+        </div>           
+    </div>    
 </div>  
 </template>
 
 <script>
+import M from "materialize-css";
 import mixins from "./mixins.js";
 
 export default {
@@ -20,13 +25,16 @@ export default {
   mixins: [mixins],
 
   props: {
-    profiles: null
+    imagenes: null,
+    nombre: null
   },
 
-  computed: {
-    getImages() {
-      return this.profiles != null ? this.profiles.profiles : [];
-    }
+  mounted() {
+    const imgLightBox2 = document.querySelectorAll(".materialboxed");
+    M.Materialbox.init(imgLightBox2, {
+      inDuration: 500,
+      outDuration: 500
+    });    
   }
 
 }

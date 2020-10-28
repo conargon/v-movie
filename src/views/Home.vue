@@ -1,8 +1,8 @@
 <template>
-<div class="center-align">
+<div>
 
-    <div>
-      <h4>Peliculas recientes más populares</h4>
+    <div class="titulo center-align secundario-texto">
+      <p>Peliculas recientes más populares</p>
     </div>
 
     <!--CARUSEL -->
@@ -75,3 +75,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.titulo {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.poster {
+  border-radius: 8px;
+}
+</style>

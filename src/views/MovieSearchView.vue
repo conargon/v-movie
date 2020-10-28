@@ -3,13 +3,17 @@
     <div class="progress" v-if="loading">
       <div class="indeterminate"></div>
     </div>  
-    <MovieGrid v-bind:movies="movies" @pageChange="onPageChange($event)" v-if="movies != null && movies.results.length > 0"/>
+    <div v-if="!loading && movies.results.length == 0">
+      <p class="no_results">No se han encontrado resultados</p>
+    </div>
+    <MovieGrid v-bind:movies="movies" @pageChange="onPageChange($event)" v-if="!loading && movies != null && movies.results.length > 0"/>
 </div>    
 </template>
 
 <script>
 import axios from 'axios';
 import MovieGrid from '@/components/MovieGrid'
+import mixins from "@/components/mixins.js";
 
 export default {
   name: 'MovieSearchView',
@@ -17,6 +21,8 @@ export default {
   components: {
     MovieGrid,
   },
+
+  mixins: [mixins],   
 
   data: function() {
     return {
@@ -38,6 +44,7 @@ export default {
                 response => {
                     this.movies = response.data;
                     if(this.movies != null) {
+                      this.movies.results = this.movies.results.filter(m => this.tienePoster(m));
                       this.movies.results = this.movies.results.sort((a,b) => b.vote_count-a.vote_count)
                     }
                 }
@@ -75,6 +82,10 @@ export default {
   width: 95%;
   max-width: initial;
   margin-bottom: 100px;
+}
+
+.no_results {
+  font-size: 2em;
 }
 
 </style>

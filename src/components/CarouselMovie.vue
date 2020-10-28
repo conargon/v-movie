@@ -45,9 +45,6 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  width: 100%;
-}
 
 .carousel {
   min-height: 550px;
@@ -74,6 +71,21 @@ export default {
   left: 0;
   z-index: -1;
   border-radius: 15px;
+}
+
+@media (max-width: 600px) {
+  .carousel {
+    min-height: 300px;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .carousel .carousel-item {
+    width: 175px; 
+    height: 250px;  
+  }
+
 }
 
 </style>

@@ -1,30 +1,26 @@
 <template>
     <!-- REPARTO -->
-    <div class="row seccion">
-      <div class="titulo-seccion">
-        <div>Reparto</div>
+    <div class="row seccion" v-if="people(movie) != null && people(movie).length > 0">
+      <div class="titulo-seccion secundario-texto">
+        <div>Reparto de {{movie.title}}</div>
         <div class="divider"></div>
       </div>
-      <div class="col s6 m3 l2" v-for="(p,i) in people(movie)" :key="i">
+      <div class="col s12 m4 l2 xl2" v-for="(p,i) in people(movie)" :key="i">
         <div class="card small hoverable">
           <div class="card-image">
-            <img class="materialboxed" :src="srcProfile(p)" :data-caption="p.name" />
-          </div>
-          <div class="card-content center-align">
-            <p class="actor">{{p.name}}</p>
-            <p class="personaje">{{p.character != null && p.character != "" ? p.character : "-"}}</p>
-          </div>
-          <div class="card-action">
-            <a class="center-align" href="#" @click.stop="goTo(p)">Ficha</a>
+            <img class="responsive-img" :src="srcProfile(p)" @click.stop="goTo(p)"/>
           </div>
         </div>
+        <div class="center-align">
+          <p class="actor">{{p.name}}</p>
+          <p class="personaje">{{p.character != null && p.character != "" ? p.character : "-"}}</p>
+        </div>        
       </div>
     </div>
 </template>
 
 <script>
 import mixins from "./mixins.js";
-import M from "materialize-css";
 
 export default {
   name: "MovieReparto",
@@ -43,13 +39,6 @@ export default {
     }
   },
 
-  mounted() {
-    const imgLightBox = document.querySelectorAll(".materialboxed");
-    M.Materialbox.init(imgLightBox, {
-      inDuration: 500,
-      outDuration: 500
-    });
-  }
 };
 </script>
 
@@ -79,6 +68,7 @@ export default {
 }
 
 .card.small .card-image {
-  max-height: 75%;
+  max-height: 100%;
+  cursor: pointer;
 }
 </style>

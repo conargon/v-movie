@@ -1,8 +1,8 @@
 <template>
   <!-- VIDEOS -->
   <div class="row seccion" v-if="videos(movie) != null && videos(movie).length > 0">
-    <div class="titulo-seccion">
-      <div>Videos</div>
+    <div class="titulo-seccion secundario-texto">
+      <div>Videos de {{movie.title}}</div>
       <div class="divider"></div>
     </div>
     <div class="col s12 l6" v-for="(p,i) in videos(movie)" :key="i">
@@ -32,3 +32,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+.video-container{
+  margin-bottom: 20px;
+}
+
+</style>

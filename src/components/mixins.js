@@ -7,9 +7,12 @@ export default {
             : "./no-poster.jpg";
         },      
         srcPoster: function (movie) {
-          return movie != null && movie.poster_path != null
+          return this.tienePoster(movie)
             ? "http://image.tmdb.org/t/p/w342" + movie.poster_path
             : "./no-poster.jpg";
+        },
+        tienePoster: function(movie) {
+          return movie != null && movie.poster_path != null && movie.poster_path != "";
         },
         srcLogoProductora: function (movie) {
             var firstCompany = this.firstCompany(movie)
@@ -73,6 +76,15 @@ export default {
         birthdayLocalDate(person) {
           return person != null && person.birthday != null ? new Date(person.birthday).toLocaleDateString('es-ES') : '';
         },
+        agePerson(person) {
+          if(person != null && person.birthday != null && person.deathday == null) {
+            var ageDifMs = Date.now() - new Date(person.birthday).getTime();
+            var ageDate = new Date(ageDifMs); // miliseconds from epoch
+            return Math.abs(ageDate.getUTCFullYear() - 1970);
+          } else {
+            return null;
+          }
+        },        
         deathdayLocalDate(person) {
             return person != null && person.deathday != null ? new Date(person.deathday).toLocaleDateString('es-ES') : '';
         },  

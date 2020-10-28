@@ -3,7 +3,7 @@
   <div class="row seccion">
 
     <!-- TITULO DE LA PELICULA Y LOGO DE LA PRODUCTORA  -->
-    <div class="titulo-seccion">
+    <div class="titulo-seccion secundario-texto">
       <div v-if="srcLogoProductora(movie) != null && srcLogoProductora(movie) != ''">
         <img class="responsive-img right" :src="srcLogoProductora(movie)" style="height:48px;margin-left:40px;margin-right:20px;" />
       </div>
@@ -32,7 +32,7 @@
         </li>           
         <li class="collection-item">Valoración:
           <div style="display:inline; vertical-align: middle;">
-              <i class="material-icons tiny red-text text-lighten-1" v-for="i in Math.round(movie.vote_average/2)" :key="i">star</i>
+              <i class="material-icons tiny secundario-texto text-lighten-1" v-for="i in Math.round(movie.vote_average/2)" :key="i">star</i>
           </div>
            <strong>&nbsp;{{movie.vote_average}}</strong>
         </li>
@@ -77,7 +77,6 @@ export default {
 .titulo-seccion {
   font-size: 2em;
   font-weight: bold;
-  color: rgb(238, 110, 115); 
   margin-bottom: 40px; 
 }
 
