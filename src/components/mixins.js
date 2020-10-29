@@ -88,11 +88,14 @@ export default {
         deathdayLocalDate(person) {
             return person != null && person.deathday != null ? new Date(person.deathday).toLocaleDateString('es-ES') : '';
         },  
-        srcPosterPerson: function (credit) {
-          return credit != null && credit.person.profile_path != null
-              ? "http://image.tmdb.org/t/p/w342" + credit.person.profile_path
+        srcPosterPerson: function (person) {
+          return this.tienePosterPerson(person)
+              ? "http://image.tmdb.org/t/p/w342" + person.profile_path
               : "./no-poster.jpg";
-      },                     
+        },                     
+        tienePosterPerson: function(person) {
+          return person != null && person.profile_path != null && person.profile_path != '';
+        },        
       },
 
 }

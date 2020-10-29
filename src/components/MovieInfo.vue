@@ -43,7 +43,11 @@
           </span>
         </li>
         <li class="collection-item">
-          <blockquote>{{movie.overview}}</blockquote>
+          <blockquote>
+            <p><strong>{{movie.tagline}}</strong></p>
+            <br>
+            <p>{{movie.overview}}</p>
+            </blockquote>
         </li>
       </ul>
     </div>
@@ -82,5 +86,9 @@ export default {
 
 .poster {
   border-radius: 8px;
+}
+
+blockquote p:first-child {
+  font-size: 1.3em;
 }
 </style>

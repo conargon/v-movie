@@ -34,7 +34,7 @@ export default {
   methods: {
     goTo: function(p) {
       this.$router
-        .push({ name: "PeopleDetail", params: { idPeople: p.credit_id } })
+        .push({ name: "PeopleDetail", params: { type: 'credit', idPeople: p.credit_id } })
         .catch(() => {});
     }
   },

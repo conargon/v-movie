@@ -5,7 +5,6 @@
     </div>
     <PeopleDetail 
         v-else
-        :credit="credit" 
         :person="person" 
         :imagenes="imagenes" 
         :movies="movies" 
@@ -105,7 +104,11 @@ export default {
     },  
 
   created () {
-    this.findCredit(this.$route.params.idPeople);
+      if (this.$route.params.type == 'credit') {
+        this.findCredit(this.$route.params.idPeople);
+      } else {
+        this.findPerson(this.$route.params.idPeople, 'es-ES')
+      }
   },
 
   mounted() {

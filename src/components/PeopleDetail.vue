@@ -2,11 +2,11 @@
   <div class="container">
 
     <!-- INFO DEL ACTOR --> 
-    <div class="card" v-if="credit != null && person != null && imagenes != null && movies != null">     
+    <div class="card" v-if="person != null && imagenes != null && movies != null">     
       <div class="card-content">
-        <PeopleInfo :credit="credit" :person="person" />
-        <PeopleImagenes id="imagenesActor" :imagenes="imagenes" :nombre="credit.person.name" />
-        <PeoplePeliculas id="videosActor" :movies="movies" :nombre="credit.person.name" />
+        <PeopleInfo :person="person" />
+        <PeopleImagenes id="imagenesActor" :imagenes="imagenes" :nombre="person.name" />
+        <PeoplePeliculas id="videosActor" :movies="movies" :nombre="person.name" />
       </div>
 
     </div>
@@ -45,7 +45,6 @@ export default {
   mixins: [mixins],
 
   props: {
-    credit: null,
     person: null,
     imagenes: null,
     movies: null

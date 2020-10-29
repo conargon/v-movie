@@ -20,15 +20,9 @@
         </li>          
         </ul>      
       </div>    
-      <!-- <div class="nav-content red lighten-3">
-        <div class="col s12">
-          <a href="#!" class="breadcrumb">First</a>
-          <a href="#!" class="breadcrumb">Second</a>
-          <a href="#!" class="breadcrumb">Third</a>
-        </div>        
-      </div> -->
     </nav>
  
+    <!-- MENU MOBILE -->
     <ul id="slide-out" class="sidenav secundario">
       <li>
         <div class="valign-wrapper">
@@ -45,8 +39,9 @@
     </ul>
   
     <!-- FORMULARIO DE BUSQUEDA MOBILE -->
-    <div id="modal1 secundario" class="modal">
+    <div id="modal1" class="modal secundario">
       <div class="modal-content">
+        <i class="small material-icons left white-text">search</i>
         <p>Buscar</p>
         <div class="input-field valign-wrapper">
             <input id="searchMobile" type="search" v-model="searchText" @keydown.enter="onEnterSearchMobile" required>
@@ -95,7 +90,7 @@ export default {
       }
       this.$store.commit("setCurrentPage", 1);
       this.$router
-        .push({ name: "MovieSearch", params: { searchText: this.searchText } })
+        .push({ name: "Search", params: { searchText: this.searchText } })
         .catch(() => {});
     },
     onEnterSearchMobile: function() {
