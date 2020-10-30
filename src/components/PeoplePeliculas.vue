@@ -10,7 +10,7 @@
     <div class="col s12 m3 l2" v-for="(p,i) in movies.results" :key="i">
       <div class="card medium hoverable">
         <div class="card-image">
-          <img class="responsive-img" :src="srcPoster(p)" @click.stop="goTo(p)" />
+          <img class="responsive-img" :src="srcPoster(p)" @click.stop="goTo(p)"  :title="'Ver ficha de ' + p.title"/>
         </div>
       </div>
       <div class="center-align">

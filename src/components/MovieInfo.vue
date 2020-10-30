@@ -32,7 +32,8 @@
         </li>           
         <li class="collection-item">Valoración:
           <div style="display:inline; vertical-align: middle;">
-              <i class="material-icons tiny secundario-texto text-lighten-1" v-for="i in Math.round(movie.vote_average/2)" :key="i">star</i>
+              <i class="material-icons tiny" :style="i<=Math.round(movie.vote_average/2) ? 'color:#fdd835' : 'color:#424242'" 
+                  v-for="i in 5" :key="i">star</i>
           </div>
            <strong>&nbsp;{{movie.vote_average}}</strong>
         </li>
@@ -91,4 +92,5 @@ export default {
 blockquote p:first-child {
   font-size: 1.3em;
 }
+
 </style>

@@ -8,7 +8,7 @@
       <div class="col s12 m4 l2 xl2" v-for="(p,i) in people(movie)" :key="i">
         <div class="card small hoverable">
           <div class="card-image">
-            <img class="responsive-img" :src="srcProfile(p)" @click.stop="goTo(p)"/>
+            <img class="responsive-img" :src="srcProfile(p)" @click.stop="goTo(p)" :title="'Ver ficha de ' + p.name"/>
           </div>
         </div>
         <div class="center-align">

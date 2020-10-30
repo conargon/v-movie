@@ -13,17 +13,49 @@
           </li>          
         <li>
           <div class="input-field">
-            <input id="search" type="search" v-model="searchText" @keydown.enter="onEnterSearch" required>
+            <input class="terciario-texto" id="search" type="search" v-model="searchText" @keydown.enter="onEnterSearch" required>
             <label class="label-icon" for="search"><i class="material-icons">search</i></label>
             <i class="material-icons" @click="searchText=''">close</i>
           </div>
-        </li>          
+        </li> 
+        <li><a class="dropdown-trigger" href="#" data-target="dropdown1"><i class="material-icons">more_vert</i></a></li>         
         </ul>      
       </div>    
     </nav>
+
+    <!-- MENU OPCIONES -->
+    <ul id="dropdown1" class="dropdown-content primario">
+      <li>
+        <div class="switch">
+          <label>
+            <input type="checkbox">
+            <span class="lever"></span>
+            <span class="secundario-texto">Buscar películas</span>
+          </label>
+        </div>
+      </li>
+      <li>
+        <div class="switch">
+          <label>
+            <input type="checkbox">
+            <span class="lever"></span>
+            <span class="secundario-texto">Buscar gente</span>
+          </label>
+        </div>
+      </li>
+      <li>
+        <div class="switch">
+          <label>
+            <input type="checkbox">
+            <span class="lever"></span>
+            <span class="secundario-texto">Buscar series TV</span>
+          </label>
+        </div>
+      </li>            
+    </ul>    
  
     <!-- MENU MOBILE -->
-    <ul id="slide-out" class="sidenav secundario">
+    <ul id="slide-out" class="sidenav primario">
       <li>
         <div class="valign-wrapper">
           <img src="imdb.svg" width="80" class="logoMobile" />
@@ -36,6 +68,34 @@
       <li>
         <a class="sidenav-close white-text modal-trigger" href="#modal1"><i class="small material-icons left white-text">search</i>Buscar</a>
       </li>   
+      <li><div class="divider"></div></li>
+      <li>
+        <div class="switch">
+          <label>            
+            <input type="checkbox">
+            <span class="lever"></span>
+            <span class="white-text">Buscar películas</span>
+          </label>
+        </div>
+      </li>
+      <li>
+        <div class="switch">
+          <label class="white-text">            
+            <input type="checkbox">
+            <span class="lever"></span>
+            <span>Buscar gente</span>
+          </label>
+        </div>
+      </li>
+      <li>
+        <div class="switch">
+          <label class="white-text">            
+            <input type="checkbox">
+            <span class="lever"></span>
+            <span>Buscar series TV</span>
+          </label>
+        </div>
+      </li>       
     </ul>
   
     <!-- FORMULARIO DE BUSQUEDA MOBILE -->
@@ -118,7 +178,14 @@ export default {
       onOpenEnd: function() {
         document.getElementById("searchMobile").focus();
       }
-    });    
+    });   
+    var elemsDropdown = document.querySelectorAll('.dropdown-trigger');
+    M.Dropdown.init(elemsDropdown, {
+      alignment: 'right',
+      constrainWidth: false,
+      closeOnClick: false,
+      coverTrigger: false
+    });      
   },
 
 };
@@ -161,5 +228,11 @@ export default {
   bottom: 0;  
   width: 100%;
 }
+
+.switch {
+  margin: 20px 30px 20px 10px;
+}
+
+
 
 </style>
