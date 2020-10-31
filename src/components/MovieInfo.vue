@@ -22,7 +22,7 @@
         <li class="collection-item"><div v-html="`Título original: <strong> ${tituloOriginal(movie)} </strong>`"/></li>        
         <li class="collection-item"><div v-html="`Duración: <strong>${movie.runtime} minutos</strong>`"/></li>
         <li class="collection-item"><div v-html="`Lanzamiento: <strong>${fechaLanzamiento(movie)}</strong>`"/></li>
-        <li class="collection-item"><div v-html="`Producción: <strong>${firstCompany(movie).name}</strong>`"/></li>
+        <li class="collection-item" v-if="firstCompany(movie) != ''"><div v-html="`Producción: <strong>${firstCompany(movie).name}</strong>`"/></li>
         <li class="collection-item"><div v-html="`Dirección: <strong>${director(movie)[0].name}</strong>`"/></li>       
         <li class="collection-item" v-if="movie.homepage != null && movie.homepage != ''">
           <p>
@@ -43,7 +43,7 @@
             <div class="chip green white-text">{{g.name}}</div>
           </span>
         </li>
-        <li class="collection-item">
+        <li class="collection-item" v-if="movie.overview != ''">
           <blockquote>
             <p><strong>{{movie.tagline}}</strong></p>
             <br>

@@ -7,7 +7,7 @@
       <div v-if="srcLogoProductoraTv(serieTv) != null && srcLogoProductoraTv(serieTv) != ''">
         <img class="responsive-img right" :src="srcLogoProductoraTv(serieTv)" style="height:48px;margin-left:40px;margin-right:20px;" />
       </div>
-      <div><i class="material-icons medium" style="vertical-align: middle;">tv</i>&nbsp;{{serieTv.name}}</div>          
+      <div><i class="material-icons medium" style="vertical-align: middle;">tv</i>&nbsp;{{serieTv.name}} {{anyoLanzamientoSerieTv(serieTv)}}</div>          
       <div class="divider"></div>
     </div>      
 

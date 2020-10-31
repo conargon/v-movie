@@ -19,36 +19,32 @@
       <div class="col s12 m6 l3 xl2" v-for="m in multi.results" :key="m.id">
 
         <!-- PELICULA --> 
-        <div v-if="m.media_type == 'movie'">
+        <div v-if="m.media_type == 'movie'" :title="m.title + ' ' + anyoLanzamiento(m)">
             <div class="card small hoverable">
               <div class="card-image">
                 <img
                   class="responsive-img"
                   :src="srcPoster(m)"
                   alt=""
-                  :data-caption="m.title"
-                  @click.stop="goToMovie(m)"
-                  :title="m.title"
+                  @click.stop="goToMovie(m)"                  
                 />
               </div>
             </div>
             <div class="center-align">
               <p class="titulo"><i class="material-icons tiny" style="vertical-align: middle;">theaters</i>&nbsp;Película</p>
-              <p class="nombre">{{m.title}}</p>
+              <p class="nombre">{{m.title}} {{anyoLanzamiento(m)}}</p>
             </div> 
         </div> 
 
         <!-- ACTOR --> 
-        <div v-if="m.media_type == 'person'">
+        <div v-if="m.media_type == 'person'" :title="m.name">
             <div class="card small hoverable">
               <div class="card-image">
                 <img
                   class="responsive-img"
                   :src="srcProfile(m)"
                   alt=""
-                  :data-caption="m.name"
-                  @click.stop="goToPeople(m)"
-                  :title="m.name"
+                  @click.stop="goToPeople(m)"                  
                 />
               </div>
             </div>
@@ -59,22 +55,20 @@
         </div>       
 
         <!-- TV --> 
-        <div v-if="m.media_type == 'tv'">
+        <div v-if="m.media_type == 'tv'" :title="m.name + ' ' + anyoLanzamientoSerieTv(m)">
             <div class="card small hoverable">
               <div class="card-image">
                 <img
                   class="responsive-img"
                   :src="srcPoster(m)"
                   alt=""
-                  :data-caption="m.name"
                   @click.stop="goToSerieTv(m)"
-                  :title="m.name"
                 />
               </div>
             </div>
             <div class="center-align">
               <p class="titulo"><i class="material-icons tiny" style="vertical-align: middle;">tv</i>&nbsp;Serie TV</p>
-              <p class="nombre">{{m.name}}</p>
+              <p class="nombre">{{m.name}} {{anyoLanzamientoSerieTv(m)}}</p>
             </div> 
         </div>              
 

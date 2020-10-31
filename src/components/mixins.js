@@ -28,7 +28,12 @@ export default {
         anyoLanzamiento: function(movie) {
             return movie != null && movie.release_date != null ?
                 " (" + movie.release_date.substr(0, 4) + ")" :
-                "xxx";
+                "????";
+        },
+        anyoLanzamientoSerieTv: function(serieTv) {
+            return serieTv != null && serieTv.first_air_date != null ?
+                " (" + serieTv.first_air_date.substr(0, 4) + ")" :
+                "????";
         },
         fechaLanzamiento: function(movie) {
             return movie != null && movie.release_date != null ? new Date(movie.release_date).toLocaleDateString('es-ES') : '';
