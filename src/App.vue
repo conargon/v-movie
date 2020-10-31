@@ -28,7 +28,7 @@
       <li>
         <div class="switch">
           <label>
-            <input type="checkbox">
+            <input type="checkbox" v-model="searchMovies">
             <span class="lever"></span>
             <span class="secundario-texto">Buscar películas</span>
           </label>
@@ -37,7 +37,7 @@
       <li>
         <div class="switch">
           <label>
-            <input type="checkbox">
+            <input type="checkbox" v-model="searchPeople">
             <span class="lever"></span>
             <span class="secundario-texto">Buscar gente</span>
           </label>
@@ -46,7 +46,7 @@
       <li>
         <div class="switch">
           <label>
-            <input type="checkbox">
+            <input type="checkbox" v-model="searchTv">
             <span class="lever"></span>
             <span class="secundario-texto">Buscar series TV</span>
           </label>
@@ -72,7 +72,7 @@
       <li>
         <div class="switch">
           <label>            
-            <input type="checkbox">
+            <input type="checkbox" v-model="searchMovies">
             <span class="lever"></span>
             <span class="white-text">Buscar películas</span>
           </label>
@@ -81,7 +81,7 @@
       <li>
         <div class="switch">
           <label class="white-text">            
-            <input type="checkbox">
+            <input type="checkbox" v-model="searchPeople">
             <span class="lever"></span>
             <span>Buscar gente</span>
           </label>
@@ -90,7 +90,7 @@
       <li>
         <div class="switch">
           <label class="white-text">            
-            <input type="checkbox">
+            <input type="checkbox" v-model="searchTv">
             <span class="lever"></span>
             <span>Buscar series TV</span>
           </label>
@@ -140,8 +140,39 @@ export default {
   name: "App",
 
   data: () => ({
-    searchText: "",
+    searchText: "",    
+    searchKey: 0,
   }),
+
+  computed: {
+    searchMovies: {
+      set(searchMovies) {
+        this.$store.commit("setSearchMovies", searchMovies);
+        this.onEnterSearch();
+      },
+      get() {
+        return this.$store.state.searchMovies;
+      }
+    },
+    searchPeople: {
+      set(searchPeople) {
+        this.$store.commit("setSearchPeople", searchPeople);
+        this.onEnterSearch();
+      },
+      get() {
+        return this.$store.state.searchPeople;
+      }
+    },
+    searchTv: {
+      set(searchTv) {
+        this.$store.commit("setSearchTv", searchTv);
+        this.onEnterSearch();
+      },
+      get() {
+        return this.$store.state.searchTv;
+      }
+    },        
+  },
 
   methods: {
     onEnterSearch: function () {
@@ -150,7 +181,7 @@ export default {
       }
       this.$store.commit("setCurrentPage", 1);
       this.$router
-        .push({ name: "Search", params: { searchText: this.searchText } })
+        .push({ name: "Search", params: { searchText: this.searchText, searchKey: this.searchKey++ } })
         .catch(() => {});
     },
     onEnterSearchMobile: function() {
@@ -165,7 +196,9 @@ export default {
   },
 
   created() {
-    this.$store.commit("clearSrcImagePreview");
+    this.searchMovies = true;
+    this.searchPeople = true;
+    this.searchTv = true;    
   },
 
 
@@ -185,7 +218,7 @@ export default {
       constrainWidth: false,
       closeOnClick: false,
       coverTrigger: false
-    });      
+    });   
   },
 
 };

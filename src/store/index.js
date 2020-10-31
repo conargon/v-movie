@@ -5,19 +5,24 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        srcImagePreview: String,
-        currentPage: Number
+        currentPage: Number,
+        searchMovies: Boolean,
+        searchPeople: Boolean,
+        searchTv: Boolean,
     },
     mutations: {
-        setSrcImagePreview(state, src) {
-            state.srcImagePreview = src;
-        },
-        clearSrcImagePreview(state) {
-            state.srcImagePreview = "";
-        },
         setCurrentPage(state, page) {
             state.currentPage = page;
-        }
+        },
+        setSearchMovies(state, searchMovies) {
+            state.searchMovies = searchMovies;
+        },
+        setSearchPeople(state, searchPeople) {
+            state.searchPeople = searchPeople;
+        },
+        setSearchTv(state, searchTv) {
+            state.searchTv = searchTv;
+        },
     },
     actions: {},
     modules: {}

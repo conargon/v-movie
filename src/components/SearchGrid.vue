@@ -1,7 +1,7 @@
 <template>
   <div v-if="multi != null && multi.total_pages > 0">
 
-    <!-- PAGINACION --> 
+    <!-- PAGINACION 
     <ul class="pagination">
       <li :class="multi.page == 1 ? 'disabled' : 'waves-effect'">
         <a href="#" @click="onPageChange(multi.page-1)"><i class="material-icons">chevron_left</i></a>
@@ -12,7 +12,19 @@
       <li :class="multi.page == multi.total_pages ? 'disabled' : 'waves-effect'">
         <a href="#" @click="onPageChange(multi.page+1)"><i class="material-icons">chevron_right</i></a>
       </li>
-    </ul>
+    </ul>--> 
+
+    <div class="paginacion noselect">
+      <paginate
+        v-model="currentPage"
+        :page-range="9"
+        :page-count="multi.total_pages"
+        :click-handler="onPageChange"
+        :prev-text="'<'"
+        :next-text="'>'"
+        :container-class="'pagination'">
+      </paginate>
+    </div>
 
     <!-- GRID DE PELICULAS/ACTORES/SERIES DE TV --> 
     <div class="row">
@@ -80,12 +92,35 @@
 
 <script>
 import mixins from "./mixins.js";
+import Paginate from 'vuejs-paginate';
 
 export default {
   name: "SearchGrid",
 
+  // data: function() {
+  //   return {
+  //     currentPage: 1
+  //   }
+  // },
+
+  computed: {
+    currentPage: {
+      get() {
+        return this.$store.state.currentPage;
+      },
+      set(currentPage) {
+        this.$store.commit("setCurrentPage", currentPage);
+      }
+    },
+  },
+
+
   props: {
     multi: null,
+  },
+
+  components: {
+    Paginate 
   },
 
   mixins: [mixins],  
@@ -108,13 +143,19 @@ export default {
       this.$router
         .push({ name: "PeopleDetail", params: { type: 'person', idPeople: m.id } })
         .catch(() => {});
-    },    
+    }   
   },
 
 };
 </script>
 
 <style scoped>
+
+.paginacion {
+  width: 95%;
+  padding-top: 10px;
+}
+
 .card.small .card-image {
   max-height: 100%;
   cursor: pointer;

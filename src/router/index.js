@@ -10,7 +10,7 @@ const routes = [{
             import ('../views/Home.vue')
     },
     {
-        path: '/search/:searchText',
+        path: '/search/:searchText/:searchKey',
         name: 'Search',
         component: () =>
             import ('../views/SearchView.vue')

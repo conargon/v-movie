@@ -63,6 +63,18 @@ export default {
             return movie != null && movie.credits != null ? movie.credits.crew.filter(e => e.job == 'Director') : null;
         },
         images: function(movie) {
+            // if (movie != null && movie.images != null) {
+            //     let result = [];
+            //     if (movie.images.backdrops != null) {
+            //         result.push(...movie.images.backdrops);
+            //     }
+            //     if (movie.images.posters != null) {
+            //         result.push(...movie.images.posters);
+            //     }
+            //     return result;
+            // } else {
+            //     return null;
+            // }
             return movie != null && movie.images != null ? movie.images.backdrops : null;
         },
         videos: function(movie) {
