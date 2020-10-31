@@ -1,0 +1,74 @@
+<template>
+    <!-- REPARTO -->
+    <div class="row seccion" v-if="people(serieTv) != null && people(serieTv).length > 0">
+      <div class="titulo-seccion secundario-texto">
+        <div>Reparto de {{serieTv.name}}</div>
+        <div class="divider"></div>
+      </div>
+      <div class="col s12 m4 l2 xl2" v-for="(p,i) in people(serieTv)" :key="i">
+        <div class="card small hoverable">
+          <div class="card-image">
+            <img class="responsive-img" :src="srcProfile(p)" @click.stop="goTo(p)" :title="'Ver ficha de ' + p.name"/>
+          </div>
+        </div>
+        <div class="center-align">
+          <p class="actor">{{p.name}}</p>
+          <p class="personaje">{{p.character != null && p.character != "" ? p.character : "-"}}</p>
+        </div>        
+      </div>
+    </div>
+</template>
+
+<script>
+import mixins from "./mixins.js";
+
+export default {
+  name: "TvReparto",
+
+  mixins: [mixins],
+
+  props: {
+    serieTv: null
+  },
+
+  methods: {
+    goTo: function(p) {
+      this.$router
+        .push({ name: "PeopleDetail", params: { type: 'credit', idPeople: p.credit_id } })
+        .catch(() => {});
+    }
+  },
+
+};
+</script>
+
+<style scoped>
+.col p {
+  font-size: 0.8em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actor {
+  font-weight: bold;
+}
+
+.personaje {
+  font-style: italic;
+}
+
+.card-content {
+  padding: 4px;
+}
+
+.card-action {
+  padding: 8px 24px;
+  font-size: 0.8em;
+}
+
+.card.small .card-image {
+  max-height: 100%;
+  cursor: pointer;
+}
+</style>

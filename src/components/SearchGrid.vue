@@ -20,7 +20,7 @@
 
         <!-- PELICULA --> 
         <div v-if="m.media_type == 'movie'">
-            <div class="card medium hoverable">
+            <div class="card small hoverable">
               <div class="card-image">
                 <img
                   class="responsive-img"
@@ -33,14 +33,14 @@
               </div>
             </div>
             <div class="center-align">
-              <p class="titulo">Película</p>
+              <p class="titulo"><i class="material-icons tiny" style="vertical-align: middle;">theaters</i>&nbsp;Película</p>
               <p class="nombre">{{m.title}}</p>
             </div> 
         </div> 
 
         <!-- ACTOR --> 
         <div v-if="m.media_type == 'person'">
-            <div class="card medium hoverable">
+            <div class="card small hoverable">
               <div class="card-image">
                 <img
                   class="responsive-img"
@@ -53,27 +53,27 @@
               </div>
             </div>
             <div class="center-align">
-              <p class="titulo">Persona</p>
+              <p class="titulo"><i class="material-icons tiny" style="vertical-align: middle;">person</i>&nbsp;Persona</p>
               <p class="nombre">{{m.name}}</p>
             </div> 
         </div>       
 
         <!-- TV --> 
         <div v-if="m.media_type == 'tv'">
-            <div class="card medium hoverable">
+            <div class="card small hoverable">
               <div class="card-image">
                 <img
                   class="responsive-img"
                   :src="srcPoster(m)"
                   alt=""
                   :data-caption="m.name"
-                  @click.stop="goToPeople(m)"
+                  @click.stop="goToSerieTv(m)"
                   :title="m.name"
                 />
               </div>
             </div>
             <div class="center-align">
-              <p class="titulo">Serie TV</p>
+              <p class="titulo"><i class="material-icons tiny" style="vertical-align: middle;">tv</i>&nbsp;Serie TV</p>
               <p class="nombre">{{m.name}}</p>
             </div> 
         </div>              
@@ -105,6 +105,11 @@ export default {
         .push({ name: "MovieDetail", params: { idMovie: m.id } })
         .catch(() => {});
     },
+    goToSerieTv: function (m) {
+      this.$router
+        .push({ name: "TvDetail", params: { idSerieTv: m.id } })
+        .catch(() => {});
+    },    
     goToPeople: function (m) {
       this.$router
         .push({ name: "PeopleDetail", params: { type: 'person', idPeople: m.id } })
@@ -116,7 +121,7 @@ export default {
 </script>
 
 <style scoped>
-.card.medium .card-image {
+.card.small .card-image {
   max-height: 100%;
   cursor: pointer;
   border-radius: 4px;

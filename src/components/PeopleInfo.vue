@@ -4,7 +4,7 @@
 
     <!-- NOMBRE -->
     <div class="titulo-seccion secundario-texto">
-      <div>{{person.name}}</div>          
+      <div><i class="material-icons medium" style="vertical-align: middle;">person</i>&nbsp;{{person.name}}</div>          
       <div class="divider"></div>
     </div>       
 

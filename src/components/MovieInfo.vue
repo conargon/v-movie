@@ -7,7 +7,7 @@
       <div v-if="srcLogoProductora(movie) != null && srcLogoProductora(movie) != ''">
         <img class="responsive-img right" :src="srcLogoProductora(movie)" style="height:48px;margin-left:40px;margin-right:20px;" />
       </div>
-      <div>{{movie.title}} {{anyoLanzamiento(movie)}}</div>          
+      <div><i class="material-icons medium" style="vertical-align: middle;">theaters</i>{{movie.title}} {{anyoLanzamiento(movie)}}</div>          
       <div class="divider"></div>
     </div>      
 

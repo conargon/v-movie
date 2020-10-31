@@ -7,25 +7,31 @@ const routes = [{
         path: '/',
         name: 'Home',
         component: () =>
-            import ( '../views/Home.vue')
+            import ('../views/Home.vue')
     },
     {
         path: '/search/:searchText',
         name: 'Search',
         component: () =>
-            import ( '../views/SearchView.vue')
-    },    
+            import ('../views/SearchView.vue')
+    },
     {
         path: '/movie/:idMovie',
         name: 'MovieDetail',
         component: () =>
-            import ( '../views/MovieDetailView.vue')
+            import ('../views/MovieDetailView.vue')
+    },
+    {
+        path: '/tv/:idSerieTv',
+        name: 'TvDetail',
+        component: () =>
+            import ('../views/TvDetailView.vue')
     },
     {
         path: '/people/:type/:idPeople',
         name: 'PeopleDetail',
         component: () =>
-            import ( '../views/PeopleDetailView.vue')
+            import ('../views/PeopleDetailView.vue')
     }
 ]
 

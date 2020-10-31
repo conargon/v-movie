@@ -8,7 +8,7 @@
     </div>         
 
     <div class="col s12 m3 l2" v-for="(p,i) in movies.results" :key="i">
-      <div class="card medium hoverable">
+      <div class="card small hoverable">
         <div class="card-image">
           <img class="responsive-img" :src="srcPoster(p)" @click.stop="goTo(p)"  :title="'Ver ficha de ' + p.title"/>
         </div>
@@ -67,7 +67,7 @@ export default {
   font-size: 0.8em;
 }
 
-.card.medium .card-image {
+.card.small .card-image {
   max-height: 100%;
   cursor: pointer;
   margin: auto;
