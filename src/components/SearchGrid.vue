@@ -1,19 +1,7 @@
 <template>
   <div v-if="multi != null && multi.total_pages > 0">
 
-    <!-- PAGINACION 
-    <ul class="pagination">
-      <li :class="multi.page == 1 ? 'disabled' : 'waves-effect'">
-        <a href="#" @click="onPageChange(multi.page-1)"><i class="material-icons">chevron_left</i></a>
-      </li>
-      <li :class="multi.page == i ? 'active' : 'waves-effect'" v-for="i in multi.total_pages" :key="i">
-        <a href="#" @click="onPageChange(i)">{{i}}</a>
-      </li>
-      <li :class="multi.page == multi.total_pages ? 'disabled' : 'waves-effect'">
-        <a href="#" @click="onPageChange(multi.page+1)"><i class="material-icons">chevron_right</i></a>
-      </li>
-    </ul>--> 
-
+    <!-- PAGINACION --> 
     <div class="paginacion noselect">
       <paginate
         v-model="currentPage"
@@ -96,12 +84,6 @@ import Paginate from 'vuejs-paginate';
 
 export default {
   name: "SearchGrid",
-
-  // data: function() {
-  //   return {
-  //     currentPage: 1
-  //   }
-  // },
 
   computed: {
     currentPage: {

@@ -16,6 +16,19 @@
       <img class="responsive-img materialboxed poster" :src="srcPoster(movie)" :data-caption="movie.title" />
     </div>
 
+    <!-- <div class="col s12 m3">
+      <div class="slider">
+        <ul class="slides" >
+          <li>
+            <img class="responsive-img materialboxed poster" :src="srcPoster(movie)" :data-caption="movie.title" />
+          </li>
+          <li v-for="(p,i) in posters(movie)" :key="i">
+            <img class="responsive-img materialboxed poster" :src="srcImage(p)" :data-caption="movie.title"> 
+          </li>
+        </ul>
+      </div>
+    </div> -->
+
     <!-- FICHA -->
     <div class="col s12 m9">
       <ul class="collection">      
@@ -74,6 +87,10 @@ export default {
       inDuration: 500,
       outDuration: 500
     });
+    // const elems = document.querySelectorAll('.slider');
+    // M.Slider.init(elems, {
+    //   indicators: false
+    // });    
   }  
 };
 </script>
@@ -88,6 +105,10 @@ export default {
 .poster {
   border-radius: 8px;
 }
+
+/* .slider .slides {
+  height: unset; 
+} */
 
 blockquote p:first-child {
   font-size: 1.3em;
