@@ -29,7 +29,7 @@
         <li class="collection-item" v-if="movie.homepage != null && movie.homepage != ''">
           <p>
             Página principal:
-            <a :href="movie.homepage" target="_blank" class="text-decoration-none">{{movie.homepage}}</a>
+            <a :href="movie.homepage" target="_blank" class="text-decoration-none"><strong>{{movie.homepage}}</strong></a>
           </p>
         </li>           
         <li class="collection-item">Valoración:
