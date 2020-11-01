@@ -23,6 +23,7 @@
         <li><a class="btn-floating terciario" href="#" v-scroll-to="'#creditsSerieTv'" title="Reparto"><i class="material-icons">person</i></a></li>
         <li><a class="btn-floating terciario" href="#" v-scroll-to="'#imageneSerieTv'" title="Imágenes"><i class="material-icons">image</i></a></li>
         <li><a class="btn-floating terciario" href="#" v-scroll-to="'#videosSerieTv'" title="Videos"><i class="material-icons">videocam</i></a></li>
+        <li><a class="btn-floating terciario" href="#" @click.stop="$router.back()" title="Volver"><i class="material-icons">keyboard_backspace</i></a></li>
       </ul>
     </div>
 

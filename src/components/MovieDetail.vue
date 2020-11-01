@@ -21,7 +21,8 @@
         <li><a class="btn-floating terciario" href="#" v-scroll-to="'#infoMovie'" title="Ficha"><i class="material-icons">theaters</i></a></li>
         <li><a class="btn-floating terciario" href="#" v-scroll-to="'#repartoMovie'" title="Reparto"><i class="material-icons">person</i></a></li>
         <li><a class="btn-floating terciario" href="#" v-scroll-to="'#imagenesMovie'" title="Imágenes"><i class="material-icons">image</i></a></li>
-        <li><a class="btn-floating terciario" href="#" v-scroll-to="'#videosMovie'" title="Trailers"><i class="material-icons">videocam</i></a></li>        
+        <li><a class="btn-floating terciario" href="#" v-scroll-to="'#videosMovie'" title="Trailers"><i class="material-icons">videocam</i></a></li>
+        <li><a class="btn-floating terciario" href="#" @click.stop="$router.back()" title="Volver"><i class="material-icons">keyboard_backspace</i></a></li>        
       </ul>
     </div>
 

@@ -20,6 +20,7 @@
         <li><a class="btn-floating terciario" href="#" v-scroll-to="'#infoPeople'" title="Ficha"><i class="material-icons">movie</i></a></li>
         <li><a class="btn-floating terciario" href="#" v-scroll-to="'#imagenesPeople'" title="Imágenes"><i class="material-icons">image</i></a></li>
         <li><a class="btn-floating terciario" href="#" v-scroll-to="'#creditosPeople'" title="Créditos"><i class="material-icons">videocam</i></a></li>
+        <li><a class="btn-floating terciario" href="#" @click.stop="$router.back()" title="Volver"><i class="material-icons">keyboard_backspace</i></a></li>
       </ul>
     </div>
 
