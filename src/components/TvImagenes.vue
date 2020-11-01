@@ -5,19 +5,13 @@
         <div>Imágenes de {{serieTv.name}}</div>
         <div class="divider"></div>
       </div>      
-      <div class="col s12 l4" v-for="(p,i) in images(serieTv)" :key="i">
-          <div class="card hoverable">
-            <div class="card-image">
-              <img class="responsive-img materialboxed" :src="srcImage(p)" :data-caption="serieTv.title" />
-            </div>
-          </div>
-      </div>
+      <VuePictureSwipe :items="gallery(serieTv, serieTv.name)" ></VuePictureSwipe>
     </div>
 </template>
 
 <script>
 import mixins from "./mixins.js";
-// import M from "materialize-css";
+import VuePictureSwipe from 'vue-picture-swipe';
 
 export default {
   name: "TvImagenes",
@@ -28,12 +22,9 @@ export default {
     serieTv: null
   },
 
-  // mounted() {
-  //   const imgLightBox = document.querySelectorAll(".materialboxed");
-  //   M.Materialbox.init(imgLightBox, {
-  //     inDuration: 500,
-  //     outDuration: 500
-  //   });
-  // }
+  components: {
+    VuePictureSwipe
+  },  
+
 };
 </script>

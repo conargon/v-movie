@@ -16,19 +16,6 @@
       <img class="responsive-img materialboxed poster" :src="srcPoster(movie)" :data-caption="movie.title" />
     </div>
 
-    <!-- <div class="col s12 m3">
-      <div class="slider">
-        <ul class="slides" >
-          <li>
-            <img class="responsive-img materialboxed poster" :src="srcPoster(movie)" :data-caption="movie.title" />
-          </li>
-          <li v-for="(p,i) in posters(movie)" :key="i">
-            <img class="responsive-img materialboxed poster" :src="srcImage(p)" :data-caption="movie.title"> 
-          </li>
-        </ul>
-      </div>
-    </div> -->
-
     <!-- FICHA -->
     <div class="col s12 m9">
       <ul class="collection">      

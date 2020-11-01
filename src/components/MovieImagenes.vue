@@ -5,19 +5,14 @@
         <div>Imágenes de {{movie.title}}</div>
         <div class="divider"></div>
       </div>      
-      <div class="col s12 l4" v-for="(p,i) in images(movie)" :key="i">
-          <div class="card hoverable">
-            <div class="card-image">
-              <img class="responsive-img materialboxed" :src="srcImage(p)" :data-caption="movie.title" />
-            </div>
-          </div>
-      </div>
-    </div>
+      <VuePictureSwipe :items="gallery(movie, movie.title)" ></VuePictureSwipe>
+    </div>     
 </template>
 
 <script>
 import mixins from "./mixins.js";
 import M from "materialize-css";
+import VuePictureSwipe from 'vue-picture-swipe';
 
 export default {
   name: "MovieImagenes",
@@ -28,6 +23,10 @@ export default {
     movie: null
   },
 
+  components: {
+    VuePictureSwipe
+  },
+
   mounted() {
     const imgLightBox = document.querySelectorAll(".materialboxed");
     M.Materialbox.init(imgLightBox, {
@@ -35,5 +34,7 @@ export default {
       outDuration: 500
     });
   }
-};
+
+}
+
 </script>

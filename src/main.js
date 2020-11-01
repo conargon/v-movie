@@ -10,6 +10,9 @@ import './css/estilos.css';
 
 Vue.config.productionTip = false
 
+var VueScrollTo = require('vue-scrollto');
+Vue.use(VueScrollTo);
+
 new Vue({
     router,
     store,

@@ -107,7 +107,35 @@ export default {
 
         fechaStr(fecha) {
             return fecha != null ? new Date(fecha).toLocaleDateString('es-ES') : '';
+        },
+
+        gallery(obj, nombre) {
+            let result = this.images(obj);
+            if (result != null) {
+                result = result.map(e => ({
+                    src: 'http://image.tmdb.org/t/p/original' + e.file_path,
+                    thumbnail: 'http://image.tmdb.org/t/p/w300' + e.file_path,
+                    w: e.width,
+                    h: e.height,
+                    title: nombre,
+                    alt: nombre
+                }));
+                let posters = this.posters(obj);
+                if (posters != null) {
+                    result.push(...posters.map(e => ({
+                        src: 'http://image.tmdb.org/t/p/original' + e.file_path,
+                        thumbnail: 'http://image.tmdb.org/t/p/w300' + e.file_path,
+                        w: e.width,
+                        h: e.height,
+                        title: nombre + " (poster)",
+                        alt: nombre
+                    })));
+                }
+                return result;
+            } else {
+                return [];
+            }
         }
-    },
+    }
 
 }

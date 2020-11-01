@@ -18,11 +18,11 @@
         <i class="large material-icons">menu</i>
       </a>
       <ul>
-        <li><a class="btn-floating terciario" href="#" @click="window.goTo(0,0)" title="Ficha"><i class="material-icons">tv</i></a></li>
-        <li><a class="btn-floating terciario" href="#seasonsSerieTv" title="Temporadas"><i class="material-icons">extension</i></a></li>
-        <li><a class="btn-floating terciario" href="#creditsSerieTv" title="Reparto"><i class="material-icons">person</i></a></li>
-        <li><a class="btn-floating terciario" href="#imageneSerieTv" title="Imágenes"><i class="material-icons">image</i></a></li>
-        <li><a class="btn-floating terciario" href="#videosSerieTv" title="Videos"><i class="material-icons">videocam</i></a></li>
+        <li><a class="btn-floating terciario" href="#" v-scroll-to="'#infoSerieTv'" title="Ficha"><i class="material-icons">tv</i></a></li>
+        <li><a class="btn-floating terciario" href="#" v-scroll-to="'#seasonsSerieTv'" title="Temporadas"><i class="material-icons">extension</i></a></li>
+        <li><a class="btn-floating terciario" href="#" v-scroll-to="'#creditsSerieTv'" title="Reparto"><i class="material-icons">person</i></a></li>
+        <li><a class="btn-floating terciario" href="#" v-scroll-to="'#imageneSerieTv'" title="Imágenes"><i class="material-icons">image</i></a></li>
+        <li><a class="btn-floating terciario" href="#" v-scroll-to="'#videosSerieTv'" title="Videos"><i class="material-icons">videocam</i></a></li>
       </ul>
     </div>
 

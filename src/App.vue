@@ -13,7 +13,7 @@
           </li>          
         <li>
           <div class="input-field">
-            <input class="terciario-texto" id="search" type="search" v-model="searchText" @keydown.enter="onEnterSearch" required>
+            <input class="terciario-texto" id="search" type="search" v-model="searchText" @keydown.enter="onEnterSearch" autocomplete="off" required>
             <label class="label-icon" for="search"><i class="material-icons">search</i></label>
             <i class="material-icons" @click="searchText=''">close</i>
           </div>
