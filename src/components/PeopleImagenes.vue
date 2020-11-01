@@ -1,5 +1,5 @@
 <template>
-<div class="row seccion">
+<div class="row seccion" v-if="person != null && person.images != null && person.images.profiles != null && person.images.profiles.length > 0">
     <!-- IMAGENES -->
     <div class="titulo-seccion secundario-texto">
       <div>Imágenes de {{person.name}}</div>

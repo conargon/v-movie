@@ -23,7 +23,9 @@
         <li class="collection-item"><div v-html="`Duración: <strong>${movie.runtime} minutos</strong>`"/></li>
         <li class="collection-item"><div v-html="`Lanzamiento: <strong>${fechaLanzamiento(movie)}</strong>`"/></li>
         <li class="collection-item" v-if="firstCompany(movie) != ''"><div v-html="`Producción: <strong>${firstCompany(movie).name}</strong>`"/></li>
-        <li class="collection-item" v-if="director(movie) != null && director(movie).length > 0"><div v-html="`Dirección: <strong>${director(movie)[0].name}</strong>`"/></li>       
+        <li class="collection-item" v-if="director(movie) != null && director(movie).length > 0">
+          Dirección: <a href='#' @click="goToCreditPerson(director(movie)[0].credit_id)"><strong>{{director(movie)[0].name}}</strong></a>
+        </li>       
         <li class="collection-item" v-if="movie.homepage != null && movie.homepage != ''">
           <p>
             Página principal:
@@ -66,6 +68,14 @@ export default {
 
   props: {
     movie: null
+  },
+
+  methods: {
+        goToCreditPerson: function(credit_id) {
+            this.$router
+                .push({ name: "PeopleDetail", params: { type: 'credit', idPeople: credit_id } })
+                .catch(() => {});
+        },    
   },
 
   mounted() {

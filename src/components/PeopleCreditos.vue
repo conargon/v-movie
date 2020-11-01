@@ -20,7 +20,7 @@
         </thead>
         <tbody>
           <tr v-for="s in person.credits.cast" :key="s.id">
-            <td class="center-align"><a href="#" @click="goToMovie(s.credit_id)"><strong>{{ s.title }}</strong></a></td>
+            <td class="center-align"><a href="#" @click="goToCredit(s.credit_id)"><strong>{{ s.title }}</strong></a></td>
             <td class="center-align">{{ fechaStr(s.release_date) }}</td>
             <td class="center-align">{{ s.character }}</td>
             <td class="left-align" v-if="!isMobile()">{{ s.overview }}</td>
@@ -42,7 +42,7 @@
           </thead>
           <tbody>
             <tr v-for="s in person.credits.crew" :key="s.id">
-              <td class="center-align"><a href="#" @click="goToMovie(s.credit_id)"><strong>{{ s.title }}</strong></a></td>
+              <td class="center-align"><a href="#" @click="goToCredit(s.credit_id)"><strong>{{ s.title }}</strong></a></td>
               <td class="center-align">{{ fechaStr(s.release_date) }}</td>
               <td class="center-align">{{ s.job }}</td>
               <td class="left-align" v-if="!isMobile()">{{ s.overview }}</td>
@@ -68,30 +68,34 @@ export default {
   },
 
   methods: {
-    goToMovie: function (credit_id) {
-      axios
-        .get('https://api.themoviedb.org/3/credit/' + credit_id + '?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES')
-        .then(
-            response => {                    
-                let credit = response.data;
-                if(credit != null && credit.media != null) {
-                    if(credit.media_type == 'movie') {
-                          this.$router
-                            .push({ name: "MovieDetail", params: { idMovie: credit.media.id } })
-                            .catch(() => {});
-                    } else if(credit.media_type == 'tv') {
-                          this.$router
-                            .push({ name: "TvDetail", params: { idSerieTv: credit.media.id } })
-                            .catch(() => {});
+        goToCredit: function(credit_id) {
+            axios
+                .get('https://api.themoviedb.org/3/credit/' + credit_id + '?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES')
+                .then(
+                    response => {
+                        let credit = response.data;
+                        if (credit != null && credit.media != null) {
+                            if (credit.media_type == 'movie') {
+                                this.$router
+                                    .push({ name: "MovieDetail", params: { idMovie: credit.media.id } })
+                                    .catch(() => {});
+                            } else if (credit.media_type == 'tv') {
+                                this.$router
+                                    .push({ name: "TvDetail", params: { idSerieTv: credit.media.id } })
+                                    .catch(() => {});
+                            } else if (credit.media_type == 'person') {
+                                this.$router
+                                    .push({ name: "PeopleDetail", params: { type: 'credit', idPeople: credit.media.id } })
+                                    .catch(() => {});
+                            }
+                        }
                     }
-                }
-            }
-        )
-        .catch(
-            e => console.log(e)
-        )
-    },
-  },   
+                )
+                .catch(
+                    e => console.log(e)
+                )
+        },    
+  }
 
 }
 </script>
