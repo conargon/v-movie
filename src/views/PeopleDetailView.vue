@@ -3,12 +3,7 @@
     <div class="progress" v-if="loading">
       <div class="indeterminate"></div>
     </div>
-    <PeopleDetail 
-        v-else
-        :person="person" 
-        :imagenes="imagenes" 
-        :movies="movies" 
-        />  
+    <PeopleDetail v-else :person="person" />  
   </div>
 </template>
 
@@ -26,10 +21,7 @@ export default {
 
     data: () => {
         return { 
-            credit: null,
             person: null,
-            imagenes: null,
-            movies: null,
             loading: true
         }
     },
@@ -42,9 +34,9 @@ export default {
             .get('https://api.themoviedb.org/3/credit/' + idCredit + '?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES')
             .then(
                 response => {                    
-                    this.credit = response.data;
-                    if(this.credit != null && this.credit.person != null) {
-                        this.findPerson(this.credit.person.id, 'es-ES')
+                    let credit = response.data;
+                    if(credit != null && credit.person != null) {
+                        this.findPerson(credit.person.id, 'es-ES')
                     }
                 }
             )
@@ -53,54 +45,30 @@ export default {
             )
       },
       findPerson: function(idPerson, language) {
+          this.loading = true;
           axios
-            .get('https://api.themoviedb.org/3/person/' + idPerson + '?api_key=91e88eab577c30d2e4546d14c947362a&language=' + language)
+            .get('https://api.themoviedb.org/3/person/' + 
+                    idPerson +
+                    "?api_key=91e88eab577c30d2e4546d14c947362a" +
+                    "&language=" + language +
+                    "&append_to_response=credits,videos,images" +
+                    "&include_image_language=es,null")                    
             .then(
                 response => {
                     this.person = response.data;
+                    if(this.person != null && this.person.credits != null && this.person.credits.cast != null) {
+                        this.person.credits.cast = this.person.credits.cast.sort(function(a,b){
+                        return new Date(a.release_date) - new Date(b.release_date);
+                        });
+                    }                    
                     if(language == 'es-ES' && (this.person.biography == null || this.person.biography == '')) {
                         this.findPerson(idPerson, 'en-US');
                     }
-                    this.findMovies(idPerson)
                 }
             )
-            .catch(
-                e => console.log(e)
-            )         
-      },      
-      findMovies: function(idPerson, language) {
-          axios
-            .get('https://api.themoviedb.org/3/discover/movie?api_key=91e88eab577c30d2e4546d14c947362a&sort_by=primary_release_date.desc&include_adult=false&include_video=false&page=1' 
-                    + '&with_cast=' + idPerson
-                    + '&language=' + language)
-            .then(
-                response => {
-                    this.movies = response.data;
-                    if(this.movies != null) {
-                            this.movies.results = this.movies.results.filter( e => e.poster_path != null);
-                    }
-                    this.findImages(idPerson)
-                }
-            )
-            .catch(
-                e => console.log(e)
-            )         
-      },           
-      findImages: function(idPerson) {
-          axios
-            .get('https://api.themoviedb.org/3/person/' + idPerson + '/images?api_key=91e88eab577c30d2e4546d14c947362a')
-            .then(
-                response => {
-                    this.imagenes = response.data;
-                }
-            )
-            .catch(
-                e => console.log(e)
-            )
-            .finally(
-                this.loading = false
-            )            
-      },        
+          .catch((e) => console.log(e))
+          .finally((this.loading = false));
+      }
     },  
 
   created () {

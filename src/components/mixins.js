@@ -135,6 +135,10 @@ export default {
             } else {
                 return [];
             }
+        },
+
+        isMobile() {
+            return window.innerWidth < 600;
         }
     }
 

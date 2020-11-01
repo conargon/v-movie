@@ -1,8 +1,8 @@
 <template>
-<div class="row seccion" v-if="imagenes != null && imagenes.profiles.length > 0">
+<div class="row seccion">
     <!-- IMAGENES -->
     <div class="titulo-seccion secundario-texto">
-      <div>Imágenes de {{nombre}}</div>
+      <div>Imágenes de {{person.name}}</div>
       <div class="divider"></div>
     </div>        
     <VuePictureSwipe :items="imagesPeople" ></VuePictureSwipe>
@@ -20,8 +20,7 @@ export default {
   mixins: [mixins],
 
   props: {
-    imagenes: null,
-    nombre: null
+    person: null,
   },
 
   components: {
@@ -31,7 +30,7 @@ export default {
   computed: {
     imagesPeople: {
       get() {
-        let result = this.imagenes.profiles;
+        let result = this.person != null && this.person.images != null ? this.person.images.profiles: null;
         if(result != null) {
           result = result.map(e => ({
               src: 'http://image.tmdb.org/t/p/original' + e.file_path,

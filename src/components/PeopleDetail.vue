@@ -2,11 +2,11 @@
   <div class="container">
 
     <!-- INFO DEL ACTOR --> 
-    <div class="card" v-if="person != null && imagenes != null && movies != null">     
+    <div class="card" v-if="person != null">     
       <div class="card-content">
         <PeopleInfo id="infoPeople" :person="person" />
-        <PeopleImagenes id="imagenesPeople" :imagenes="imagenes" :nombre="person.name" />
-        <PeoplePeliculas id="videosPeople" :movies="movies" :nombre="person.name" />
+        <PeopleImagenes id="imagenesPeople" :person="person" />
+        <PeopleCreditos id="creditosPeople" :person="person" /> 
       </div>
 
     </div>
@@ -18,8 +18,8 @@
       </a>
       <ul>
         <li><a class="btn-floating terciario" href="#" v-scroll-to="'#infoPeople'" title="Ficha"><i class="material-icons">movie</i></a></li>
-        <li><a class="btn-floating terciario" href="#" v-scroll-to="'#imagenesPeople'" title="imagenesActor"><i class="material-icons">image</i></a></li>
-        <li><a class="btn-floating terciario" href="#" v-scroll-to="'#videosPeople'" title="Películas"><i class="material-icons">videocam</i></a></li>
+        <li><a class="btn-floating terciario" href="#" v-scroll-to="'#imagenesPeople'" title="Imágenes"><i class="material-icons">image</i></a></li>
+        <li><a class="btn-floating terciario" href="#" v-scroll-to="'#creditosPeople'" title="Créditos"><i class="material-icons">videocam</i></a></li>
       </ul>
     </div>
 
@@ -30,7 +30,7 @@
 import M from "materialize-css";
 import PeopleInfo from "./PeopleInfo";
 import PeopleImagenes from "./PeopleImagenes";
-import PeoplePeliculas from "./PeoplePeliculas";
+import PeopleCreditos from "./PeopleCreditos";
 import mixins from "./mixins.js";
 
 export default {
@@ -39,15 +39,13 @@ export default {
   components: {
     PeopleInfo,
     PeopleImagenes,
-    PeoplePeliculas
+    PeopleCreditos
   },
 
   mixins: [mixins],
 
   props: {
-    person: null,
-    imagenes: null,
-    movies: null
+    person: null
   },
 
   mounted() {
