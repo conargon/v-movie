@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="body">
 
     <!-- CABECERA -->
     <div class="navbar-fixed">
@@ -117,7 +117,9 @@
 
 
     <!-- VISTA PRINCIPAL -->
-    <router-view :key="$route.fullPath" />
+    <main>
+      <router-view :key="$route.fullPath" />
+    </main>
 
     <!-- PIE -->
     <footer class="page-footer primario">
@@ -258,7 +260,7 @@ export default {
 
 .page-footer {
   padding-top: 0;
-  position: fixed;
+  /* position: fixed;  */
   left: 0;
   bottom: 0;  
   width: 100%;
@@ -268,6 +270,14 @@ export default {
   margin: 20px 30px 20px 10px;
 }
 
+.body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
+main {
+  flex: 1 0 auto;
+}
 
 </style>
