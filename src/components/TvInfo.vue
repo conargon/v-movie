@@ -45,7 +45,7 @@
             <div class="chip green white-text">{{g.name}}</div>
           </span>
         </li>
-        <li class="collection-item">
+        <li class="collection-item" v-if="serieTv.overview != ''" >
           <blockquote>
             <p>{{serieTv.overview}}</p>
             </blockquote>

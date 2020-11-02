@@ -6,14 +6,14 @@
       <div class="divider"></div>
     </div>
 
-    <table class="striped responsive-table">
+    <table class="striped">
       <thead>
         <tr>
           <th class="center-align">Poster</th>
           <th class="center-align">Número</th>
           <th class="center-align">Fecha</th>
           <th class="center-align">Capítulos</th>
-          <th>Resumen</th>
+          <th v-if="!isMobile()">Resumen</th>
         </tr>
       </thead>
       <tbody>
@@ -28,7 +28,7 @@
           <td class="center-align">{{ s.name }}</td>
           <td class="center-align">{{ fechaStr(s.air_date) }}</td>
           <td class="center-align">{{ s.episode_count }}</td>
-          <td class="left-align">{{ s.overview }}</td>
+          <td class="left-align" v-if="!isMobile()">{{ s.overview }}</td>
         </tr>
       </tbody>
     </table>
