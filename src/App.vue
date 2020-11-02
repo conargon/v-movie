@@ -2,26 +2,28 @@
 <div>
 
     <!-- CABECERA -->
-    <nav class="primario">
-      <div class="nav-wrapper">
-        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <!-- <img src="imdb.svg" width="80" class="logo" /> -->
-        <img src="./assets/tmdb_long.svg" class="logo" />
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <div class="navbar-fixed">
+      <nav class="primario">
+        <div class="nav-wrapper">
+          <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <!-- <img src="imdb.svg" width="80" class="logo" /> -->
+          <img src="./assets/tmdb_long.svg" class="logo" />
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+              <a href="#" @click="goHome"><i class="large material-icons left">home</i></a>
+            </li>          
           <li>
-            <a href="#" @click="goHome"><i class="large material-icons left">home</i></a>
-          </li>          
-        <li>
-          <div class="input-field">
-            <input class="terciario-texto" id="search" type="search" v-model="searchText" @keydown.enter="onEnterSearch" autocomplete="off" required>
-            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-            <i class="material-icons" @click="searchText=''">close</i>
-          </div>
-        </li> 
-        <li><a class="dropdown-trigger" href="#" data-target="dropdown1"><i class="material-icons">more_vert</i></a></li>         
-        </ul>      
-      </div>    
-    </nav>
+            <div class="input-field">
+              <input class="terciario-texto" id="search" type="search" v-model="searchText" @keydown.enter="onEnterSearch" autocomplete="off" required>
+              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+              <i class="material-icons" @click="searchText=''">close</i>
+            </div>
+          </li> 
+          <li><a class="dropdown-trigger" href="#" data-target="dropdown1"><i class="material-icons">more_vert</i></a></li>         
+          </ul>      
+        </div>    
+      </nav>
+    </div>
 
     <!-- MENU OPCIONES -->
     <ul id="dropdown1" class="dropdown-content primario">
