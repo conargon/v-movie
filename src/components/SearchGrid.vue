@@ -20,7 +20,7 @@
 
         <!-- PELICULA --> 
         <div v-if="m.media_type == 'movie'" :title="m.title + ' ' + anyoLanzamiento(m)">
-            <div class="card small hoverable">
+            <div class="card medium hoverable">
               <div class="card-image">
                 <img
                   class="responsive-img"
@@ -38,7 +38,7 @@
 
         <!-- ACTOR --> 
         <div v-if="m.media_type == 'person'" :title="m.name">
-            <div class="card small hoverable">
+            <div class="card medium hoverable">
               <div class="card-image">
                 <img
                   class="responsive-img"
@@ -56,7 +56,7 @@
 
         <!-- TV --> 
         <div v-if="m.media_type == 'tv'" :title="m.name + ' ' + anyoLanzamientoSerieTv(m)">
-            <div class="card small hoverable">
+            <div class="card medium hoverable">
               <div class="card-image">
                 <img
                   class="responsive-img"

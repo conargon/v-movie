@@ -16,7 +16,7 @@
             <div class="input-field">
               <input class="terciario-texto" id="search" type="search" v-model="searchText" @keydown.enter="onEnterSearch" autocomplete="off" required>
               <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-              <i class="material-icons" @click="searchText=''">close</i>
+              <i class="material-icons" @click="clearSearch">close</i>
             </div>
           </li> 
           <li><a class="dropdown-trigger" href="#" data-target="dropdown1"><i class="material-icons">more_vert</i></a></li>         
@@ -192,6 +192,10 @@ export default {
       var instance = M.Modal.getInstance(document.getElementById("modal1"));
       instance.close();
       this.onEnterSearch();  
+    },
+    clearSearch: function() {
+      this.searchText='';
+      document.getElementById("search").focus();
     },
     goHome: function () {
       this.searchText = "";

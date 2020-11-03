@@ -41,7 +41,6 @@ body {
     background-color: ghostwhite;
 }
 
-
 /* .card .card-content {
     padding: 0;
 } */
@@ -52,10 +51,11 @@ body {
     border-radius: 4px;
 }
 
-
-/* .card-content {
-    padding: 4px;
-  } */
+.card.medium .card-image {
+    max-height: 100%;
+    cursor: pointer;
+    border-radius: 4px;
+}
 
 .card-action {
     padding: 8px 24px;
@@ -66,9 +66,24 @@ body {
     margin-bottom: 20px;
 }
 
+.collection {
+    border-radius: 16px;
+}
+
 blockquote {
     border-left: 5px solid #90cea1;
 }
+
+/*
+background: url(http://image.tmdb.org/t/p/original/86L8wqGMDbwURPni2t7FQ0nDjsH.jpg);
+background-color: white;
+background-repeat: no-repeat;
+background-size: cover;
+background-clip: content-box;
+background-position: center;
+background-origin: border-box;
+background-blend-mode: color;
+*/
 
 
 /* ESTILOS PROPIOS */
@@ -117,6 +132,7 @@ th {
     font-size: 2em;
     font-weight: bold;
     margin-bottom: 40px;
+    padding: 20px;
 }
 
 .titulo-seccion {
@@ -127,6 +143,7 @@ th {
 
 .poster {
     border-radius: 8px;
+    margin: auto;
 }
 
 .titulo-ficha .divider,
@@ -171,9 +188,12 @@ th {
 
 @media (max-width: 600px) {
     .container {
-        width: 100%;
+        width: 98%;
     }
     .row .col {
+        padding: 0;
+    }
+    .card .card-content {
         padding: 0;
     }
 }

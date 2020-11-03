@@ -40,11 +40,11 @@ export default {
               title: this.nombre,
               alt: this.nombre
             })
-        );        
-        return result;
-      } else {
-        return [];
-      }
+          );        
+          return result;
+        } else {
+          return [];
+        }
     }
   }},  
 
