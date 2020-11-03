@@ -3,7 +3,7 @@
   <div class="row seccion">
 
     <!-- TITULO DE LA SERIE Y LOGO DE LA PRODUCTORA  -->
-    <div class="titulo-seccion secundario-texto">
+    <div class="titulo-ficha secundario-texto">
       <div v-if="srcLogoProductoraTv(serieTv) != null && srcLogoProductoraTv(serieTv) != ''">
         <img class="responsive-img right" :src="srcLogoProductoraTv(serieTv)" style="height:48px;margin-left:40px;margin-right:20px;" />
       </div>
@@ -104,16 +104,3 @@ export default {
   }  
 };
 </script>
-
-<style scoped>
-.titulo-seccion {
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 40px; 
-}
-
-.poster {
-  border-radius: 8px;
-}
-
-</style>

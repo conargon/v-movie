@@ -32,11 +32,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-
-.video-container{
-  margin-bottom: 20px;
-}
-
-</style>

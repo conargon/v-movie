@@ -56,28 +56,3 @@ export default {
 
 };
 </script>
-
-<style scoped>
-.container {
-  width: 95%;
-  max-width: initial;
-  margin-bottom: 100px;
-}
-</style>
-
-<style>
-.seccion {
-  padding: 20px;
-}
-
-.titulo-seccion {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin-bottom: 40px;
-}
-
-.titulo-seccion .divider {
-  height: 4px;
-  background-color: #01b4e4;
-}
-</style>

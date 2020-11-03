@@ -138,12 +138,6 @@ export default {
   padding-top: 10px;
 }
 
-.card.small .card-image {
-  max-height: 100%;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
 .nombre {
   font-size: 0.9em;
   white-space: nowrap;

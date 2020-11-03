@@ -3,7 +3,7 @@
   <div class="row seccion">
 
     <!-- TITULO DE LA PELICULA Y LOGO DE LA PRODUCTORA  -->
-    <div class="titulo-seccion secundario-texto">
+    <div class="titulo-ficha secundario-texto">
       <div v-if="srcLogoProductora(movie) != null && srcLogoProductora(movie) != ''">
         <img class="responsive-img right" :src="srcLogoProductora(movie)" style="height:48px;margin-left:40px;margin-right:20px;" />
       </div>
@@ -93,19 +93,6 @@ export default {
 </script>
 
 <style scoped>
-.titulo-seccion {
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 40px; 
-}
-
-.poster {
-  border-radius: 8px;
-}
-
-/* .slider .slides {
-  height: unset; 
-} */
 
 blockquote p:first-child {
   font-size: 1.3em;

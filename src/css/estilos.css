@@ -29,12 +29,60 @@ body {
     background-color: #e0f2f1;
 }
 
+
+/* MATERIAL CSS */
+
 .container {
     width: 95%;
+    max-width: initial;
 }
 
-.card .card-content {
+.card {
+    background-color: ghostwhite;
+}
+
+
+/* .card .card-content {
     padding: 0;
+} */
+
+.card.small .card-image {
+    max-height: 100%;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+
+/* .card-content {
+    padding: 4px;
+  } */
+
+.card-action {
+    padding: 8px 24px;
+    font-size: 0.8em;
+}
+
+.video-container {
+    margin-bottom: 20px;
+}
+
+blockquote {
+    border-left: 5px solid #90cea1;
+}
+
+
+/* ESTILOS PROPIOS */
+
+table {
+    font-size: 0.9em;
+}
+
+th {
+    font-weight: bold;
+}
+
+.thumbnail {
+    max-width: 48px !important;
 }
 
 .primario {
@@ -61,8 +109,45 @@ body {
     color: #90cea1;
 }
 
-blockquote {
-    border-left: 5px solid #90cea1;
+.seccion {
+    padding: 20px;
+}
+
+.titulo-ficha {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.titulo-seccion {
+    font-size: 1.5em;
+    /* font-weight: bold; */
+    margin-bottom: 40px;
+}
+
+.poster {
+    border-radius: 8px;
+}
+
+.titulo-ficha .divider,
+.titulo-seccion .divider {
+    height: 4px;
+    background-color: #01b4e4;
+}
+
+.subtitulo-seccion {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.actor {
+    font-weight: bold;
+}
+
+.personaje {
+    font-style: italic;
 }
 
 .noselect {
@@ -80,6 +165,9 @@ blockquote {
     /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
 }
+
+
+/* MOBILE */
 
 @media (max-width: 600px) {
     .container {

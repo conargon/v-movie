@@ -99,22 +99,3 @@ export default {
 
 }
 </script>
-
-<style scoped>
-
-.subtitulo-seccion {
-    font-size: 1.3em;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-table {
-  font-size: 0.9em;
-}
-
-th {
-    font-weight: bold;
-}
-
-</style>

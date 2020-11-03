@@ -20,7 +20,7 @@
         <tr v-for="s in serieTv.seasons" :key="s.id">
           <td class="center-align">
             <img
-              class="responsive-img materialboxed poster"
+              class="responsive-img materialboxed poster thumbnail"
               :src="srcPoster(s)"
               :data-caption="serieTv.name"
             />
@@ -50,15 +50,6 @@ export default {
 </script>
 
 <style scoped>
-
-th {
-    font-weight: bold;;
-}
-
-.poster {
-  border-radius: 8px;
-  max-width: 48px;
-}
 
 blockquote p:first-child {
   font-size: 1.3em;

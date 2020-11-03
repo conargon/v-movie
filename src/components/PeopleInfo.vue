@@ -3,7 +3,7 @@
   <div class="row seccion">
 
     <!-- NOMBRE -->
-    <div class="titulo-seccion secundario-texto">
+    <div class="titulo-ficha secundario-texto">
       <div><i class="material-icons medium" style="vertical-align: middle;">person</i>&nbsp;{{person.name}}</div>          
       <div class="divider"></div>
     </div>       
@@ -43,15 +43,3 @@ export default {
 
 }
 </script>
-
-<style scoped>
-.titulo-seccion {
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 40px; 
-}
-
-.poster {
-  border-radius: 8px;
-}
-</style>

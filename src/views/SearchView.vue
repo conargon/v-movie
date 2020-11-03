@@ -192,12 +192,6 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  width: 95%;
-  max-width: initial;
-  margin-bottom: 100px;
-}
-
 .no_results {
   font-size: 2em;
 }

@@ -49,26 +49,4 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-.actor {
-  font-weight: bold;
-}
-
-.personaje {
-  font-style: italic;
-}
-
-.card-content {
-  padding: 4px;
-}
-
-.card-action {
-  padding: 8px 24px;
-  font-size: 0.8em;
-}
-
-.card.small .card-image {
-  max-height: 100%;
-  cursor: pointer;
-}
 </style>
