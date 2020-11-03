@@ -16,10 +16,11 @@
             style="height:48px;margin-left:40px;margin-right:20px;"
           />
         </div>
-        <div class="texto-titulo-ficha">
+        <div class="texto-titulo-ficha" :style="imageBackgroundMovie != '' ? 'color: white' : ''">
           <i class="material-icons medium" style="vertical-align: middle;">theaters</i>
           {{movie.title}} {{anyoLanzamiento(movie)}}
         </div>
+        <div class="divider" v-if="imageBackgroundMovie == ''"></div>
       </div>
 
       <!-- POSTER -->
@@ -124,12 +125,17 @@ export default {
   computed: {
     imageBackgroundMovie: {
       get() {
-        let image =
-          this.images(this.movie) != null
-            ? this.images(this.movie)[this.images(this.movie).length - 1]
-            : null;
-        if (image != null) {
-          return "http://image.tmdb.org/t/p/original" + image.file_path;
+        let images = this.images(this.movie);
+        if(images != null) {
+          let voto = 0;
+          let file_path = images[0].file_path;          
+          for(let image of images) {
+            if(image.vote_count > voto) {
+              voto = image.vote_average;
+              file_path = image.file_path;
+            }
+          }
+          return file_path != '' ? "http://image.tmdb.org/t/p/original" + file_path : '';
         } else {
           return "";
         }
