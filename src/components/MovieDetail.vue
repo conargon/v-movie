@@ -1,15 +1,12 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="movie != null">
 
     <!-- INFO DE LA PELI --> 
-    <div class="card" v-if="movie != null">     
-      <div class="card-content">
-        <MovieInfo :movie="movie" id="infoMovie" />
-        <MovieReparto :movie="movie" id="repartoMovie" />
-        <MovieImagenes :movie="movie" id="imagenesMovie" ref="imagenesMovie" />
-        <MovieVideos :movie="movie" id="videosMovie" />
-      </div>
-
+    <div>
+      <MovieInfo :movie="movie" id="infoMovie" />
+      <MovieReparto :movie="movie" id="repartoMovie" />
+      <MovieImagenes :movie="movie" id="imagenesMovie" ref="imagenesMovie" />
+      <MovieVideos :movie="movie" id="videosMovie" />
     </div>
 
     <!-- BOTONERA -->
@@ -54,13 +51,22 @@ export default {
   },
 
   mounted() {
-/*     const imgLightBox = document.querySelectorAll(".materialboxed");
+    const imgLightBox = document.querySelectorAll(".materialboxed");
     M.Materialbox.init(imgLightBox, {
       inDuration: 500,
       outDuration: 500
-    }); */
+    });
     var elems = document.querySelectorAll('.fixed-action-btn');
     M.FloatingActionButton.init(elems, {});    
   }
 };
 </script>
+
+<style scoped>
+.container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    max-width: initial;
+}
+</style>

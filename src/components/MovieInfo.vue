@@ -1,7 +1,7 @@
 <template>
   <!-- INFO -->
-  <div id="info" class="row seccion">
-    <div :class="imageBackgroundMovie != '' ? 'background_wrap' : ''">
+  <div id="info" class="row">
+    <div :class="imageBackgroundMovie != '' ? 'background_wrap' : ''" :style="'background-color:' + colorBackground(movie) + ';'">
 
       <!-- FONDO -->
       <img class="background_wrap_img" :src="imageBackgroundMovie"  v-if="imageBackgroundMovie != ''" />
@@ -33,7 +33,7 @@
       </div>
 
       <!-- FICHA -->
-      <div class="col s12 m9">
+      <div class="col s12 m6">
         <ul class="collection">
           <li class="collection-item">
             <div v-html="`Título original: <strong> ${tituloOriginal(movie)} </strong>`" />
@@ -95,6 +95,7 @@
         </ul>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -111,6 +112,14 @@ export default {
     movie: null
   },
 
+  computed: {
+    imageBackgroundMovie: {
+      get() {
+        return this.imageBackground(this.movie);
+      }
+    }
+  },  
+
   methods: {
     goToCreditPerson: function(credit_id) {
       this.$router
@@ -119,27 +128,6 @@ export default {
           params: { type: "credit", idPeople: credit_id }
         })
         .catch(() => {});
-    }
-  },
-
-  computed: {
-    imageBackgroundMovie: {
-      get() {
-        let images = this.images(this.movie);
-        if(images != null) {
-          let voto = 0;
-          let file_path = images[0].file_path;          
-          for(let image of images) {
-            if(image.vote_count > voto) {
-              voto = image.vote_average;
-              file_path = image.file_path;
-            }
-          }
-          return file_path != '' ? "http://image.tmdb.org/t/p/original" + file_path : '';
-        } else {
-          return "";
-        }
-      }
     }
   },
 
@@ -156,57 +144,6 @@ export default {
 <style scoped>
 blockquote p:first-child {
   font-size: 1.3em;
-}
-
-.background_wrap {
-  position: relative;
-  background-color: #01b4e4;
-  overflow: hidden;
-  border-radius: 16px;
-}
-
-.background_wrap .titulo-ficha {
-  position: relative;
-}
-
-.background_wrap .col {
-  position: relative;
-  padding: 20px;
-}
-
-.background_wrap .col img {
-  margin-top: 10px;
-}
-
-.background_wrap_img {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.4;
-}
-
-.background_wrap .collection {
-  opacity: 0.8;
-}
-
-.fondo-titulo-ficha {    
-    opacity: 0.6;
-    background-color: #000;
-    width: 100%;
-    height: 100px;
-    position: absolute;
-    top: 0;
-    left: 0;    
-}
-
-.logo-productora-titulo-ficha { 
-  position: relative;
-}
-
-.texto-titulo-ficha { 
-  position: relative;
 }
 
 </style>

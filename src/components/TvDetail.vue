@@ -1,16 +1,14 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="serieTv != null">
 
     <!-- INFO DE LA SERIE--> 
-    <div class="card" v-if="serieTv != null">     
-      <div class="card-content">
-        <TvInfo :serieTv="serieTv" id="infoSerieTv" />
-        <TvSeasons :serieTv="serieTv" id="seasonsSerieTv" />
-        <TvReparto :serieTv="serieTv" id="creditsSerieTv" />
-        <TvImagenes :serieTv="serieTv" id="imageneSerieTv" />
-        <TvVideos :serieTv="serieTv" id="videosSerieTv" /> 
-      </div> 
-    </div>
+    <div>
+      <TvInfo :serieTv="serieTv" id="infoSerieTv" />
+      <TvSeasons :serieTv="serieTv" id="seasonsSerieTv" />
+      <TvReparto :serieTv="serieTv" id="creditsSerieTv" />
+      <TvImagenes :serieTv="serieTv" id="imageneSerieTv" />
+      <TvVideos :serieTv="serieTv" id="videosSerieTv" /> 
+    </div> 
 
     <!-- BOTONERA -->
     <div class="fixed-action-btn">
@@ -62,3 +60,12 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    max-width: initial;
+}
+</style>

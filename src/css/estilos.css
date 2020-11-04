@@ -26,7 +26,7 @@ section {
 
 body {
     /* background: linear-gradient(-45deg, #ffebee, #ffcdd2, #ef9a9a); */
-    background-color: #e0f2f1;
+    /* background-color: #e0f2f1; */
 }
 
 
@@ -115,7 +115,7 @@ th {
 }
 
 .seccion {
-    padding: 20px;
+    padding: 20px 50px;
 }
 
 .titulo-ficha {
@@ -123,13 +123,17 @@ th {
     font-size: 1.6em;
     font-weight: bold;
     padding: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .titulo-seccion {
     font-family: Michroma;
-    font-size: 1.4em;
+    font-size: 1.1em;
     font-weight: bold;
     margin-bottom: 40px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .poster {
@@ -173,6 +177,59 @@ th {
     /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
 }
+
+
+
+.background_wrap {
+    position: relative;
+    /* background-color: #01b4e4; */
+    overflow: hidden;
+    /* border-radius: 16px; */
+  }
+  
+  .background_wrap .titulo-ficha {
+    position: relative;
+  }
+  
+  .background_wrap .col {
+    position: relative;
+    padding: 20px;
+  }
+  
+  .background_wrap .col img {
+    margin-top: 10px;
+  }
+  
+  .background_wrap_img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0.4;
+  }
+  
+  .background_wrap .collection {
+    opacity: 0.8;
+  }
+  
+  .fondo-titulo-ficha {    
+      opacity: 0.6;
+      background-color: #000;
+      width: 100%;
+      height: 100px;
+      position: absolute;
+      top: 0;
+      left: 0;    
+  }
+  
+  .logo-productora-titulo-ficha { 
+    position: relative;
+  }
+  
+  .texto-titulo-ficha { 
+    position: relative;
+  }
 
 
 /* MOBILE */
