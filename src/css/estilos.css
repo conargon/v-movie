@@ -127,6 +127,10 @@ th {
     text-transform: uppercase;
 }
 
+.texto-titulo-ficha { 
+    position: relative;
+}
+
 .titulo-seccion {
     font-family: Michroma;
     font-size: 1.1em;
@@ -227,10 +231,6 @@ th {
     position: relative;
   }
   
-  .texto-titulo-ficha { 
-    position: relative;
-  }
-
 
 /* MOBILE */
 
