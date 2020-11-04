@@ -1,7 +1,7 @@
 <template>
   <!-- INFO -->
   <div id="info" class="row">
-    <div :class="imageBackgroundMovie != '' ? 'background_wrap' : ''" :style="'background-color:' + colorBackground(movie) + ';'">
+    <div :class="imageBackgroundMovie != '' ? 'background_wrap' : ''" :style="'background-color:' + colorBackground(movie) + ';min-height:100vh;'">
 
       <!-- FONDO -->
       <img class="background_wrap_img" :src="imageBackgroundMovie"  v-if="imageBackgroundMovie != ''" />
