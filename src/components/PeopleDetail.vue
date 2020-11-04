@@ -12,8 +12,8 @@
     </div>
 
     <!-- BOTONERA -->
-    <div class="fixed-action-btn">
-      <a class="btn-floating btn-large secundario">
+    <div id="btnFabPeople" class="fixed-action-btn">
+      <a class="btn-floating btn-large secundario" @click="openFab">
         <i class="large material-icons">menu</i>
       </a>
       <ul>
@@ -47,6 +47,18 @@ export default {
 
   props: {
     person: null
+  },
+
+  methods: {
+    openFab() {
+      let elem = document.getElementById("btnFabPeople");
+      var instance = M.FloatingActionButton.getInstance(elem);
+      if(instance == undefined) {
+        M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'), {});
+        instance = M.FloatingActionButton.getInstance(elem);
+      }
+      instance.open();
+    }
   },
 
   mounted() {

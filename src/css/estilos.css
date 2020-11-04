@@ -152,10 +152,14 @@ th {
 }
 
 .subtitulo-seccion {
-    font-size: 1.3em;
+    font-family: Michroma;
+    text-transform: uppercase;
+    font-size: 1.1em;
     font-weight: bold;
-    margin-top: 20px;
     margin-bottom: 20px;
+    margin-top: 20px;
+    /* margin-top: 20px;
+    margin-bottom: 20px; */
 }
 
 .actor {
@@ -260,7 +264,7 @@ th {
     top: calc(50% - 25%);
     line-height: 40px;
     width: 50;
-    color: #01b4e4;
+    color:red;
     cursor: pointer;
     z-index: 500;
     transition: .2s ease all;
@@ -292,11 +296,15 @@ th {
 }
 
 .item-carrusel {
-    min-width: 10%;
+    min-width: 10%; /* 100% div 10% = 10 items */
     transition: .3s ease all;
     border-left: solid 1px white;
     position: relative;
     cursor: pointer;
+}
+
+.item-carrusel-2x {
+    min-width: 20%; /* 100% div 20% = 5 items */
 }
 
 .item-carrusel img {

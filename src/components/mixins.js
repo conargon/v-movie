@@ -6,6 +6,11 @@ export default {
                 "http://image.tmdb.org/t/p/w342" + image.file_path :
                 "./no-poster.jpg";
         },
+        srcImageOriginal: function(image) {
+            return image != null && image.file_path != null ?
+                "http://image.tmdb.org/t/p/original" + image.file_path :
+                "./no-poster.jpg";
+        },        
         srcPoster: function(movie) {
             return this.tienePoster(movie) ?
                 "http://image.tmdb.org/t/p/w342" + movie.poster_path :
@@ -109,7 +114,7 @@ export default {
             return fecha != null ? new Date(fecha).toLocaleDateString('es-ES') : '';
         },
 
-        gallery(obj, nombre) {
+        galleryImages(obj, nombre) {
             let result = this.images(obj);
             if (result != null) {
                 result = result.map(e => ({
@@ -119,23 +124,30 @@ export default {
                     h: e.height,
                     title: nombre,
                     alt: nombre
-                }));
-                let posters = this.posters(obj);
-                if (posters != null) {
-                    result.push(...posters.map(e => ({
-                        src: 'http://image.tmdb.org/t/p/original' + e.file_path,
-                        thumbnail: 'http://image.tmdb.org/t/p/w300' + e.file_path,
-                        w: e.width,
-                        h: e.height,
-                        title: nombre + " (poster)",
-                        alt: nombre
-                    })));
-                }
+                }));                
                 return result;
             } else {
                 return [];
             }
         },
+
+        galleryPosters(obj, nombre) {
+            let result = [];
+            let posters = this.posters(obj);
+            if (posters != null) {
+                result.push(...posters.map(e => ({
+                    src: 'http://image.tmdb.org/t/p/original' + e.file_path,
+                    thumbnail: 'http://image.tmdb.org/t/p/w300' + e.file_path,
+                    w: e.width,
+                    h: e.height,
+                    title: nombre + " (poster)",
+                    alt: nombre
+                })));
+                return result;
+            } else {
+                return [];
+            }
+        },        
 
         imageBackground(obj) {
             let images = this.images(obj);
@@ -158,7 +170,7 @@ export default {
             let genres_colors = [
             {
                 "id": 28,
-                "color": "#ffe0b2"
+                "color": "#01b4e4"
                 },
                 {
                 "id": 12,
