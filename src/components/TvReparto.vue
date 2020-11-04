@@ -5,16 +5,34 @@
         <div>Reparto de {{serieTv.name}}</div>
         <div class="divider"></div>
       </div>
-      <div class="col s12 m4 l2 xl2" v-for="(p,i) in people(serieTv)" :key="i">
-        <div class="card small hoverable">
-          <div class="card-image">
-            <img class="responsive-img" :src="srcProfile(p)" @click.stop="goTo(p)" :title="'Ver ficha de ' + p.name"/>
+      <div class="marco-carrusel">
+        <button role="button" id="flecha-izquierda" class="flecha-izquierda" @click.stop="scrollLeft">
+          <i class="material-icons small" style="vertical-align: middle"
+            >navigate_before</i
+          >
+        </button>
+        <div ref ="reparto_serie_tv" class="contenedor-carrusel">
+          <div class="carrusel">
+            <div class="item-carrusel" v-for="(p,i) in people(serieTv)" :key="i">
+                <img
+                  class="hoverable"
+                  :src="srcProfile(p)"
+                  @click.stop="goTo(p)"
+                  :title="'Ver ficha de ' + p.name"
+                />
+                <div class="fondo-datos-items-carrusel"></div>
+                <div class="datos-item-carrusel">
+                  <p class="actor">{{p.name}}</p>
+                  <p class="personaje">{{p.character != null && p.character != "" ? p.character : "-"}}</p>
+                </div>                 
+            </div>
           </div>
         </div>
-        <div class="center-align">
-          <p class="actor">{{p.name}}</p>
-          <p class="personaje">{{p.character != null && p.character != "" ? p.character : "-"}}</p>
-        </div>        
+        <button role="button" id="flecha-derecha" class="flecha-derecha" @click.stop="scrollRight">
+          <i class="material-icons small" style="vertical-align: middle"
+            >navigate_next</i
+          >
+        </button>
       </div>
     </div>
 </template>
@@ -36,17 +54,14 @@ export default {
       this.$router
         .push({ name: "PeopleDetail", params: { type: 'credit', idPeople: p.credit_id } })
         .catch(() => {});
-    }
+    },
+    scrollRight: function() {
+      this.$refs.reparto_serie_tv.scrollLeft += this.$refs.reparto_serie_tv.offsetWidth;
+    },
+    scrollLeft: function() {
+      this.$refs.reparto_serie_tv.scrollLeft -= this.$refs.reparto_serie_tv.offsetWidth;
+    },     
   },
 
 };
 </script>
-
-<style scoped>
-.col p {
-  font-size: 0.8em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-</style>

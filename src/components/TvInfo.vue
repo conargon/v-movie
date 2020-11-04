@@ -1,7 +1,7 @@
 <template>
   <!-- INFO -->
   <div class="row">
-    <div :class="imageBackgroundTvSerie != '' ? 'background_wrap' : ''" :style="'background-color:' + colorBackground(serieTv) + ';min-height:100vh;'">
+    <div :class="imageBackgroundTvSerie != '' ? 'background_wrap' : ''" :style="'background-color:' + colorBackground(serieTv) + ';'">
 
       <!-- FONDO -->
       <img

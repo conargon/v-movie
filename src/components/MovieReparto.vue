@@ -14,7 +14,7 @@
           >navigate_before</i
         >
       </button>
-      <div ref ="contenedor_carrusel" class="contenedor-carrusel">
+      <div ref ="reparto_pelicula" class="contenedor-carrusel">
         <div class="carrusel">
           <div class="item-carrusel" v-for="(p,i) in people(movie)" :key="i">
               <img
@@ -62,10 +62,10 @@ export default {
         .catch(() => {});
     },
     scrollRight: function() {
-      this.$refs.contenedor_carrusel.scrollLeft += this.$refs.contenedor_carrusel.offsetWidth;
+      this.$refs.reparto_pelicula.scrollLeft += this.$refs.reparto_pelicula.offsetWidth;
     },
     scrollLeft: function() {
-      this.$refs.contenedor_carrusel.scrollLeft -= this.$refs.contenedor_carrusel.offsetWidth;
+      this.$refs.reparto_pelicula.scrollLeft -= this.$refs.reparto_pelicula.offsetWidth;
     },    
   },
 };

@@ -51,11 +51,6 @@ export default {
   },
 
   mounted() {
-    const imgLightBox = document.querySelectorAll(".materialboxed");
-    M.Materialbox.init(imgLightBox, {
-      inDuration: 500,
-      outDuration: 500
-    });
     var elems = document.querySelectorAll('.fixed-action-btn');
     M.FloatingActionButton.init(elems, {});    
   }
