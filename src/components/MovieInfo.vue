@@ -4,12 +4,12 @@
     <div :class="imageBackgroundMovie != '' ? 'background_wrap' : ''" :style="'background-color:' + colorBackground(movie) + ';'">
 
       <!-- FONDO -->
-      <img class="background_wrap_img" :src="imageBackgroundMovie"  v-if="imageBackgroundMovie != ''" />
+      <img class="background_wrap_img  hide-on-med-and-down" :src="imageBackgroundMovie"  v-if="imageBackgroundMovie != ''" />
 
       <!-- TITULO DE LA PELICULA Y LOGO DE LA PRODUCTORA  -->
       <div class="titulo-ficha secundario-texto">
         <div class="fondo-titulo-ficha" v-if="imageBackgroundMovie != ''"></div>
-        <div class="logo-productora-titulo-ficha" v-if="!isMobile() && srcLogoProductora(movie) != null && srcLogoProductora(movie) != ''">
+        <div class="logo-productora-titulo-ficha hide-on-med-and-down" v-if="srcLogoProductora(movie) != null && srcLogoProductora(movie) != ''">
           <img
             class="responsive-img right"
             :src="srcLogoProductora(movie)"
@@ -17,7 +17,7 @@
           />
         </div>
         <div class="texto-titulo-ficha" :style="imageBackgroundMovie != '' ? 'color: white' : ''">
-          <i class="material-icons medium" style="vertical-align: middle;">theaters</i>
+          <i class="material-icons medium  hide-on-med-and-down" style="vertical-align: middle;">theaters</i>
           {{movie.title}} {{anyoLanzamiento(movie)}}
         </div>
         <div class="divider" v-if="imageBackgroundMovie == ''"></div>

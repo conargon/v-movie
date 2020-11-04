@@ -139,7 +139,7 @@ export default {
 
         imageBackground(obj) {
             let images = this.images(obj);
-            if(images != null) {
+            if(images != null && images.length > 0) {
                 let voto = 0;
                 let file_path = images[0].file_path;          
                 for(let image of images) {
