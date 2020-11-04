@@ -33,7 +33,7 @@
       </div>
 
       <!-- FICHA -->
-      <div class="col s12 m6">
+      <div class="col s12 m9">
         <ul class="collection">
           <li class="collection-item">
             <div v-html="`Título original: <strong> ${tituloOriginal(movie)} </strong>`" />
