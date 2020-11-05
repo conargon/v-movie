@@ -1,7 +1,7 @@
 <template>
-<div>
+<div class="container">
 
-    <div class="titulo center-align secundario-texto">
+    <div class="titulo-ficha center-align secundario-texto">
       <p>Peliculas recientes más populares</p>
     </div>
 
@@ -57,9 +57,9 @@ export default {
         // )
         .then((response) => {
           this.movies = response.data.results; //
-          this.movies = this.movies.sort(
+/*           this.movies = this.movies.sort(
             (a, b) => b.vote_average - a.vote_average
-          );
+          ); */
 
           this.loaded = true;
 
