@@ -12,8 +12,8 @@
 
 <script>
 import axios from "axios";
+import mixins from "@/components/mixins.js";
 import CarouselMovie from "@/components/CarouselMovie";
-
 
 export default {
   name: "Home",
@@ -21,6 +21,8 @@ export default {
   components: {
     CarouselMovie
   },
+
+  mixins: [mixins],  
 
   data: function () {
     return {
@@ -41,26 +43,17 @@ export default {
     searchLastMovies: function () {
       let hoy = new Date().toISOString().substr(0, 10);
       let mesAnt = this.addMonths(new Date(), -1).toISOString().substr(0, 10);
+      const params =  "&page=1" +
+                    "&primary_release_date.gte=" + mesAnt +
+                    "&primary_release_date.lte=" + hoy +
+                    "&sort_by=popularity.desc" +
+                    "&include_adult=false" +
+                    "&include_video=true";
       axios
-        .get(
-          "https://api.themoviedb.org/3/discover/movie?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES" +
-            "&page=1" +
-            "&primary_release_date.gte=" +
-            mesAnt +
-            "&primary_release_date.lte=" +
-            hoy +
-            "&sort_by=popularity.desc&include_adult=false&include_video=true"
-        )
-        // peliculas más populares
-        // .get(
-        //   "https://api.themoviedb.org/3/movie/popular?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES&page="+page
-        // )
+        .get(this.getUrlApi("/discover/movie", "es-ES", params))
+/*         .get(this.getUrlApi("/trending/tv/day", "es-ES", params))         */
         .then((response) => {
           this.movies = response.data.results; //
-/*           this.movies = this.movies.sort(
-            (a, b) => b.vote_average - a.vote_average
-          ); */
-
           this.loaded = true;
 
         })

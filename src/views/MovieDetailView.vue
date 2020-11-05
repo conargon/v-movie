@@ -9,6 +9,7 @@
 
 <script>
 import axios from "axios";
+import mixins from "@/components/mixins.js";
 import MovieDetail from "@/components/MovieDetail";
 
 export default {
@@ -17,6 +18,8 @@ export default {
   components: {
     MovieDetail,
   },
+
+  mixins: [mixins],   
 
   data: function () {
     return {
@@ -29,15 +32,10 @@ export default {
     // TODO usar api para recuperar la config.
     findMovie: function (idMovie) {
       this.loading = true;
+      const params = "&append_to_response=credits,videos,images" +
+                   "&include_image_language=es,null";
       axios
-        .get(
-          "https://api.themoviedb.org/3/movie/" +
-            idMovie +
-            "?api_key=91e88eab577c30d2e4546d14c947362a" +
-            "&language=es-ES" +
-            "&append_to_response=credits,videos,images" +
-            "&include_image_language=es,null"
-        )
+        .get(this.getUrlApi("/movie/"+idMovie, "es-ES", params))
         .then((response) => {
           this.movie = response.data;
         })

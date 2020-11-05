@@ -64,15 +64,19 @@ export default {
     // TODO usar api para recuperar la config.
     searchMulti: function (query, page) {
         this.loading = true;
+      let params = "&query=" + query +
+                   "&page=" + page +
+                   "&include_adult=false";           
         axios
-          .get(
+          .get(this.getUrlApi("/search/multi", "es-ES", params))
+/*           .get(
             "https://api.themoviedb.org/3/search/multi?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES&" +
               "query=" +
               query +
               "&page=" +
               page +
               "&include_adult=false"
-          )
+          ) */
           .then((response) => {
             this.multi = response.data;
             if (this.multi != null) {
@@ -86,30 +90,17 @@ export default {
     },
     searchParcial: function (query, page) {
         this.loading = true;
-        const requestMovies = axios.get(
-              "https://api.themoviedb.org/3/search/movie?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES&" +
-              "query=" +
-              query +
-              "&page=" +
-              page +
-              "&include_adult=false"
-          );
-        const requestPeople = axios.get(
-              "https://api.themoviedb.org/3/search/person?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES&" +
-              "query=" +
-              query +
-              "&page=" +
-              page +
-              "&include_adult=false"
-          );
-        const requestSeriesTv = axios.get(
-              "https://api.themoviedb.org/3/search/tv?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES&" +
-              "query=" +
-              query +
-              "&page=" +
-              page +
-              "&include_adult=false"
-          );    
+        let params = "&query=" + query +
+                     "&page=" + page +
+                     "&include_adult=false";       
+
+        const urlRequestMovies = this.getUrlApi("/search/movie", "es-ES", params);
+        const urlRequestPeople = this.getUrlApi("/search/person", "es-ES", params);
+        const urlRequestSeriesTv = this.getUrlApi("/search/tv", "es-ES", params);
+
+        const requestMovies = axios.get(urlRequestMovies);
+        const requestPeople = axios.get(urlRequestPeople);
+        const requestSeriesTv = axios.get(urlRequestSeriesTv);    
 
         axios.all([requestMovies, requestPeople, requestSeriesTv]).then(axios.spread((...responses) => {
           const responseMovies = responses[0]

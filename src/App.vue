@@ -201,14 +201,10 @@ export default {
       this.searchText = "";
       this.$router.push({ name: "Home" }).catch(() => {});
     },
+    loadConfig: function() {
+      this.$store.dispatch("loadConfig");
+    },    
   },
-
-  created() {
-    this.searchMovies = true;
-    this.searchPeople = true;
-    this.searchTv = true;    
-  },
-
 
   mounted() {
     //M.AutoInit();  
@@ -228,6 +224,14 @@ export default {
       coverTrigger: false
     });   
   },
+
+  created() {
+    this.searchMovies = true;
+    this.searchPeople = true;
+    this.searchTv = true;   
+    this.loadConfig(); 
+  },
+
 
 };
 </script>

@@ -9,6 +9,7 @@
 
 <script>
 import axios from 'axios';
+import mixins from "@/components/mixins.js";
 import PeopleDetail from '@/components/PeopleDetail'
 
 export default {
@@ -19,6 +20,8 @@ export default {
         PeopleDetail,
     },    
 
+    mixins: [mixins],      
+
     data: () => {
         return { 
             person: null,
@@ -27,11 +30,10 @@ export default {
     },
 
     methods: {
-      // TODO usar api para recuperar la config.
       findCredit: function(idCredit) {
           this.loading = true;
           axios
-            .get('https://api.themoviedb.org/3/credit/' + idCredit + '?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES')
+            .get(this.getUrlApi("/credit/"+idCredit, "es-ES", ""))
             .then(
                 response => {                    
                     let credit = response.data;
@@ -46,13 +48,10 @@ export default {
       },
       findPerson: function(idPerson, language) {
           this.loading = true;
+          const params = "&append_to_response=credits,videos,images" +
+                   "&include_image_language=es,null";          
           axios
-            .get('https://api.themoviedb.org/3/person/' + 
-                    idPerson +
-                    "?api_key=91e88eab577c30d2e4546d14c947362a" +
-                    "&language=" + language +
-                    "&append_to_response=credits,videos,images" +
-                    "&include_image_language=es,null")                    
+            .get(this.getUrlApi("/person/"+idPerson, language, params))           
             .then(
                 response => {
                     this.person = response.data;

@@ -1,6 +1,23 @@
 export default {
 
+    computed: {
+        baseUrl: {
+            get() {
+                return this.$store.state.baseUrl
+            }
+        },
+        apiKey: {
+            get() {
+                return this.$store.state.apiKey
+            }
+        },        
+    },      
+
     methods: {
+        getUrlApi(metodo, idioma, parametros) {
+            let result = this.baseUrl + metodo + "?api_key=" + this.apiKey + "&language=" + idioma + parametros;
+            return result;
+        },
         srcImage: function(image) {
             return image != null && image.file_path != null ?
                 "http://image.tmdb.org/t/p/w342" + image.file_path :
