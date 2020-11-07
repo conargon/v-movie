@@ -134,6 +134,7 @@ export default {
 .paginacion {
   width: 95%;
   padding-top: 10px;
+  color:white;
 }
 
 .nombre {

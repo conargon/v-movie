@@ -27,6 +27,13 @@ section {
 body {
     /* background: linear-gradient(-45deg, #ffebee, #ffcdd2, #ef9a9a); */
     /* background-color: #e0f2f1; */
+    /* background: url(../assets/cinema.png); */
+}
+
+.root {
+    --color-primario: #0d253f;
+    --color-secundario: #01b4e4;
+    --color-terciario: #90cea1;
 }
 
 
@@ -45,6 +52,7 @@ body {
 /* .card .card-content {
     padding: 0;
 } */
+
 
 /* .card.small .card-image {
     max-height: 100%;
@@ -166,7 +174,7 @@ th {
     font-weight: bold;
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;    
+    overflow: hidden;
 }
 
 .personaje {
@@ -246,7 +254,7 @@ th {
 /* -------------- FIN FONDO INFO --------------------- */
 
 
-/* -------------- CARRUSEL --------------------- */
+/* -------------- CARRUSEL PROPIO --------------------- */
 
 .marco-carrusel {
     display: flex;
@@ -264,7 +272,7 @@ th {
     top: calc(50% - 25%);
     line-height: 40px;
     width: 50;
-    color:red;
+    color: red;
     cursor: pointer;
     z-index: 500;
     transition: .2s ease all;
@@ -296,7 +304,8 @@ th {
 }
 
 .item-carrusel {
-    min-width: 10%; /* 100% div 10% = 10 items */
+    min-width: 10%;
+    /* 100% div 10% = 10 items */
     transition: .3s ease all;
     border-left: solid 1px white;
     position: relative;
@@ -304,7 +313,8 @@ th {
 }
 
 .item-carrusel-2x {
-    min-width: 20%; /* 100% div 20% = 5 items */
+    min-width: 20%;
+    /* 100% div 20% = 5 items */
 }
 
 .item-carrusel img {
@@ -355,6 +365,89 @@ th {
     }
     .datos-item-carrusel {
         font-size: 0.8rem;
+    }
+}
+
+
+/* -------------- FIN CARRUSEL PROPIO --------------------- */
+
+
+/* -------------- CARRUSEL  --------------------- */
+
+.swiper-left-arrow,
+.swiper-right-arrow {
+    color: rgba(0, 0, 0, .6);
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+}
+
+.swiper-left-arrow:hover,
+.swiper-right-arrow:hover {
+    color: #01b4e4;
+}
+
+.swiper-left-arrow:focus,
+.swiper-right-arrow:focus {
+    outline: none;
+}
+
+.swiper-outer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    position: relative;
+}
+
+.carrusel-pagination {
+    position: relative;
+    font-size: 0.9rem;
+    text-align: center;
+    /* color: white; */
+}
+
+.card .card-content {
+    padding: 4px 4px;
+    font-size: 0.8rem;
+    text-align: center;
+    /* min-height: 52px; */
+    overflow: hidden;
+    background: black;
+    color: white;
+}
+
+.card .card-image {
+    height: 100%;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.titulo-carrusel {
+    font-family: Michroma;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    /* text-transform: uppercase; */
+    text-align: center;
+    padding: 20px 0 0px 0;
+    /* background:#01b4e4; */
+    color: #0d253f;
+}
+
+.container-carrusel {
+    width: 75%;
+    margin: 0 auto;
+    /* background: black; */
+}
+
+.container-search {
+    width: 75%;
+    margin: 0 auto;
+}
+
+@media (max-width: 800px) {
+    .container-carrusel {
+        width: 100%;
     }
 }
 

@@ -2,6 +2,7 @@
   <!-- INFO -->
   <div class="row seccion">
 
+
     <!-- NOMBRE -->
     <div class="titulo-ficha secundario-texto">
       <div><i class="material-icons medium" style="vertical-align: middle;">person</i>&nbsp;{{person.name}}</div>          
@@ -26,6 +27,7 @@
       </ul>
     </div>
 
+
 </div>  
 </template>
 
@@ -43,3 +45,4 @@ export default {
 
 }
 </script>
+

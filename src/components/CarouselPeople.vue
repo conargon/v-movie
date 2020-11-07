@@ -1,5 +1,7 @@
 <template>
-  <div class="container-carrusel" v-if="movies != null && movies.length > 0">
+  <div class="container-carrusel" v-if="peopleList
+   != null && peopleList
+  .length > 0">
 
     <div class="titulo-carrusel">
       {{titulo}}
@@ -7,29 +9,27 @@
 
     <div class="swiper-outer">         
 
-      <div id="movie-left" class="swiper-left-arrow">
+      <div id="peopleList-left" class="swiper-left-arrow">
          <i class="material-icons small">navigate_before</i>
       </div>
 
       <swiper class="swiper" :options="swiperOption">
-        <swiper-slide v-for="(m, i) in movies" :key="i">        
+        <swiper-slide v-for="(m, i) in peopleList" :key="i">        
           <div class="card hoverable">
             <div class="card-image">
-                <img class="imgSwiper" :src="srcPoster(m)" @click="goTo(m)" alt="" />
+                <img class="imgSwiper" :src="srcPosterPerson(m)" @click="goTo(m)" alt="" />
             </div>
             <div class="card-content">
-                <strong>{{m.title}}</strong>
-                <br>
-                {{fechaStr(m.release_date)}}
+                <strong>{{m.name}}</strong>
             </div>
           </div>
         </swiper-slide>
       </swiper>      
-      <div id="movie-right" class="swiper-right-arrow">
+      <div id="peopleList-right" class="swiper-right-arrow">
          <i class="material-icons small">navigate_next</i>
       </div>   
     </div>
-    <div id="movie-pagination" class="carrusel-pagination"></div>
+    <div id="peopleList-pagination" class="carrusel-pagination"></div>
   </div>
 </template>
 
@@ -40,12 +40,12 @@ import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 
 
 export default {
-  name: "CarouselMovie",
+  name: "CarouselPeople",
 
   mixins: [mixins],
 
   props: {
-    movies: Array,
+    peopleList: Array,
     titulo: null,
   },
 
@@ -63,12 +63,12 @@ export default {
           loop: false,
           loopFillGroupWithBlank: false,
           pagination: {
-            el: '#movie-pagination',
+            el: '#peopleList-pagination',
             type: 'fraction'
           },
           navigation: {
-            nextEl: '#movie-right',
-            prevEl: '#movie-left'
+            nextEl: '#peopleList-right',
+            prevEl: '#peopleList-left'
           },
           breakpoints: {
             1400: {
@@ -109,7 +109,7 @@ export default {
   methods: {
     goTo: function (m) {
       this.$router
-        .push({ name: "MovieDetail", params: { idMovie: m.id } })
+        .push({ name: "PeopleDetail", params: { type: "person", idPeople: m.id } })
         .catch(() => {});
     },
     fechaStr(fecha) {

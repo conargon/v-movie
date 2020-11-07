@@ -5,7 +5,7 @@
 
       <!-- FONDO -->
       <img
-        class="background_wrap_img"
+        class="background_wrap_img hide-on-med-and-down"
         :src="imageBackgroundTvSerie"
         v-if="imageBackgroundTvSerie != ''"
       />

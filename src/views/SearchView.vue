@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-search">
     <div class="progress" v-if="loading">
       <div class="indeterminate"></div>
     </div>

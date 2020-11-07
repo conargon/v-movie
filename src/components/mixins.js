@@ -10,8 +10,8 @@ export default {
             get() {
                 return this.$store.state.apiKey
             }
-        },        
-    },      
+        },
+    },
 
     methods: {
         getUrlApi(metodo, idioma, parametros) {
@@ -27,7 +27,7 @@ export default {
             return image != null && image.file_path != null ?
                 "http://image.tmdb.org/t/p/original" + image.file_path :
                 "./no-poster.jpg";
-        },        
+        },
         srcPoster: function(movie) {
             return this.tienePoster(movie) ?
                 "http://image.tmdb.org/t/p/w342" + movie.poster_path :
@@ -58,7 +58,7 @@ export default {
                 "????";
         },
         fechaLanzamiento: function(movie) {
-            return movie != null && movie.release_date != null ? new Date(movie.release_date).toLocaleDateString('es-ES') : '';
+            return movie != null && movie.release_date != null ? new Date(movie.release_date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
         },
         firstCompany: function(movie) {
             if (
@@ -141,7 +141,7 @@ export default {
                     h: e.height,
                     title: nombre,
                     alt: nombre
-                }));                
+                }));
                 return result;
             } else {
                 return [];
@@ -164,114 +164,113 @@ export default {
             } else {
                 return [];
             }
-        },        
+        },
 
         imageBackground(obj) {
             let images = this.images(obj);
-            if(images != null && images.length > 0) {
+            if (images != null && images.length > 0) {
                 let voto = 0;
-                let file_path = images[0].file_path;          
-                for(let image of images) {
-                    if(image.vote_count > voto) {
+                let file_path = images[0].file_path;
+                for (let image of images) {
+                    if (image.vote_count > voto) {
                         voto = image.vote_average;
                         file_path = image.file_path;
                     }
                 }
                 return file_path != '' ? "http://image.tmdb.org/t/p/original" + file_path : '';
             } else {
-            return "";
+                return "";
             }
-        },      
-        
+        },
+
         colorBackground(obj) {
-            let genres_colors = [
-            {
-                "id": 28,
-                "color": "#01b4e4"
+            let genres_colors = [{
+                    "id": 28,
+                    "color": "#01b4e4"
                 },
                 {
-                "id": 12,
-                "color": "#f8bbd0"
+                    "id": 12,
+                    "color": "#f8bbd0"
                 },
                 {
-                "id": 16,
-                "color": "#b2dfdb"
+                    "id": 16,
+                    "color": "#b2dfdb"
                 },
                 {
-                "id": 35,
-                "color": "#fff9c4"
+                    "id": 35,
+                    "color": "#fff9c4"
                 },
                 {
-                "id": 80,
-                "color": "#f5f5f5"
+                    "id": 80,
+                    "color": "#f5f5f5"
                 },
                 {
-                "id": 99,
-                "color": "#ffecb3"
+                    "id": 99,
+                    "color": "#ffecb3"
                 },
                 {
-                "id": 18,
-                "color": "#cfd8dc"
+                    "id": 18,
+                    "color": "#cfd8dc"
                 },
                 {
-                "id": 10751,
-                "color": "#c8e6c9"
+                    "id": 10751,
+                    "color": "#c8e6c9"
                 },
                 {
-                "id": 14,
-                "color": "#e1bee7"
+                    "id": 14,
+                    "color": "#e1bee7"
                 },
                 {
-                "id": 36,
-                "color": "#ffccbc"
+                    "id": 36,
+                    "color": "#ffccbc"
                 },
                 {
-                "id": 27,
-                "color": "#c5cae9"
+                    "id": 27,
+                    "color": "#c5cae9"
                 },
                 {
-                "id": 10402,
-                "color": "#fff9c4"
+                    "id": 10402,
+                    "color": "#fff9c4"
                 },
                 {
-                "id": 9648,
-                "color": "#dcedc8"
+                    "id": 9648,
+                    "color": "#dcedc8"
                 },
                 {
-                "id": 10749,
-                "color": "#f8bbd0"
+                    "id": 10749,
+                    "color": "#f8bbd0"
                 },
                 {
-                "id": 878,
-                "color": "b3e5fc"
+                    "id": 878,
+                    "color": "b3e5fc"
                 },
                 {
-                "id": 10770,
-                "color": "#d1c4e9"
+                    "id": 10770,
+                    "color": "#d1c4e9"
                 },
                 {
-                "id": 53,
-                "color": "#f0f4c3"
+                    "id": 53,
+                    "color": "#f0f4c3"
                 },
                 {
-                "id": 10752,
-                "color": "#ffe0b2"
+                    "id": 10752,
+                    "color": "#ffe0b2"
                 },
                 {
-                "id": 37,
-                "color": "#d7ccc8"
+                    "id": 37,
+                    "color": "#d7ccc8"
                 }
             ];
-            if(obj != null && obj.genres != null && obj.genres.length > 0) {
+            if (obj != null && obj.genres != null && obj.genres.length > 0) {
                 let genres = genres_colors.find(e => e.id === obj.genres[0].id);
-                if(genres != null) {
+                if (genres != null) {
                     return genres.color;
                 } else {
                     return "#01b4e4";
                 }
             } else {
                 return "#01b4e4";
-            }   
+            }
 
         },
 

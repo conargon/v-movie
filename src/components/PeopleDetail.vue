@@ -68,3 +68,14 @@ export default {
 
 };
 </script>
+
+<style scoped>
+
+.card .card-content {
+    font-size: 1rem;
+    text-align: left;
+    color: black;
+    background: initial;
+}
+
+</style>
