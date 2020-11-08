@@ -1,8 +1,10 @@
 <template>
 <div class="container">
+    <div class="container-carrusel">
     <CarouselMovie titulo="Peliculas recientes más populares" :movies="moviesMostPopular" v-if="loaded"/>
     <CarouselTv titulo="Series de TV recientes más populares" :seriesTv="seriesTvMostPopular" v-if="loaded"/>
     <CarouselPeople titulo="Personas más populares" :peopleList="peopleTrending" v-if="loaded"/>
+    </div>
 </div>
 </template>
 

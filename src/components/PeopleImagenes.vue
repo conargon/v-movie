@@ -5,7 +5,8 @@
       <div>Imágenes de {{person.name}}</div>
       <div class="divider"></div>
     </div>        
-    <VuePictureSwipe :items="imagesPeople" ></VuePictureSwipe>
+    <VuePictureSwipe :items="imagesPeople"  v-if="person.images.profiles < 6"></VuePictureSwipe>
+     <CarouselImages id="postersPeople" :imageList = "person.images.profiles" v-else />
 </div>  
 </template>
 
@@ -13,6 +14,7 @@
 import M from "materialize-css";
 import mixins from "./mixins.js";
 import VuePictureSwipe from 'vue-picture-swipe';
+import CarouselImages from '@/components/CarouselImages';
 
 export default {
   name: "PeopleImagenes",
@@ -24,7 +26,8 @@ export default {
   },
 
   components: {
-    VuePictureSwipe
+    VuePictureSwipe,
+    CarouselImages
   },
   
   computed: {

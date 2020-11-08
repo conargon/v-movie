@@ -16,29 +16,8 @@
 
         <!-- CARRUSEL DE POSTERS/IMAGENES -->
         <VuePictureSwipe :items="galleryImages(movie, movie.title)" v-if="images(movie).length < 6"></VuePictureSwipe>
-        <div class="marco-carrusel" v-else>
-          <button role="button" id="flecha-izquierda" class="flecha-izquierda" @click.stop="scrollLeft">
-            <i class="material-icons small" style="vertical-align: middle"
-              >navigate_before</i
-            >
-          </button>
-          <div ref ="images_pelicula" class="contenedor-carrusel">
-            <div class="carrusel">
-              <div class="item-carrusel item-carrusel-2x" v-for="(p,i) in images(movie)" :key="i">
-                  <img
-                    class="hoverable materialboxed"
-                    :src="srcImageOriginal(p)"
-                  />               
-              </div>
-            </div>
-          </div>
-          <button role="button" id="flecha-derecha" class="flecha-derecha" @click.stop="scrollRight">
-            <i class="material-icons small" style="vertical-align: middle"
-              >navigate_next</i
-            >
-          </button>
-        </div>
-
+        <CarouselImages id="images" :imageList = "images(movie)" v-else />
+       
       </div>
 
 
@@ -50,29 +29,8 @@
 
         <!-- CARRUSEL DE PORTADAS -->
         <VuePictureSwipe :items="galleryPosters(movie, movie.title)" v-if="posters(movie).length < 6"></VuePictureSwipe>
-        <div class="marco-carrusel" v-else>
-          <button role="button" id="flecha-izquierda" class="flecha-izquierda" @click.stop="scrollLeftPosters">
-            <i class="material-icons small" style="vertical-align: middle"
-              >navigate_before</i
-            >
-          </button>
-          <div ref ="posters_pelicula" class="contenedor-carrusel">
-            <div class="carrusel">
-              <div class="item-carrusel" v-for="(p,i) in posters(movie)" :key="i">
-                  <img
-                    class="hoverable materialboxed"
-                    :src="srcImage(p)"
-                  />               
-              </div>
-            </div>
-          </div>
-          <button role="button" id="flecha-derecha" class="flecha-derecha" @click.stop="scrollRightPosters">
-            <i class="material-icons small" style="vertical-align: middle"
-              >navigate_next</i
-            >
-          </button>
-        </div>   
-
+        <CarouselImages id="posters" :imageList = "posters(movie)" v-else />
+        
       </div>
 
     </div>     
@@ -82,6 +40,7 @@
 import mixins from "./mixins.js";
 import M from "materialize-css";
 import VuePictureSwipe from 'vue-picture-swipe';
+import CarouselImages from '@/components/CarouselImages';
 
 export default {
   name: "MovieImagenes",
@@ -93,22 +52,8 @@ export default {
   },
 
   components: {
-    VuePictureSwipe 
-  },
-
-  methods: {
-    scrollRight: function() {
-      this.$refs.images_pelicula.scrollLeft += this.$refs.images_pelicula.offsetWidth;
-    },
-    scrollLeft: function() {
-      this.$refs.images_pelicula.scrollLeft -= this.$refs.images_pelicula.offsetWidth;
-    },  
-    scrollRightPosters: function() {
-      this.$refs.posters_pelicula.scrollLeft += this.$refs.posters_pelicula.offsetWidth;
-    },
-    scrollLeftPosters: function() {
-      this.$refs.posters_pelicula.scrollLeft -= this.$refs.posters_pelicula.offsetWidth;
-    },      
+    VuePictureSwipe,
+    CarouselImages
   },
 
   mounted() {

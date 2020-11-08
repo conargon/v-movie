@@ -1,9 +1,9 @@
 <template>
-  <div class="container-carrusel" v-if="peopleList
+  <div v-if="peopleList
    != null && peopleList
   .length > 0">
 
-    <div class="titulo-carrusel">
+    <div class="titulo-carrusel" v-if="titulo != ''">
       {{titulo}}
     </div>
 
@@ -21,6 +21,9 @@
             </div>
             <div class="card-content">
                 <strong>{{m.name}}</strong>
+                <div style="font-style: italic;" v-if="m.character !== undefined">
+                  {{m.character != null && m.character != "" ? m.character : "-"}}
+                </div>
             </div>
           </div>
         </swiper-slide>

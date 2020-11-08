@@ -8,40 +8,14 @@
       <div>Reparto de {{ movie.title }}</div>
       <div class="divider"></div>
     </div>
-    <div class="marco-carrusel">
-      <button role="button" id="flecha-izquierda" class="flecha-izquierda" @click.stop="scrollLeft">
-        <i class="material-icons small" style="vertical-align: middle"
-          >navigate_before</i
-        >
-      </button>
-      <div ref ="reparto_pelicula" class="contenedor-carrusel">
-        <div class="carrusel">
-          <div class="item-carrusel" v-for="(p,i) in people(movie)" :key="i">
-              <img
-                class="hoverable"
-                :src="srcProfile(p)"
-                @click.stop="goTo(p)"
-                :title="'Ver ficha de ' + p.name"
-              />
-              <div class="fondo-datos-items-carrusel"></div>
-              <div class="datos-item-carrusel">
-                <p class="actor">{{p.name}}</p>
-                <p class="personaje">{{p.character != null && p.character != "" ? p.character : "-"}}</p>
-              </div>                 
-          </div>
-        </div>
-      </div>
-      <button role="button" id="flecha-derecha" class="flecha-derecha" @click.stop="scrollRight">
-        <i class="material-icons small" style="vertical-align: middle"
-          >navigate_next</i
-        >
-      </button>
-    </div>
+    <CarouselPeople :peopleList="people(movie)"/>
+  
   </div>
 </template>
 
 <script>
 import mixins from "./mixins.js";
+import CarouselPeople from "@/components/CarouselPeople";
 
 export default {
   name: "MovieReparto",
@@ -52,6 +26,10 @@ export default {
     movie: null,
   },
 
+  components: {
+    CarouselPeople
+  },  
+
   methods: {
     goTo: function (p) {
       this.$router
@@ -61,12 +39,6 @@ export default {
         })
         .catch(() => {});
     },
-    scrollRight: function() {
-      this.$refs.reparto_pelicula.scrollLeft += this.$refs.reparto_pelicula.offsetWidth;
-    },
-    scrollLeft: function() {
-      this.$refs.reparto_pelicula.scrollLeft -= this.$refs.reparto_pelicula.offsetWidth;
-    },    
   },
 };
 </script>

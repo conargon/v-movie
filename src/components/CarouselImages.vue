@@ -1,5 +1,5 @@
 <template>
-  <div v-if="seriesTv != null && seriesTv.length > 0">
+  <div v-if="imageList != null && imageList.length > 0">
 
     <div class="titulo-carrusel">
       {{titulo}}
@@ -7,45 +7,38 @@
 
     <div class="swiper-outer">         
 
-      <div id="tv-left" class="swiper-left-arrow">
+      <div :id="'image-left-'+id" class="swiper-left-arrow">
          <i class="material-icons small">navigate_before</i>
       </div>
 
       <swiper class="swiper" :options="swiperOption">
-        <swiper-slide v-for="(m, i) in seriesTv" :key="i">        
-          <div class="card hoverable">
-            <div class="card-image">
-                <img class="imgSwiper" :src="srcPoster(m)" @click="goTo(m)" alt="" />
-            </div>
-            <div class="card-content">
-                <strong>{{m.name}}</strong>
-                <br>
-                {{fechaStr(m.first_air_date)}}
-            </div>
-          </div>
+        <swiper-slide v-for="(m, i) in imageList" :key="i">        
+          <img class="responsive-img materialboxed hoverable" :src="srcImageOriginal(m)" alt="" />
         </swiper-slide>
       </swiper>      
-      <div id="tv-right" class="swiper-right-arrow">
+      <div :id="'image-right-'+id" class="swiper-right-arrow">
          <i class="material-icons small">navigate_next</i>
       </div>   
     </div>
-    <div id="tv-pagination" class="carrusel-pagination"></div>
+    <div :id="'image-pagination-'+id" class="carrusel-pagination"></div>
   </div>
 </template>
 
 <script>
 import mixins from "./mixins.js";
+import M from "materialize-css";
 import 'swiper/css/swiper.min.css'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 
 
 export default {
-  name: "CarouselTv",
+  name: "CarouselImages",
 
   mixins: [mixins],
 
   props: {
-    seriesTv: Array,
+    id: null,
+    imageList: Array,
     titulo: null,
   },
 
@@ -63,12 +56,12 @@ export default {
           loop: false,
           loopFillGroupWithBlank: false,
           pagination: {
-            el: '#tv-pagination',
+            el: '#image-pagination-'+this.id,
             type: 'fraction'
           },
           navigation: {
-            nextEl: '#tv-right',
-            prevEl: '#tv-left'
+            nextEl: '#image-right-'+this.id,
+            prevEl: '#image-left-'+this.id,
           },
           breakpoints: {
             1400: {
@@ -106,16 +99,19 @@ export default {
     }
   },  
 
-  methods: {
-    goTo: function (m) {
-      this.$router
-        .push({ name: "TvDetail", params: { idSerieTv: m.id } })
-        .catch(() => {});
-    },
-    fechaStr(fecha) {
-        return fecha != null ? new Date(fecha).toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
-    },
-  },
+  mounted() {
+    const imgLightBox = document.querySelectorAll(".materialboxed");
+      M.Materialbox.init(imgLightBox, {
+        inDuration: 500,
+        outDuration: 500
+      });
+  },  
 
 };
 </script>
+
+<style scoped>
+.carrusel-pagination {
+    bottom: 0 !important;
+}
+</style>

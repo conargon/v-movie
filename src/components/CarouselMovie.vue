@@ -1,5 +1,5 @@
 <template>
-  <div class="container-carrusel" v-if="movies != null && movies.length > 0">
+  <div v-if="movies != null && movies.length > 0">
 
     <div class="titulo-carrusel">
       {{titulo}}
