@@ -1,38 +1,15 @@
 <template>
     <!-- IMAGENES -->
-    <div class="row seccion" v-if="(images(serieTv) != null && images(serieTv).length > 0) || (posters(serieTv) != null && posters(serieTv).length > 0)">
+    <div class="row seccion" v-if="(allImages(serieTv) != null && allImages(serieTv).length > 0)">
 
       <div class="titulo-seccion secundario-texto">
         <div>Imágenes de {{serieTv.name}}</div>
         <div class="divider"></div>
-      </div>      
-      
+      </div>            
 
-      <div v-if="images(serieTv) != null && images(serieTv).length > 0">
-
-        <div class="subtitulo-seccion terciario-texto">
-          <div>Posters</div>
-        </div>  
-
-        <!-- CARRUSEL DE POSTERS/IMAGENES -->
-        <VuePictureSwipe :items="galleryImages(serieTv, serieTv.name)" v-if="images(serieTv).length < 6"></VuePictureSwipe>
-        <CarouselImages id="imagesSerieTv" :imageList = "images(serieTv)" v-else />
-       
-      </div>
-      
-
-      <div v-if="posters(serieTv) != null && posters(serieTv).length > 0">
-
-        <div class="subtitulo-seccion terciario-texto">
-          <div>Portadas</div>
-        </div> 
-
-        <!-- CARRUSEL DE PORTADAS -->
-        <VuePictureSwipe :items="galleryPosters(serieTv, serieTv.name)" v-if="posters(serieTv).length < 6"></VuePictureSwipe>
-        <CarouselImages id="portadasSerieTv" :imageList = "posters(serieTv)" v-else />
-       
-      </div>
-
+      <!-- CARRUSEL DE POSTERS/IMAGENES -->
+      <VuePictureSwipe :items="galleryAllImages(serieTv, serieTv.name)" v-if="allImages(serieTv).length < 6"></VuePictureSwipe>
+      <CarouselImages id="imagesSerieTv" :imageList = "allImages(serieTv)" v-else />      
 
     </div>
 </template>

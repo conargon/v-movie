@@ -24,6 +24,7 @@
             <div class="card hoverable">
               <div class="card-image">
                 <img
+                  loading="lazy" 
                   :src="srcPoster(m)"
                   alt=""
                   @click.stop="goToMovie(m)"                 

@@ -1,37 +1,15 @@
 <template>
     <!-- IMAGENES -->
-    <div class="row seccion" v-if="(images(movie) != null && images(movie).length > 0)  || (posters(movie) != null && posters(movie).length > 0)">
+    <div class="row seccion" v-if="(allImages(movie) != null && allImages(movie).length > 0)">
 
       <div class="titulo-seccion secundario-texto">
         <div>Imágenes de {{movie.title}}</div>
         <div class="divider"></div>
       </div>      
 
-
-      <div v-if="images(movie) != null && images(movie).length > 0">
-      
-        <div class="subtitulo-seccion terciario-texto">
-          <div>Posters</div>
-        </div>  
-
-        <!-- CARRUSEL DE POSTERS/IMAGENES -->
-        <VuePictureSwipe :items="galleryImages(movie, movie.title)" v-if="images(movie).length < 6"></VuePictureSwipe>
-        <CarouselImages id="images" :imageList = "images(movie)" v-else />
-       
-      </div>
-
-
-      <div v-if="posters(movie) != null && posters(movie).length > 0">
-      
-        <div class="subtitulo-seccion terciario-texto">
-          <div>Portadas</div>
-        </div> 
-
-        <!-- CARRUSEL DE PORTADAS -->
-        <VuePictureSwipe :items="galleryPosters(movie, movie.title)" v-if="posters(movie).length < 6"></VuePictureSwipe>
-        <CarouselImages id="posters" :imageList = "posters(movie)" v-else />
-        
-      </div>
+      <!-- CARRUSEL DE POSTERS/IMAGENES -->
+      <VuePictureSwipe :items="galleryAllImages(movie, movie.title)" v-if="allImages(movie).length < 6"></VuePictureSwipe>
+      <CarouselImages id="images" :imageList = "allImages(movie)" v-else />      
 
     </div>     
 </template>

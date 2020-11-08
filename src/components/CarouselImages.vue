@@ -9,16 +9,18 @@
 
       <div :id="'image-left-'+id" class="swiper-left-arrow">
          <i class="material-icons small">navigate_before</i>
-      </div>
+      </div>   
 
       <swiper class="swiper" :options="swiperOption">
         <swiper-slide v-for="(m, i) in imageList" :key="i">        
           <img class="responsive-img materialboxed hoverable" :src="srcImageOriginal(m)" alt="" />
         </swiper-slide>
-      </swiper>      
+      </swiper>    
+
       <div :id="'image-right-'+id" class="swiper-right-arrow">
          <i class="material-icons small">navigate_next</i>
       </div>   
+
     </div>
     <div :id="'image-pagination-'+id" class="carrusel-pagination"></div>
   </div>
@@ -27,7 +29,6 @@
 <script>
 import mixins from "./mixins.js";
 import M from "materialize-css";
-import 'swiper/css/swiper.min.css'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 
 
@@ -53,8 +54,11 @@ export default {
           slidesPerView: 5,
           spaceBetween: 5,
           slidesPerGroup: 5,
+          autoHeight: true,
           loop: false,
+          freeMode: true,
           loopFillGroupWithBlank: false,
+          effect: 'slide',
           pagination: {
             el: '#image-pagination-'+this.id,
             type: 'fraction'
@@ -114,4 +118,5 @@ export default {
 .carrusel-pagination {
     bottom: 0 !important;
 }
+
 </style>

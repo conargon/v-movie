@@ -17,7 +17,8 @@
         <swiper-slide v-for="(m, i) in peopleList" :key="i">        
           <div class="card hoverable">
             <div class="card-image">
-                <img class="imgSwiper" :src="srcPosterPerson(m)" @click="goTo(m)" alt="" />
+                <img loading="lazy" class="swiper-lazy" :src="srcPosterPerson(m)" @click="goTo(m)" alt="" />
+                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
             </div>
             <div class="card-content">
                 <strong>{{m.name}}</strong>
@@ -38,7 +39,6 @@
 
 <script>
 import mixins from "./mixins.js";
-import 'swiper/css/swiper.min.css'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 
 
@@ -64,6 +64,7 @@ export default {
           spaceBetween: 5,
           slidesPerGroup: 5,
           loop: false,
+          lazy: true,
           loopFillGroupWithBlank: false,
           pagination: {
             el: '#peopleList-pagination',

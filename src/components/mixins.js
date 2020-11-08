@@ -90,6 +90,20 @@ export default {
         posters: function(movie) {
             return movie != null && movie.images != null ? movie.images.posters : null;
         },
+        allImages: function(movie) {
+            let result = [];
+            if (movie != null && movie.images != null) {
+                if (movie.images.backdrops != null && movie.images.backdrops.length > 0) {
+                    result = movie.images.backdrops;
+                }
+                if (movie.images.posters != null && movie.images.posters.length > 0) {
+                    result = result.concat(movie.images.posters);
+                }
+                return result;
+            } else {
+                return null;
+            }
+        },
         videos: function(movie) {
             return movie != null && movie.videos != null && movie.videos.results != null && movie.videos.results.length > 0 ?
                 movie.videos.results :
@@ -164,6 +178,13 @@ export default {
             } else {
                 return [];
             }
+        },
+
+        galleryAllImages(obj, nombre) {
+            let result = [];
+            result = result.concat(this.galleryImages(obj, nombre));
+            result = result.concat(this.galleryPosters(obj, nombre));
+            return result;
         },
 
         imageBackground(obj) {
