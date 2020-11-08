@@ -2,13 +2,13 @@
   <!-- REPARTO -->
   <div
     class="row seccion"
-    v-if="people(movie) != null && people(movie).length > 0"
+    v-if="allPeople(movie) != null && allPeople(movie).length > 0"
   >
     <div class="titulo-seccion secundario-texto">
       <div>Reparto de {{ movie.title }}</div>
       <div class="divider"></div>
     </div>
-    <CarouselPeople :peopleList="people(movie)"/>
+    <CarouselPeople :peopleList="allPeople(movie)"/>
   
   </div>
 </template>

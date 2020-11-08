@@ -112,6 +112,21 @@ export default {
         people: function(movie) {
             return movie != null && movie.credits != null ? movie.credits.cast.filter(e => e.profile_path != null) : null;
         },
+        peopleCrew: function(movie) {
+            return movie != null && movie.credits != null ? movie.credits.crew.filter(e => e.profile_path != null) : null;
+        },
+        allPeople: function(movie) {
+            let result = [];
+            let cast = this.people(movie);
+            let crew = this.peopleCrew(movie);
+            if (cast != null) {
+                result = result.concat(cast)
+            }
+            if (crew != null) {
+                result = result.concat(crew)
+            }
+            return result;
+        },
         srcProfile: function(credit) {
             return credit != null && credit.profile_path != null ?
                 "http://image.tmdb.org/t/p/w342" + credit.profile_path :

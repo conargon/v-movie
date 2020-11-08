@@ -1,8 +1,17 @@
 <template>
   <div v-if="seriesTv != null && seriesTv.length > 0">
 
-    <div class="titulo-carrusel">
-      {{titulo}}
+    <div class="cabecera-carousel" v-if="titulo != null && titulo != ''">
+      <div class="titulo-carrusel">
+        {{titulo}}
+      </div>
+      <div class="switch">        
+        <label>          
+          <span>{{diario ? 'Hoy' : 'Esta semana'}}</span>        
+          <input type="checkbox"  v-model="diario">
+          <span class="lever"></span>
+        </label>
+      </div>
     </div>
 
     <div class="swiper-outer">         
@@ -15,7 +24,7 @@
         <swiper-slide v-for="(m, i) in seriesTv" :key="i">        
           <div class="card hoverable">
             <div class="card-image">
-                <img loading="lazy" class="swiper-lazy" :src="srcPoster(m)" @click="goTo(m)" alt="" />
+                <img class="swiper-lazy" :src="srcPoster(m)" @click="goTo(m)" alt="" />
                 <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
             </div>
             <div class="card-content">
@@ -54,8 +63,15 @@ export default {
     SwiperSlide
   },
 
+  watch: {
+    diario: function(val) {
+      this.$emit('changeFilterDiario', val ? 'day' : 'week');
+    }
+  },  
+
   data() {
     return {
+        diario: true,
         swiperOption: {
           slidesPerView: 5,
           spaceBetween: 5,

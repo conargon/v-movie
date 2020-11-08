@@ -3,9 +3,18 @@
    != null && peopleList
   .length > 0">
 
-    <div class="titulo-carrusel" v-if="titulo != ''">
-      {{titulo}}
-    </div>
+    <div class="cabecera-carousel" v-if="titulo != null && titulo != ''">
+      <div class="titulo-carrusel">
+        {{titulo}}
+      </div>
+      <div class="switch">        
+        <label>          
+          <span>{{diario ? 'Hoy' : 'Esta semana'}}</span>        
+          <input type="checkbox"  v-model="diario">
+          <span class="lever"></span>
+        </label>
+      </div>
+    </div>    
 
     <div class="swiper-outer">         
 
@@ -13,11 +22,11 @@
          <i class="material-icons small">navigate_before</i>
       </div>
 
-      <swiper class="swiper" :options="swiperOption">
+      <swiper class="swiper" :options="swiperOption" ref="swiperPeople">
         <swiper-slide v-for="(m, i) in peopleList" :key="i">        
           <div class="card hoverable">
             <div class="card-image">
-                <img loading="lazy" class="swiper-lazy" :src="srcPosterPerson(m)" @click="goTo(m)" alt="" />
+                <img class="swiper-lazy" :src="srcPosterPerson(m)" @click="goTo(m)" alt="" />
                 <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
             </div>
             <div class="card-content">
@@ -25,6 +34,9 @@
                 <div style="font-style: italic;" v-if="m.character !== undefined">
                   {{m.character != null && m.character != "" ? m.character : "-"}}
                 </div>
+                <div style="font-style: italic;" v-if="m.job !== undefined">
+                  {{m.job != null && m.job != "" ? m.job : "-"}}
+                </div>                
             </div>
           </div>
         </swiper-slide>
@@ -57,8 +69,15 @@ export default {
     SwiperSlide
   },
 
+  watch: {
+    diario: function(val) {
+      this.$emit('changeFilterDiario', val ? 'day' : 'week');
+    }
+  },
+
   data() {
     return {
+        diario: true,
         swiperOption: {
           slidesPerView: 5,
           spaceBetween: 5,
@@ -78,7 +97,7 @@ export default {
             1400: {
               slidesPerView: 6,
               slidesPerGroup: 6,
-              spaceBetween: 10
+              spaceBetween: 10,
             },            
             1200: {
               slidesPerView: 5,

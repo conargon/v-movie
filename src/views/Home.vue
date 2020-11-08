@@ -1,11 +1,14 @@
 <template>
-<div class="container">
-    <div class="container-carrusel">
-    <CarouselMovie titulo="Peliculas recientes más populares" :movies="moviesMostPopular" v-if="loaded"/>
-    <CarouselTv titulo="Series de TV recientes más populares" :seriesTv="seriesTvMostPopular" v-if="loaded"/>
-    <CarouselPeople titulo="Personas más populares" :peopleList="peopleTrending" v-if="loaded"/>
-    </div>
-</div>
+  <div class="container">
+      <div class="progress" v-if="!loaded">
+        <div class="indeterminate"></div>
+      </div>    
+      <div class="container-carrusel" v-if="loaded">
+        <CarouselMovie titulo="Peliculas recientes más populares" :movies="moviesMostPopular" @changeFilterDiario="onChangeMovieFilterDiario"/>
+        <CarouselTv titulo="Series de TV recientes más populares" :seriesTv="seriesTvMostPopular" @changeFilterDiario="onChangeTvFilterDiario"/>
+        <CarouselPeople titulo="Personas más populares" :peopleList="peopleTrending" @changeFilterDiario="onChangePeopleFilterDiario"/>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -32,6 +35,10 @@ export default {
       seriesTvMostPopular: [],
       peopleTrending: [],
       loaded: false,
+      //
+      movieFilterDiario: 'day',
+      tvFilterDiario: 'day',
+      peopleFilterDiario: 'day',
     };
   },
 
@@ -56,13 +63,13 @@ export default {
 
       // const urlGetMostPopularMovies = this.getUrlApi("/discover/movie", "es-ES", params);                      
       // const urlGetMostPopularTv = this.getUrlApi("/discover/tv", "es-ES", params);
-      const urlGetMostPopularMovies = this.getUrlApi("/trending/movie/day", "es-ES", "");                      
-      const urlGetMostPopularTv = this.getUrlApi("/trending/tv/day", "es-ES", "");        
-      const urlGetTrendingPeople = this.getUrlApi("/trending/person/day", "es-ES", "");  
+      const urlGetMostPopularMovies = this.getUrlApi("/trending/movie/" + this.movieFilterDiario, "es-ES", "");                      
+      const urlGetMostPopularTv = this.getUrlApi("/trending/tv/" + this.tvFilterDiario, "es-ES", "");        
+      const urlGetTrendingPeople = this.getUrlApi("/trending/person/" + this.peopleFilterDiario, "es-ES", "");  
       
       const requestGetMostPopularMovies = axios.get(urlGetMostPopularMovies);
       const requestGetMostPopularTv = axios.get(urlGetMostPopularTv);
-      const requestGetTrendingPeople = axios.get(urlGetTrendingPeople);
+      const requestGetTrendingPeople = axios.get(urlGetTrendingPeople); 
 
       axios.all([requestGetMostPopularMovies, requestGetMostPopularTv, requestGetTrendingPeople])
       .then(axios.spread((...responses) => {
@@ -74,9 +81,18 @@ export default {
       .finally((this.loaded = true));      
       
     },
-    onPageChange: function (newPage) {
-      this.searchMovies(newPage);
+    onChangeMovieFilterDiario: function (val) {
+      this.movieFilterDiario  = val;
+      this.searchMostPopular();
     },
+    onChangeTvFilterDiario: function (val) {
+      this.tvFilterDiario  = val;
+      this.searchMostPopular();
+    },
+    onChangePeopleFilterDiario: function (val) {
+      this.peopleFilterDiario  = val;
+      this.searchMostPopular();
+    },        
   },
   created() {
     this.searchMostPopular();

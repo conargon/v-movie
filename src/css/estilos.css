@@ -283,13 +283,24 @@ th {
     border-radius: 4px;
 }
 
+.cabecera-carousel {
+    display: flex;
+    padding-left: 30px;
+    padding-right: 30px;
+    justify-content: space-between;
+}
+
+.cabecera-carousel .switch {
+    align-self: flex-end;
+}
+
 .titulo-carrusel {
     font-family: Michroma;
     font-size: 1.2rem;
     font-weight: bold;
     letter-spacing: 2px;
     /* text-transform: uppercase; */
-    text-align: center;
+    /* text-align: center; */
     padding: 20px 0 0px 0;
     /* background:#01b4e4; */
     color: #0d253f;

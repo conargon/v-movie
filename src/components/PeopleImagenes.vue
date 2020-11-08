@@ -5,7 +5,7 @@
       <div>Imágenes de {{person.name}}</div>
       <div class="divider"></div>
     </div>        
-    <VuePictureSwipe :items="imagesPeople"  v-if="person.images.profiles < 6"></VuePictureSwipe>
+    <VuePictureSwipe :items="imagesPeople"  v-if="person.images.profiles.length < 6"></VuePictureSwipe>
      <CarouselImages id="postersPeople" :imageList = "person.images.profiles" v-else />
 </div>  
 </template>
