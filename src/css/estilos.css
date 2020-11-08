@@ -48,24 +48,6 @@ body {
     background-color: ghostwhite;
 }
 
-
-/* .card .card-content {
-    padding: 0;
-} */
-
-
-/* .card.small .card-image {
-    max-height: 100%;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.card.medium .card-image {
-    max-height: 100%;
-    cursor: pointer;
-    border-radius: 4px;
-} */
-
 .card-action {
     padding: 8px 24px;
     font-size: 0.8em;
@@ -166,8 +148,6 @@ th {
     font-weight: bold;
     margin-bottom: 20px;
     margin-top: 20px;
-    /* margin-top: 20px;
-    margin-bottom: 20px; */
 }
 
 .actor {
@@ -252,124 +232,6 @@ th {
 
 
 /* -------------- FIN FONDO INFO --------------------- */
-
-
-/* -------------- CARRUSEL PROPIO --------------------- */
-
-.marco-carrusel {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.flecha-izquierda,
-.flecha-derecha {
-    position: absolute;
-    border: none;
-    background: rgba(0, 0, 0, 0.3);
-    font-size: 40px;
-    height: 50%;
-    top: calc(50% - 25%);
-    line-height: 40px;
-    width: 50;
-    color: red;
-    cursor: pointer;
-    z-index: 500;
-    transition: .2s ease all;
-}
-
-.flecha-izquierda {
-    left: 0;
-}
-
-.flecha-derecha {
-    right: 0;
-}
-
-.flecha-izquierda:hover,
-.flecha-derecha:hover {
-    background: rgba(0, 0, 0, 0.9);
-}
-
-.contenedor-carrusel {
-    width: 100%;
-    padding: 20px 0;
-    overflow: hidden;
-    scroll-behavior: smooth;
-}
-
-.contenedor-carrusel .carrusel {
-    display: flex;
-    flex-wrap: nowrap;
-}
-
-.item-carrusel {
-    min-width: 10%;
-    /* 100% div 10% = 10 items */
-    transition: .3s ease all;
-    border-left: solid 1px white;
-    position: relative;
-    cursor: pointer;
-}
-
-.item-carrusel-2x {
-    min-width: 20%;
-    /* 100% div 20% = 5 items */
-}
-
-.item-carrusel img {
-    width: 100%;
-    vertical-align: top;
-    border-radius: 8px;
-}
-
-.fondo-datos-items-carrusel {
-    background: black;
-    position: absolute;
-    bottom: 0px;
-    opacity: 0.6;
-    width: 100%;
-    max-height: 50px;
-    height: 50px;
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
-}
-
-.datos-item-carrusel {
-    width: 100%;
-    max-height: 50px;
-    height: 50px;
-    text-align: center;
-    color: white;
-    overflow: hidden;
-    padding-bottom: 6px;
-    padding-top: 6px;
-    font-size: 0.8rem;
-    position: absolute;
-    bottom: 0px;
-    border-radius: 8px;
-}
-
-@media (max-width: 600px) {
-    .contenedor-carrusel {
-        overflow: visible;
-    }
-    .contenedor-carrusel .carrusel {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-    .flecha-izquierda,
-    .flecha-derecha {
-        display: none;
-    }
-    .datos-item-carrusel {
-        font-size: 0.8rem;
-    }
-}
-
-
-/* -------------- FIN CARRUSEL PROPIO --------------------- */
 
 
 /* -------------- CARRUSEL  --------------------- */

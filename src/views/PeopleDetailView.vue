@@ -57,7 +57,7 @@ export default {
                     this.person = response.data;
                     if(this.person != null && this.person.credits != null && this.person.credits.cast != null) {
                         this.person.credits.cast = this.person.credits.cast.sort(function(a,b){
-                        return new Date(a.release_date) - new Date(b.release_date);
+                        return new Date(b.release_date) - new Date(a.release_date);
                         });
                     }                    
                     if(language == 'es-ES' && (this.person.biography == null || this.person.biography == '')) {
