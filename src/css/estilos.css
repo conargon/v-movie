@@ -77,7 +77,8 @@ th {
 }
 
 .thumbnail {
-    max-width: 48px !important;
+    /* max-width: 48px !important; */
+    width: 80px;
 }
 
 .primario {

@@ -13,14 +13,14 @@
           <th class="center-align">Número</th>
           <th class="center-align">Fecha</th>
           <th class="center-align">Capítulos</th>
-          <th v-if="!isMobile()">Resumen</th>
+          <th class="hide-on-med-and-down">Resumen</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="s in serieTv.seasons" :key="s.id">
-          <td class="center-align">
+          <td class="center-align thumbnail">
             <img
-              class="responsive-img materialboxed poster thumbnail"
+              class="responsive-img materialboxed poster"
               :src="srcPoster(s)"
               :data-caption="serieTv.name"
             />
@@ -28,7 +28,7 @@
           <td class="center-align">{{ s.name }}</td>
           <td class="center-align">{{ fechaStr(s.air_date) }}</td>
           <td class="center-align">{{ s.episode_count }}</td>
-          <td class="left-align" v-if="!isMobile()">{{ s.overview }}</td>
+          <td class="left-align hide-on-med-and-down">{{ s.overview }}</td>
         </tr>
       </tbody>
     </table>
