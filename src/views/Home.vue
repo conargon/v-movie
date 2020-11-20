@@ -4,8 +4,8 @@
         <div class="indeterminate"></div>
       </div>    
       <div class="container-carrusel" v-if="loaded">
-        <CarouselMovie titulo="Peliculas recientes más populares" :movies="moviesMostPopular" @changeFilterDiario="onChangeMovieFilterDiario"/>
-        <CarouselTv titulo="Series de TV recientes más populares" :seriesTv="seriesTvMostPopular" @changeFilterDiario="onChangeTvFilterDiario"/>
+        <CarouselMovie titulo="Peliculas recientes populares" :movies="moviesMostPopular" @changeFilterDiario="onChangeMovieFilterDiario"/>
+        <CarouselTv titulo="Series TV recientes populares" :seriesTv="seriesTvMostPopular" @changeFilterDiario="onChangeTvFilterDiario"/>
         <CarouselPeople titulo="Personas más populares" :peopleList="peopleTrending" @changeFilterDiario="onChangePeopleFilterDiario"/>
       </div>
   </div>

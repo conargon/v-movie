@@ -1,7 +1,7 @@
 <template>
   <!-- INFO -->
   <div id="info" class="row">
-    <div :class="imageBackgroundMovie != '' ? 'background_wrap' : ''" :style="'background-color:' + colorBackground(movie) + ';'">
+    <div :class="imageBackgroundMovie != '' ? 'background_wrap' : ''" :style="isMobile() ? 'background-color: unset;' : 'background-color:' + colorBackground(movie) + ';'">
 
       <!-- FONDO -->
       <img class="background_wrap_img  hide-on-med-and-down" :src="imageBackgroundMovie"  v-if="imageBackgroundMovie != ''" />
@@ -16,7 +16,7 @@
             style="height:48px;margin-left:40px;margin-right:20px;"
           />
         </div>
-        <div class="texto-titulo-ficha" :style="imageBackgroundMovie != '' ? 'color: white' : ''">
+        <div class="texto-titulo-ficha" :style="!isMobile() && imageBackgroundMovie != '' ? 'color: white' : ''">
           <i class="material-icons medium  hide-on-med-and-down" style="vertical-align: middle;">theaters</i>
           {{movie.title}} {{anyoLanzamiento(movie)}}
         </div>

@@ -5,7 +5,7 @@
     <div class="paginacion noselect">
       <paginate
         v-model="currentPage"
-        :page-range="isMobile() ? 5 : 11"
+        :page-range="isMobile() ? 3 : 11"
         :page-count="multi.total_pages"
         :click-handler="onPageChange"
         :prev-text="'<'"

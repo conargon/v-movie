@@ -342,4 +342,36 @@ th {
     .seccion {
         padding: 20px 10px;
     }
+    .texto-titulo-ficha {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+    .titulo-ficha {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+    .titulo-seccion {
+        font-size: 0.8rem;
+        text-align: center;
+    }
+    .subtitulo-seccion {
+        font-size: 0.8rem;
+        text-align: center;
+    }
+    .titulo-carrusel {
+        font-size: .9rem;
+    }
+    .cabecera-carousel {
+        flex-direction: column;
+    }
+    .cabecera-carousel .switch {
+        align-self: unset;
+    }
+    .fondo-titulo-ficha {
+        opacity: unset;
+        background-color: unset;
+    }
+    .titulo-ficha .divider, .titulo-seccion .divider {
+        display: none;
+    }
 }

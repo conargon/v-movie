@@ -5,7 +5,7 @@
 
     <!-- NOMBRE -->
     <div class="titulo-ficha secundario-texto">
-      <div><i class="material-icons medium" style="vertical-align: middle;">person</i>&nbsp;{{person.name}}</div>          
+      <div><i class="material-icons medium hide-on-med-and-down" style="vertical-align: middle;">person</i>&nbsp;{{person.name}}</div>          
       <div class="divider"></div>
     </div>       
 

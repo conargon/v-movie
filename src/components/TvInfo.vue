@@ -1,7 +1,7 @@
 <template>
   <!-- INFO -->
   <div class="row">
-    <div :class="imageBackgroundTvSerie != '' ? 'background_wrap' : ''" :style="'background-color:' + colorBackground(serieTv) + ';'">
+    <div :class="imageBackgroundTvSerie != '' ? 'background_wrap' : ''" :style="isMobile() ? 'background-color: unset;' : 'background-color:' + colorBackground(serieTv) + ';'">
 
       <!-- FONDO -->
       <img
@@ -13,15 +13,15 @@
       <!-- TITULO DE LA SERIE Y LOGO DE LA PRODUCTORA  -->
       <div class="titulo-ficha secundario-texto">
         <div class="fondo-titulo-ficha" v-if="imageBackgroundTvSerie != ''"></div>
-        <div class="logo-productora-titulo-ficha" v-if="srcLogoProductoraTv(serieTv) != null && srcLogoProductoraTv(serieTv) != ''">
+        <div class="logo-productora-titulo-ficha hide-on-med-and-down" v-if="srcLogoProductoraTv(serieTv) != null && srcLogoProductoraTv(serieTv) != ''">
           <img
             class="responsive-img right"
             :src="srcLogoProductoraTv(serieTv)"
             style="height:48px;margin-left:40px;margin-right:20px;"
           />
         </div>
-        <div class="texto-titulo-ficha" :style="imageBackgroundTvSerie != '' ? 'color: white' : ''">
-          <i class="material-icons medium" style="vertical-align: middle;">tv</i>
+        <div class="texto-titulo-ficha" :style="!isMobile() && imageBackgroundTvSerie != '' ? 'color: white' : ''">
+          <i class="material-icons medium hide-on-med-and-down" style="vertical-align: middle;">tv</i>
           &nbsp;{{serieTv.name}} {{anyoLanzamientoSerieTv(serieTv)}}
         </div>
         <div class="divider" v-if="imageBackgroundTvSerie == ''"></div>
