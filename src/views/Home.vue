@@ -1,108 +1,112 @@
 <template>
-  <div class="home ma-0 pa-4 fluid">    
-    <v-container fluid>
-
-      <v-container fluid text-center>
-        <img src="../assets/tmdb_long.svg" style="max-height: 48px;">        
-      </v-container> 
-
-      <v-container text-center v-if="movies != null">
-        <h2>Peliculas recientes más populares</h2>
-      </v-container> 
-
-      <!-- CARUSEL VISTA PC -->
-      <carousel 
-        :perPageCustom="[[400, 1], [768, 3], [1024, 6]]" 
-        scrollPerPage 
-        navigationEnabled 
-        :paginationEnabled="true"
-        v-if="$vuetify.breakpoint.smAndUp"
-      >
-        <slide :id="'VueCarousel-slide-' + i" v-for="(m,i) in movies" :key="i">
-          <v-container fluid grid-list-lg>
-            <v-layout row wrap>
-              <v-flex>
-                <Movie v-bind:movie="m" />
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </slide>
-      </carousel>
-
-      <!-- CARUSEL VISTA MOVIL -->
-      <v-carousel 
-          hide-delimiters 
-          height="auto" 
-          v-else
-      >
-        <v-carousel-item                     
-          v-for="(m,i) in movies"
-          :key="i" 
-        >
-          <Movie v-bind:movie="m" />
-        </v-carousel-item>
-      </v-carousel>      
-
-    </v-container>
+  <div class="container">
+      <div class="progress" v-if="!loaded">
+        <div class="indeterminate"></div>
+      </div>    
+      <div class="container-carrusel" v-if="loaded">
+        <CarouselMovie titulo="Peliculas recientes populares" :movies="moviesMostPopular" @changeFilterDiario="onChangeMovieFilterDiario"/>
+        <CarouselTv titulo="Series TV recientes populares" :seriesTv="seriesTvMostPopular" @changeFilterDiario="onChangeTvFilterDiario"/>
+        <CarouselPeople titulo="Personas más populares" :peopleList="peopleTrending" @changeFilterDiario="onChangePeopleFilterDiario"/>
+      </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import { Carousel, Slide } from "vue-carousel";
-import Movie from "@/components/Movie";
+import mixins from "@/components/mixins.js";
+import CarouselMovie from "@/components/CarouselMovie";
+import CarouselTv from "@/components/CarouselTv";
+import CarouselPeople from "@/components/CarouselPeople";
 
 export default {
   name: "Home",
 
   components: {
-    Movie,
-    Carousel,
-    Slide,
+    CarouselMovie,
+    CarouselTv,
+    CarouselPeople
   },
+
+  mixins: [mixins],  
 
   data: function () {
     return {
-      movies: [],
+      moviesMostPopular: [],
+      seriesTvMostPopular: [],
+      peopleTrending: [],
+      loaded: false,
+      //
+      movieFilterDiario: 'day',
+      tvFilterDiario: 'day',
+      peopleFilterDiario: 'day',
     };
   },
 
   methods: {
-    addMonths: function(date, months) {
-        var d = date.getDate();
-        date.setMonth(date.getMonth() + +months);
-        if (date.getDate() != d) {
-          date.setDate(0);
-        }
-        return date;
+    addMonths: function (date, months) {
+      var d = date.getDate();
+      date.setMonth(date.getMonth() + +months);
+      if (date.getDate() != d) {
+        date.setDate(0);
+      }
+      return date;
     },
-    searchLastMovies: function () {
-      let hoy = new Date().toISOString().substr(0,10);
-      let mesAnt = this.addMonths(new Date(), -1).toISOString().substr(0,10);
-      axios
-        .get(
-          "https://api.themoviedb.org/3/discover/movie?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES" +
-            "&page=1" + 
-            "&primary_release_date.gte=" +  mesAnt +
-            "&primary_release_date.lte=" + hoy +
-            "&sort_by=popularity.desc&include_adult=false&include_video=true"
-        )
-        // peliculas más populares
-        // .get(
-        //   "https://api.themoviedb.org/3/movie/popular?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES&page="+page
-        // )        
-        .then((response) => {
-          this.movies = response.data.results; //
-          this.movies = this.movies.sort( (a,b) => b.vote_average - a.vote_average);
-        })
-        .catch((e) => console.log(e));
+    searchMostPopular: function () {
+      // let hoy = new Date().toISOString().substr(0, 10);
+      // let mesAnt = this.addMonths(new Date(), -1).toISOString().substr(0, 10);
+      // const params =  "&page=1" +
+      //               "&primary_release_date.gte=" + mesAnt +
+      //               "&primary_release_date.lte=" + hoy +
+      //               "&sort_by=popularity.desc" +
+      //               "&include_adult=false" +
+      //               "&include_video=true";
+
+      // const urlGetMostPopularMovies = this.getUrlApi("/discover/movie", "es-ES", params);                      
+      // const urlGetMostPopularTv = this.getUrlApi("/discover/tv", "es-ES", params);
+      const urlGetMostPopularMovies = this.getUrlApi("/trending/movie/" + this.movieFilterDiario, "es-ES", "");                      
+      const urlGetMostPopularTv = this.getUrlApi("/trending/tv/" + this.tvFilterDiario, "es-ES", "");        
+      const urlGetTrendingPeople = this.getUrlApi("/trending/person/" + this.peopleFilterDiario, "es-ES", "");  
+      
+      const requestGetMostPopularMovies = axios.get(urlGetMostPopularMovies);
+      const requestGetMostPopularTv = axios.get(urlGetMostPopularTv);
+      const requestGetTrendingPeople = axios.get(urlGetTrendingPeople); 
+
+      axios.all([requestGetMostPopularMovies, requestGetMostPopularTv, requestGetTrendingPeople])
+      .then(axios.spread((...responses) => {
+            this.moviesMostPopular = responses[0].data.results;
+            this.seriesTvMostPopular = responses[1].data.results;
+            this.peopleTrending = responses[2].data.results;
+      }))
+      .catch((e) => console.log(e))
+      .finally((this.loaded = true));      
+      
     },
-    onPageChange: function (newPage) {
-      this.searchMovies(newPage);
+    onChangeMovieFilterDiario: function (val) {
+      this.movieFilterDiario  = val;
+      this.searchMostPopular();
     },
+    onChangeTvFilterDiario: function (val) {
+      this.tvFilterDiario  = val;
+      this.searchMostPopular();
+    },
+    onChangePeopleFilterDiario: function (val) {
+      this.peopleFilterDiario  = val;
+      this.searchMostPopular();
+    },        
   },
   created() {
-    this.searchLastMovies(this.$route.params.searchText);
+    this.searchMostPopular();
   },
 };
 </script>
+
+<style scoped>
+.titulo {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.poster {
+  border-radius: 8px;
+}
+</style>

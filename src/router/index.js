@@ -7,25 +7,31 @@ const routes = [{
         path: '/',
         name: 'Home',
         component: () =>
-            import ( /* webpackChunkName: "Home" */ '../views/Home.vue')
+            import ('../views/Home.vue')
     },
     {
-        path: '/search/:searchText',
-        name: 'MovieSearch',
+        path: '/search/:searchText/:searchKey',
+        name: 'Search',
         component: () =>
-            import ( /* webpackChunkName: "movieSearch" */ '../views/MovieSearchView.vue')
+            import ('../views/SearchView.vue')
     },
     {
         path: '/movie/:idMovie',
         name: 'MovieDetail',
         component: () =>
-            import ( /* webpackChunkName: "movieDetail" */ '../views/MovieDetailView.vue')
+            import ('../views/MovieDetailView.vue')
     },
     {
-        path: '/people/:idPeople',
+        path: '/tv/:idSerieTv',
+        name: 'TvDetail',
+        component: () =>
+            import ('../views/TvDetailView.vue')
+    },
+    {
+        path: '/people/:type/:idPeople',
         name: 'PeopleDetail',
         component: () =>
-            import ( /* webpackChunkName: "peopleDetail" */ '../views/PeopleDetailView.vue')
+            import ('../views/PeopleDetailView.vue')
     }
 ]
 

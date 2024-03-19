@@ -1,0 +1,378 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    /* background: linear-gradient(-45deg, #ffebee, #ffcdd2, #ef9a9a); */
+    /* background-color: #e0f2f1; */
+    /* background: url(../assets/cinema.png); */
+}
+
+.root {
+    --color-primario: #0d253f;
+    --color-secundario: #01b4e4;
+    --color-terciario: #90cea1;
+}
+
+
+/* MATERIAL CSS */
+
+.container {
+    width: 95%;
+    max-width: initial;
+}
+
+.card {
+    background-color: ghostwhite;
+}
+
+.card-action {
+    padding: 8px 24px;
+    font-size: 0.8em;
+}
+
+.video-container {
+    margin-bottom: 20px;
+}
+
+.collection {
+    border-radius: 16px;
+}
+
+blockquote {
+    border-left: 5px solid #90cea1;
+}
+
+
+/* ESTILOS PROPIOS */
+
+table {
+    font-size: 0.9em;
+}
+
+th {
+    font-weight: bold;
+}
+
+.thumbnail {
+    /* max-width: 48px !important; */
+    width: 80px;
+}
+
+.primario {
+    background-color: #0d253f;
+}
+
+.primario-texto {
+    color: #0d253f;
+}
+
+.secundario {
+    background-color: #01b4e4;
+}
+
+.secundario-texto {
+    color: #01b4e4;
+}
+
+.terciario {
+    background-color: #90cea1;
+}
+
+.terciario-texto {
+    color: #90cea1;
+}
+
+.seccion {
+    padding: 20px 50px;
+}
+
+.titulo-ficha {
+    font-family: Michroma;
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.texto-titulo-ficha {
+    position: relative;
+}
+
+.titulo-seccion {
+    font-family: Michroma;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.poster {
+    border-radius: 8px;
+    margin: auto;
+}
+
+.titulo-ficha .divider,
+.titulo-seccion .divider {
+    height: 4px;
+    background-color: #01b4e4;
+}
+
+.subtitulo-seccion {
+    font-family: Michroma;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.actor {
+    font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.personaje {
+    font-style: italic;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+
+/* -------------- FONDO INFO --------------------- */
+
+.background_wrap {
+    position: relative;
+    /* background-color: #01b4e4; */
+    overflow: hidden;
+    /* border-radius: 16px; */
+}
+
+.background_wrap .titulo-ficha {
+    position: relative;
+}
+
+.background_wrap .col {
+    position: relative;
+    padding: 20px;
+}
+
+.background_wrap .col img {
+    margin-top: 10px;
+}
+
+.background_wrap_img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0.3;
+}
+
+.background_wrap .collection {
+    opacity: 0.8;
+}
+
+.fondo-titulo-ficha {
+    opacity: 0.6;
+    background-color: #000;
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.logo-productora-titulo-ficha {
+    position: relative;
+}
+
+
+/* -------------- FIN FONDO INFO --------------------- */
+
+
+/* -------------- CARRUSEL  --------------------- */
+
+.swiper-left-arrow,
+.swiper-right-arrow {
+    color: rgba(0, 0, 0, .6);
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+}
+
+.swiper-left-arrow:hover,
+.swiper-right-arrow:hover {
+    color: #01b4e4;
+}
+
+.swiper-left-arrow:focus,
+.swiper-right-arrow:focus {
+    outline: none;
+}
+
+.swiper-outer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    position: relative;
+}
+
+.carrusel-pagination {
+    position: relative;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.card .card-content {
+    padding: 4px 4px;
+    font-size: 0.8rem;
+    text-align: center;
+    /* min-height: 52px; */
+    overflow: hidden;
+    background: black;
+    color: white;
+}
+
+.card .card-image {
+    height: 100%;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.cabecera-carousel {
+    display: flex;
+    padding-left: 30px;
+    padding-right: 30px;
+    justify-content: space-between;
+}
+
+.cabecera-carousel .switch {
+    align-self: flex-end;
+}
+
+.titulo-carrusel {
+    font-family: Michroma;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    /* text-transform: uppercase; */
+    /* text-align: center; */
+    padding: 20px 0 0px 0;
+    /* background:#01b4e4; */
+    color: #0d253f;
+}
+
+.container-carrusel {
+    width: 75%;
+    margin: 0 auto;
+    /* background: black; */
+}
+
+.container-search {
+    width: 75%;
+    margin: 0 auto;
+}
+
+@media (max-width: 800px) {
+    .container-carrusel {
+        width: 100%;
+    }
+}
+
+
+/* -------------- FIN CARRUSEL --------------------- */
+
+
+/* -------------- MOBILE -------------- */
+
+@media (max-width: 600px) {
+    .container {
+        width: 98%;
+    }
+    .row .col {
+        padding: 4px;
+    }
+    .card .card-content {
+        padding: 4px;
+    }
+    .seccion {
+        padding: 20px 10px;
+    }
+    .texto-titulo-ficha {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+    .titulo-ficha {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+    .titulo-seccion {
+        font-size: 0.8rem;
+        text-align: center;
+    }
+    .subtitulo-seccion {
+        font-size: 0.8rem;
+        text-align: center;
+    }
+    .titulo-carrusel {
+        font-size: .9rem;
+    }
+    .cabecera-carousel {
+        flex-direction: column;
+    }
+    .cabecera-carousel .switch {
+        align-self: unset;
+    }
+    .fondo-titulo-ficha {
+        opacity: unset;
+        background-color: unset;
+    }
+    .titulo-ficha .divider, .titulo-seccion .divider {
+        display: none;
+    }
+}

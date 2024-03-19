@@ -1,48 +1,44 @@
 <template>
-    <v-progress-linear
-      v-if="loading"  
-      indeterminate
-      color="cyan"
-    ></v-progress-linear>
-    <PeopleDetail 
-        v-else
-        v-bind:credit="credit" 
-        v-bind:person="person" 
-        v-bind:images="images" 
-        v-bind:movies="movies" 
-        />  
+  <div>
+    <div class="progress" v-if="loading">
+      <div class="indeterminate"></div>
+    </div>
+    <PeopleDetail v-else :person="person" />  
+  </div>
 </template>
 
 <script>
 import axios from 'axios';
+import mixins from "@/components/mixins.js";
 import PeopleDetail from '@/components/PeopleDetail'
 
 export default {
     
     name: 'PeopleView',
+
     components: {
         PeopleDetail,
     },    
+
+    mixins: [mixins],      
+
     data: () => {
         return { 
-            credit: null,
             person: null,
-            images: [],
-            movies: null,
             loading: true
         }
     },
+
     methods: {
-      // TODO usar api para recuperar la config.
       findCredit: function(idCredit) {
           this.loading = true;
           axios
-            .get('https://api.themoviedb.org/3/credit/' + idCredit + '?api_key=91e88eab577c30d2e4546d14c947362a&language=es-ES')
+            .get(this.getUrlApi("/credit/"+idCredit, "es-ES", ""))
             .then(
                 response => {                    
-                    this.credit = response.data;
-                    if(this.credit != null && this.credit.person != null) {
-                        this.findPerson(this.credit.person.id, 'es-ES')
+                    let credit = response.data;
+                    if(credit != null && credit.person != null) {
+                        this.findPerson(credit.person.id, 'es-ES')
                     }
                 }
             )
@@ -51,61 +47,40 @@ export default {
             )
       },
       findPerson: function(idPerson, language) {
+          this.loading = true;
+          const params = "&append_to_response=credits,videos,images" +
+                   "&include_image_language=es,null";          
           axios
-            .get('https://api.themoviedb.org/3/person/' + idPerson + '?api_key=91e88eab577c30d2e4546d14c947362a&language=' + language)
+            .get(this.getUrlApi("/person/"+idPerson, language, params))           
             .then(
                 response => {
                     this.person = response.data;
+                    if(this.person != null && this.person.credits != null && this.person.credits.cast != null) {
+                        this.person.credits.cast = this.person.credits.cast.sort(function(a,b){
+                        return new Date(b.release_date) - new Date(a.release_date);
+                        });
+                    }                    
                     if(language == 'es-ES' && (this.person.biography == null || this.person.biography == '')) {
                         this.findPerson(idPerson, 'en-US');
                     }
-                    this.findMovies(idPerson)
                 }
             )
-            .catch(
-                e => console.log(e)
-            )         
-      },      
-      findMovies: function(idPerson, language) {
-          axios
-            .get('https://api.themoviedb.org/3/discover/movie?api_key=91e88eab577c30d2e4546d14c947362a&sort_by=primary_release_date.desc&include_adult=false&include_video=false&page=1' 
-                    + '&with_cast=' + idPerson
-                    + '&language=' + language)
-            .then(
-                response => {
-                    this.movies = response.data;
-                    if(this.movies != null) {
-                            this.movies.results = this.movies.results.filter( e => e.poster_path != null);
-                    }
-                    this.findImages(idPerson)
-                }
-            )
-            .catch(
-                e => console.log(e)
-            )         
-      },           
-      findImages: function(idPerson) {
-          axios
-            .get('https://api.themoviedb.org/3/person/' + idPerson + '/images?api_key=91e88eab577c30d2e4546d14c947362a')
-            .then(
-                response => {
-                    this.images = response.data.profiles;
-                }
-            )
-            .catch(
-                e => console.log(e)
-            )
-            .finally(
-                this.loading = false
-            )            
-      },            
+          .catch((e) => console.log(e))
+          .finally((this.loading = false));
+      }
     },  
 
   created () {
-    this.findCredit(this.$route.params.idPeople);
+      if (this.$route.params.type == 'credit') {
+        this.findCredit(this.$route.params.idPeople);
+      } else {
+        this.findPerson(this.$route.params.idPeople, 'es-ES')
+      }
   },
+
   mounted() {
         window.scrollTo(0,0);
   }    
+  
 }
 </script>

@@ -1,161 +1,291 @@
 <template>
-  <v-app id="inspire">
+<div class="body">
 
     <!-- CABECERA -->
-    <v-app-bar      
-      app
-      color="blue darken-3"
-      dense
-    >
+    <div class="navbar-fixed">
+      <nav class="primario">
+        <div class="nav-wrapper">
+          <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <!-- <img src="imdb.svg" width="80" class="logo" /> -->
+          <a href="#" @click="goHome">
+            <img src="./assets/tmdb_long.svg" class="logo" />
+          </a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">       
+            <li>
+              <div class="input-field">
+                <input class="terciario-texto" id="search" type="search" v-model="searchText" @keydown.enter="onEnterSearch" autocomplete="off" required>
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons" @click="clearSearch">close</i>
+              </div>
+            </li> 
+            <li><a class="dropdown-trigger" href="#" data-target="dropdown1"><i class="material-icons">more_vert</i></a></li>         
+          </ul>      
+        </div>    
+      </nav>
+    </div>
 
-      <!-- LOGO TMDB -->  
-      <img src="imdb.svg" width="80" class="mr-4"/>
+    <!-- MENU OPCIONES -->
+    <ul id="dropdown1" class="dropdown-content primario">
+      <li>
+        <div class="switch">
+          <label>
+            <input type="checkbox" v-model="searchMovies">
+            <span class="lever"></span>
+            <span class="secundario-texto">Buscar películas</span>
+          </label>
+        </div>
+      </li>
+      <li>
+        <div class="switch">
+          <label>
+            <input type="checkbox" v-model="searchPeople">
+            <span class="lever"></span>
+            <span class="secundario-texto">Buscar gente</span>
+          </label>
+        </div>
+      </li>
+      <li>
+        <div class="switch">
+          <label>
+            <input type="checkbox" v-model="searchTv">
+            <span class="lever"></span>
+            <span class="secundario-texto">Buscar series TV</span>
+          </label>
+        </div>
+      </li>            
+    </ul>    
+ 
+    <!-- MENU MOBILE -->
+    <ul id="slide-out" class="sidenav primario">
+      <li>
+        <div class="valign-wrapper">
+          <img src="imdb.svg" width="80" class="logoMobile" />
+        </div>
+      </li>
+      <li><div class="divider"></div></li>
+      <li>
+        <a class="sidenav-close white-text" href="#" @click="goHome"><i class="small material-icons left white-text">home</i>Inicio</a>
+      </li>          
+      <li>
+        <a class="sidenav-close white-text modal-trigger" href="#modal1"><i class="small material-icons left white-text">search</i>Buscar</a>
+      </li>   
+      <li><div class="divider"></div></li>
+      <li>
+        <div class="switch">
+          <label>            
+            <input type="checkbox" v-model="searchMovies">
+            <span class="lever"></span>
+            <span class="white-text">Buscar películas</span>
+          </label>
+        </div>
+      </li>
+      <li>
+        <div class="switch">
+          <label class="white-text">            
+            <input type="checkbox" v-model="searchPeople">
+            <span class="lever"></span>
+            <span>Buscar gente</span>
+          </label>
+        </div>
+      </li>
+      <li>
+        <div class="switch">
+          <label class="white-text">            
+            <input type="checkbox" v-model="searchTv">
+            <span class="lever"></span>
+            <span>Buscar series TV</span>
+          </label>
+        </div>
+      </li>       
+    </ul>
+  
+    <!-- FORMULARIO DE BUSQUEDA MOBILE -->
+    <div id="modal1" class="modal secundario">
+      <div class="modal-content">
+        <i class="small material-icons left white-text">search</i>
+        <p>Buscar</p>
+        <div class="input-field valign-wrapper">
+            <input id="searchMobile" type="search" v-model="searchText" @keydown.enter="onEnterSearchMobile" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat" @click="onEnterSearch">Aceptar</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat" @click="searchText=''">Cancelar</a>
+      </div>
+    </div>        
 
-      <!-- CAMPO DE BUSQUEDA -->
-      <v-text-field
-        flat
-        solo-inverted
-        hide-details
-        dense
-        clearable
-        append-icon="mdi-magnify"      
-        label="Búsqueda de peliculas"        
-        ref="inputSearch"
-        v-model="searchText"
-        @keydown.enter="onEnterSearch"
-        @click:append="onEnterSearch"
-      >
-      </v-text-field>
-
-      <!-- MENU DE OPCIONES -->
-      <v-menu
-        bottom
-        left
-        offset-y
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            icon
-            v-bind="attrs"
-            v-on="on"
-          >
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item
-            @click="goHome"
-          >
-            <v-list-item-icon>
-               <v-icon>mdi-home</v-icon>
-            </v-list-item-icon>                      
-            <v-list-item-title>Inicio</v-list-item-title>
-          </v-list-item>
-          
-          <v-list-item @click.stop="dialog = true">
-            <v-list-item-icon>
-              <v-icon>mdi-cog</v-icon> 
-            </v-list-item-icon>                        
-            <v-list-item-title>Opciones</v-list-item-title>
-          </v-list-item> 
-
-        </v-list>
-      </v-menu>
-
-    </v-app-bar>
 
     <!-- VISTA PRINCIPAL -->
-    <v-main>
-        <router-view :key="$route.fullPath"/>           
-    </v-main>  
-     
-    <!-- PIE CON CREDITOS -->
-    <v-footer
-      dark
-      padless
-      absolute
-      app
-      color="blue darken-3"
-    >
-      <v-card
-        flat
-        tile
-        fluid
-        class="text-center"
-        color="blue darken-3"
-        style="width:100%"
-      >
-        <v-card-text class="white--text">
-          {{ new Date().getFullYear() }} — <strong>&copy; Constantino Argüello González</strong>
-        </v-card-text>
-      </v-card>
-    </v-footer>
+    <main>
+      <router-view :key="$route.fullPath" />
+    </main>
 
-    <!-- DIALOGO DE OPCIONES -->
-    <v-dialog
-        v-model="dialog"
-        max-width="290"
-    >
-        <v-card>
-          <v-card-title class="headline">Opciones</v-card-title>
-          <v-card-text>
-            <v-switch
-              v-model="$vuetify.theme.dark"
-              hide-details
-              inset
-              label="Nocturno"
-            ></v-switch>        
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-              color="green darken-1"
-              text
-              @click="dialog = false"
-            >
-              Cerrar
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-    </v-dialog>
+    <!-- PIE -->
+    <footer class="page-footer primario">
+      <div class="footer-copyright">
+        <div class="container center-align">
+          <strong
+            >&copy; Constantino Argüello González&nbsp;{{
+              new Date().getFullYear()
+            }}</strong
+          >
+        </div>
+      </div>
+    </footer>
 
-    <!-- VISUALIZACIÓN IMAGENES PANTALLA COMPLETA -->
-    <ImagePreview />   
-
-  </v-app>
+  </div>
 </template>
 
 <script>
-import ImagePreview from "@/components/ImagePreview";
+import M from "materialize-css";
 
 export default {
-  name: 'App',
-
-  components: {
-    ImagePreview
-  },
-
-  props: {
-    source: String,
-  },
+  name: "App",
 
   data: () => ({
-    dialog: false,
-    searchText: "",
+    searchText: "",    
+    searchKey: 0,
   }),
-  methods: {
-    onEnterSearch:function() {  
-      this.$store.commit('setCurrentPage', 1);
-      this.$router.push({ name: 'MovieSearch', params: { searchText : this.searchText } }).catch(()=>{});
+
+  computed: {
+    searchMovies: {
+      set(searchMovies) {
+        this.$store.commit("setSearchMovies", searchMovies);
+        this.onEnterSearch();
+      },
+      get() {
+        return this.$store.state.searchMovies;
+      }
     },
-    goHome: function() {
-      this.searchText = '';
-      this.$router.push({ name : 'Home' }).catch(()=>{});
+    searchPeople: {
+      set(searchPeople) {
+        this.$store.commit("setSearchPeople", searchPeople);
+        this.onEnterSearch();
+      },
+      get() {
+        return this.$store.state.searchPeople;
+      }
     },
+    searchTv: {
+      set(searchTv) {
+        this.$store.commit("setSearchTv", searchTv);
+        this.onEnterSearch();
+      },
+      get() {
+        return this.$store.state.searchTv;
+      }
+    },        
   },
+
+  methods: {
+    onEnterSearch: function () {
+      if(this.searchText == null || this.searchText.trim() == '') {
+        return;
+      }
+      this.$store.commit("setCurrentPage", 1);
+      this.$router
+        .push({ name: "Search", params: { searchText: this.searchText, searchKey: this.searchKey++ } })
+        .catch(() => {});
+    },
+    onEnterSearchMobile: function() {
+      var instance = M.Modal.getInstance(document.getElementById("modal1"));
+      instance.close();
+      this.onEnterSearch();  
+    },
+    clearSearch: function() {
+      this.searchText='';
+      document.getElementById("search").focus();
+    },
+    goHome: function () {
+      this.searchText = "";
+      this.$router.push({ name: "Home" }).catch(() => {});
+    },
+    loadConfig: function() {
+      this.$store.dispatch("loadConfig");
+    },    
+  },
+
+  mounted() {
+    //M.AutoInit();  
+    var elemsSidenav = document.querySelectorAll('.sidenav');
+    M.Sidenav.init(elemsSidenav, {});    
+    var elemsModal = document.querySelectorAll('.modal');
+    M.Modal.init(elemsModal, {
+      onOpenEnd: function() {
+        document.getElementById("searchMobile").focus();
+      }
+    });   
+    var elemsDropdown = document.querySelectorAll('.dropdown-trigger');
+    M.Dropdown.init(elemsDropdown, {
+      alignment: 'right',
+      constrainWidth: false,
+      closeOnClick: false,
+      coverTrigger: false
+    });   
+  },
+
   created() {
-    this.$store.commit('clearSrcImagePreview')
-  }
+    this.searchMovies = true;
+    this.searchPeople = true;
+    this.searchTv = true;   
+    this.loadConfig(); 
+  },
+
+
 };
 </script>
+
+<style scoped>
+
+.logo {
+  margin-left: 50px;
+  width: 180px;
+}
+
+.logoMobile {
+  margin-left: auto;
+  margin-right: auto;  
+  padding: 24px;
+  width: 180px;
+}
+
+#modal1 .modal-content {
+  font-size: 1.5em;
+}
+
+#slide-out {
+  color:white;
+}
+
+.nav-content {
+    padding-left: 16px;
+}
+
+#search {
+  height: auto;
+}
+
+.page-footer {
+  padding-top: 0;
+  /* position: fixed;  */
+  left: 0;
+  bottom: 0;  
+  width: 100%;
+}
+
+.switch {
+  margin: 20px 30px 20px 10px;
+}
+
+.body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+  /* background: black; */
+}
+
+</style>

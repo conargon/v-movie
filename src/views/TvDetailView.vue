@@ -3,49 +3,48 @@
     <div class="progress" v-if="loading">
       <div class="indeterminate"></div>
     </div>
-    <MovieDetail v-else :movie="movie" />
+    <TvDetail v-else :serieTv="serieTv" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import mixins from "@/components/mixins.js";
-import MovieDetail from "@/components/MovieDetail";
+import TvDetail from "@/components/TvDetail";
 
 export default {
-  name: "MovieDetailView",
+  name: "TvDetailView",
 
   components: {
-    MovieDetail,
+    TvDetail,
   },
 
-  mixins: [mixins],   
+  mixins: [mixins],  
 
   data: function () {
     return {
-      movie: null,
+      serieTv: null,
       loading: true,
     };
   },
 
   methods: {
-    // TODO usar api para recuperar la config.
-    findMovie: function (idMovie) {
+    findSerieTv: function (idSerieTv) {
       this.loading = true;
       const params = "&append_to_response=credits,videos,images" +
-                   "&include_image_language=es,null";
+                   "&include_image_language=es,null";      
       axios
-        .get(this.getUrlApi("/movie/"+idMovie, "es-ES", params))
+        .get(this.getUrlApi("/tv/"+idSerieTv, "es-ES", params))
         .then((response) => {
-          this.movie = response.data;
+          this.serieTv = response.data;
         })
-        .catch((e) => console.log("==================> findMovie" + e))
+        .catch((e) => console.log("==================> findSerieTv" + e))
         .finally((this.loading = false));
     },
   },
 
   created() {
-    this.findMovie(this.$route.params.idMovie);
+    this.findSerieTv(this.$route.params.idSerieTv);
   },
 
   mounted() {

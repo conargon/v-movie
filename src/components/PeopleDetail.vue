@@ -1,145 +1,81 @@
 <template>
-    <v-container fluid>
-    <v-layout>
-        <v-flex>
-            <v-card>  
+  <div class="container">
 
-                <v-card-title>  
-                    <p class="text-title font-weight-bold" style="word-break: normal;">{{credit.person.name}}</p>
-                </v-card-title>   
+    <!-- INFO DEL ACTOR --> 
+    <div class="card" v-if="person != null">     
+      <div class="card-content">
+        <PeopleInfo id="infoPeople" :person="person" />
+        <PeopleImagenes id="imagenesPeople" :person="person" />
+        <PeopleCreditos id="creditosPeople" :person="person" /> 
+      </div>
 
-                <v-tabs icons-and-text show-arrows>
-                    <v-tab>Información<v-icon>mdi-information</v-icon></v-tab>
-                    <v-tab v-if="images != null && images.length > 0">Imágenes<v-icon>mdi-image</v-icon></v-tab>
-                    <v-tab v-if="movies != null && movies.results.length > 0">Películas<v-icon>mdi-video</v-icon></v-tab>                        
-                    
-                    <!-- FICHA DEL ACTOR (INFO) -->
-                    <v-tab-item>
-                        <v-container fluid>
-                            <v-row dense>
+    </div>
 
-                                <v-col cols="12" sm="2" v-if="credit.person.profile_path != null">  
-                                    <v-img :src="srcPoster" contain max-height="400" style="border-radius: 10px;">
-                                        <template v-slot:placeholder>
-                                        <v-row
-                                            class="fill-height ma-0"
-                                            align="center"
-                                            justify="center"
-                                        >
-                                            <v-progress-circular indeterminate color="$vuetify.theme.dark ? 'grey lighten-5' : 'blue darken-3'"></v-progress-circular>
-                                        </v-row>
-                                        </template>                                     
-                                    </v-img>
-                                </v-col>
+    <!-- BOTONERA -->
+    <div id="btnFabPeople" class="fixed-action-btn">
+      <a class="btn-floating btn-large secundario" @click="openFab">
+        <i class="large material-icons">menu</i>
+      </a>
+      <ul>
+        <li><a class="btn-floating terciario" href="#" v-scroll-to="'#infoPeople'" title="Ficha"><i class="material-icons">movie</i></a></li>
+        <li><a class="btn-floating terciario" href="#" v-scroll-to="'#imagenesPeople'" title="Imágenes"><i class="material-icons">image</i></a></li>
+        <li><a class="btn-floating terciario" href="#" v-scroll-to="'#creditosPeople'" title="Créditos"><i class="material-icons">videocam</i></a></li>
+        <li><a class="btn-floating terciario" href="#" @click.stop="$router.back()" title="Volver"><i class="material-icons">keyboard_backspace</i></a></li>
+      </ul>
+    </div>
 
-                                <v-col cols="12" sm="10">  
-                                                                                 
-
-                                    <v-card-title class="mt-0 pt-0 mb-0 pb-0"> 
-                                        <v-container class="ma-0 pa-0">                       
-                                            <p class="text-subtitle-2" style="word-break: normal;">
-                                                Nacimiento: <span class="sb_val">{{birthdayLocalDate}}</span>
-                                            </p>
-                                        </v-container>
-                                        <v-container  class="ma-0 pa-0" v-if="person != null && person.deathday != null">                       
-                                            <p class="text-subtitle-2" style="word-break: normal;">
-                                                Fallecimiento: <span class="sb_val">{{deathdayLocalDate}}</span>
-                                            </p>
-                                        </v-container>                                
-                                        <v-container  class="ma-0 pa-0" v-if="person != null && person.place_of_birth != null">
-                                            <p class="text-subtitle-2" style="word-break: normal;">Lugar de nacimiento: <span class="sb_val">{{person.place_of_birth}}</span></p>
-                                        </v-container>                        
-                                    </v-card-title>  
-
-                                    <v-card-title class="mt-0 pt-0 mb-0 pb-0" v-if="person != null && person.biography != null && person.biography != ''">                        
-                                        <p class="text-subtitle-1" style="word-break: normal;">Biografía</p>
-                                    </v-card-title>                            
-
-                                    <v-card-subtitle v-if="person != null && person.biography != null && person.biography != ''">
-                                        <p class="text-justify">{{person.biography}}</p>
-                                    </v-card-subtitle>                            
-                                    
-                                </v-col>
-
-                            </v-row>
-                        </v-container>
-
-                    </v-tab-item>
-
-                    <!-- IMAGENES -->     
-                    <v-tab-item  v-if="images != null && images.length > 0">
-                        <v-container fluid grid-list-md>
-                            <v-layout row wrap>           
-                                <v-flex xs12 sm6 md3 lg1 v-for="(item,i) in images" :key="i">                                   
-                                    <ImageMovie v-bind:image="item" :elevation="hover ? 8 : 1" />
-                                </v-flex>             
-                            </v-layout>                
-                        </v-container>
-                    </v-tab-item>
-
-                    <!-- PELICULAS -->     
-                    <v-tab-item  v-if="movies != null && movies.results.length > 0">
-                        <v-container fluid grid-list-md>
-                            <v-layout row wrap>           
-                                <v-flex xs12 sm6 md4 lg1 v-for="k in movies.results" :key="k.id">
-                                    <v-hover>
-                                        <template v-slot="{ hover }">
-                                            <v-card :to="{ name: 'MovieDetail', params: { idMovie: k.id }}"  :elevation="hover ? 8 : 1">
-                                                <v-img :src="'http://image.tmdb.org/t/p/original' + k.poster_path" max-height="300" :contain="true" style="border-radius: 5px;">
-                                                </v-img>
-                                                <v-card-subtitle class="ma-0 pa-0 pl-2">                                                                                                                                                                
-                                                        <p class="text-subtitle text-center" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">{{k.title}}</p>
-                                                </v-card-subtitle>   
-                                            </v-card>
-                                        </template>
-                                    </v-hover>
-                                </v-flex>             
-                            </v-layout>                
-                        </v-container>    
-                    </v-tab-item>  
-
-                </v-tabs>                 
-
-                <v-card-actions>
-                    <v-container class="pa-4 ma-0 text-center" fluid>
-                        <v-btn color="primary" @click="$router.go(-1)">Volver</v-btn>
-                    </v-container>
-                </v-card-actions>                                     
-
-            </v-card>          
-
-        </v-flex>
-    </v-layout>
-
-</v-container>
+  </div>
 </template>
 
 <script>
-import ImageMovie from "@/components/ImageMovie";
+import M from "materialize-css";
+import PeopleInfo from "./PeopleInfo";
+import PeopleImagenes from "./PeopleImagenes";
+import PeopleCreditos from "./PeopleCreditos";
+import mixins from "./mixins.js";
 
 export default {
-    name: 'PeopleDetail',
-    components: {
-        ImageMovie,
-    },    
-    props: {
-            credit: Object,
-            person: Object,
-            images: Array,
-            movies: Object
-    },
-    computed: {
-        srcPoster: function () {
-            return this.credit.person.profile_path != null
-                ? "http://image.tmdb.org/t/p/w342" + this.credit.person.profile_path
-                : "./no-poster.jpg";
-        },        
-        birthdayLocalDate() {
-            return this.person != null && this.person.birthday != null ? new Date(this.person.birthday).toLocaleDateString('es-ES') : '';
-        },
-        deathdayLocalDate() {
-            return this.person != null && this.person.deathday != null ? new Date(this.person.deathday).toLocaleDateString('es-ES') : '';
-        },
-    },
-}
+  name: "PeopleDetail",
+
+  components: {
+    PeopleInfo,
+    PeopleImagenes,
+    PeopleCreditos
+  },
+
+  mixins: [mixins],
+
+  props: {
+    person: null
+  },
+
+  methods: {
+    openFab() {
+      let elem = document.getElementById("btnFabPeople");
+      var instance = M.FloatingActionButton.getInstance(elem);
+      if(instance == undefined) {
+        M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'), {});
+        instance = M.FloatingActionButton.getInstance(elem);
+      }
+      instance.open();
+    }
+  },
+
+  mounted() {
+    var elems = document.querySelectorAll(".fixed-action-btn");
+    M.FloatingActionButton.init(elems, {});  
+  },
+
+};
 </script>
+
+<style scoped>
+
+.card .card-content {
+    font-size: 1rem;
+    text-align: left;
+    color: black;
+    background: initial;
+}
+
+</style>
