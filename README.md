@@ -5,6 +5,8 @@ world of cinema. It utilizes the public API of TMDB.
 
 ![v-movie](/public/screen01.png)
 
+![v-movie](/public/screen02.png)
+
 ## API Key
 
 You need an account on https://www.themoviedb.org/ and get a **API Key** in https://www.themoviedb.org/settings/api
