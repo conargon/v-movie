@@ -3,6 +3,10 @@
 Website where you can find information about movies, TV series, and professionals related to the 
 world of cinema. It utilizes the public API of TMDB. 
 
+## API Key
+
+You need an account on https://www.themoviedb.org/ and get a API Key in https://www.themoviedb.org/settings/api
+
 ## Project setup
 ```
 npm install
