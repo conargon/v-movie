@@ -8,7 +8,7 @@ export default new Vuex.Store({
     state: {
         // configuración
         baseUrl: "https://api.themoviedb.org/3",
-        apiKey: "91e88eab577c30d2e4546d14c947362a",
+        apiKey: "[PUT YOUR API KEY HERE]",
         imagesConfig: {
             base_url: "",
             secure_base_url: "",
