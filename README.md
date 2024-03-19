@@ -9,7 +9,11 @@ world of cinema. It utilizes the public API of TMDB.
 
 ## API Key
 
-You need an account on https://www.themoviedb.org/ and get a **API Key** in https://www.themoviedb.org/settings/api
+You need get your own key to access to public API TMDB:
+
+1. Register an [account](https://www.themoviedb.org/) in TMDB. 
+2. Get a [API Key](https://www.themoviedb.org/settings/api). 
+3. Put your key in the file *store/index.js*.
 
 ## Project setup
 ```
