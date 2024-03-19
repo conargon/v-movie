@@ -1,6 +1,6 @@
 # v-movie
 
-Website where you can find information about movies, TV series, and professionals related to the 
+Website made with **Vue** and **materialize CSS** where you can find information about movies, TV series, and professionals related to the 
 world of cinema. It utilizes the public API of TMDB. 
 
 ![v-movie](/public/screen01.png)
