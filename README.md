@@ -1,5 +1,8 @@
 # v-movie
 
+Website where you can find information about movies, TV series, and professionals related to the 
+world of cinema. It utilizes the public API of TMDB. 
+
 ## Project setup
 ```
 npm install
